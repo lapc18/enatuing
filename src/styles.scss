@@ -1,4 +1,183 @@
 /* You can add global styles to this file, and also import other style files */
+@import "bootstrap/dist/css/bootstrap.min.css";
+@import "~@angular/material/theming";
 
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+@include mat-core();
+$primary-color: mat-palette($mat-green);
+$accent-color: mat-palette($mat-purple, A200, A100, A400);
+$warn-color: mat-palette($mat-red);
+$global-theme: mat-light-theme($primary-color, $accent-color, $warn-color);
+@include angular-material-theme($global-theme);
+
+//Variables
+
+$primary: #019542;
+$accent: #26d45a;
+$warn: #c0a929;
+$dark: #1d8344;
+$danger: #c02323;
+$danger-accent: #b91212;
+//Variables
+
+html,
+body {
+    overflow-x: hidden;
+}
+body {
+    margin: 0;
+    font-family: "Titillium", sans-serif;
+}
+
+.primary-color {
+    background-color: $primary;
+}
+.accent-color {
+    background-color: $accent;
+}
+.warn-color {
+    background-color: $warn;
+}
+.danger-color {
+    background-color: $danger;
+}
+.danger-accent-color {
+    background-color: $danger-accent;
+}
+
+.heading {
+    color: $primary;
+    font-weight: bolder;
+    margin-bottom: 1rem;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    margin-top: 0;
+    margin-bottom: 0.5rem;
+}
+
+p {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+ol,
+ul,
+dl {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+ol ol,
+ul ul,
+ol ul,
+ul ol {
+    margin-bottom: 0;
+}
+
+dt {
+    font-weight: 700;
+}
+
+dd {
+    margin-bottom: 0.5rem;
+    margin-left: 0;
+}
+
+b,
+strong {
+    font-weight: bolder;
+}
+
+small {
+    font-size: 80%;
+}
+
+.lead {
+    font-size: 1.25rem;
+    font-weight: 300;
+}
+
+.display-1 {
+    font-size: 6rem;
+    font-weight: 300;
+    line-height: 1.2;
+}
+
+.display-2 {
+    font-size: 5.5rem;
+    font-weight: 300;
+    line-height: 1.2;
+}
+
+.display-3 {
+    font-size: 4.5rem;
+    font-weight: 300;
+    line-height: 1.2;
+}
+
+.display-4 {
+    font-size: 3.5rem;
+    font-weight: 300;
+    line-height: 1.2;
+}
+
+.btn {
+    padding: 1rem;
+    min-width: 15rem;
+    border-radius: 2rem;
+    border-color: transparent !important;
+    font-weight: bolder;
+    margin: 0 5px 0 5px;
+}
+
+.btn.btn-lg {
+    width: 99%;
+}
+
+.btn.btn-primary {
+    @extend .primary-color;
+    border-color: transparent !important;
+    &:hover:enabled {
+        @extend .accent-color;
+        border-color: transparent !important;
+    }
+}
+
+.btn.btn-danger {
+    @extend .danger-color;
+    border-color: transparent !important;
+    &:hover:enabled {
+        @extend .danger-accent-color;
+        border-color: transparent !important;
+    }
+}
+
+mat-form-field {
+    margin: 0.5rem;
+    min-width: 15rem;
+}
+
+mat-checkbox {
+    margin: 0.5rem;
+    min-width: 15rem;
+}
+
+mat-drawer-container {
+    width: 100vw;
+    height: 100vh;
+    mat-drawer {
+        min-width: 15%;
+    }
+}
+
+.fab {
+    position: fixed !important;
+    right: 30px;
+    bottom: 30px;
+    z-index: 1;
+}
