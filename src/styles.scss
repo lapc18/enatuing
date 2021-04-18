@@ -2,22 +2,15 @@
 @import "bootstrap/dist/css/bootstrap.min.css";
 @import "~@angular/material/theming";
 
+@import "./sass/variables.scss";
+
 @include mat-core();
-$primary-color: mat-palette($mat-green);
-$accent-color: mat-palette($mat-purple, A200, A100, A400);
+$primary-color: mat-palette($mat-pink);
+$accent-color: mat-palette($mat-blue-gray, A200, A100, A400);
 $warn-color: mat-palette($mat-red);
 $global-theme: mat-light-theme($primary-color, $accent-color, $warn-color);
 @include angular-material-theme($global-theme);
 
-//Variables
-
-$primary: #019542;
-$accent: #26d45a;
-$warn: #c0a929;
-$dark: #1d8344;
-$danger: #c02323;
-$danger-accent: #b91212;
-//Variables
 
 html,
 body {
