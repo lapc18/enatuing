@@ -14,7 +14,7 @@
     </mat-toolbar-row>
   </mat-toolbar>
  <mat-drawer-container  color="primary">
-    <mat-drawer #drawer mode="side" opened>
+    <mat-drawer #drawer mode="side" [opened]="true">
         <mat-nav-list routerLinkActive="user-management" [routerLinkActiveOptions]="{exact: true}">
             <a *ngFor="let item of drawerOptions" [matTooltip]="item.toolTip" [matTooltipPosition]="item.toolTipPosition" mat-list-item [routerLink]="item.route"> {{ item.label }} </a>
           </mat-nav-list>
