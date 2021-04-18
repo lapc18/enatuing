@@ -16,7 +16,7 @@ export const DRAWER_OPTIONS:DrawerItem[] = [
         'Dashboard',
         'Dashboard',
         'left',
-        '/dashboard',
+        '/dashboard/home',
         false,
         true
     ),

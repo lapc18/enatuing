@@ -12,9 +12,11 @@ const routes: Routes = [
       { path: 'certifications', loadChildren: () => import('../certifications/certifications.module').then(m => m.CertificationsModule) }, 
       { path: 'queue', loadChildren: () => import('../queue/queue.module').then(m => m.QueueModule) },
       { path: 'organizations', loadChildren: () => import('../organization/organization.module').then(m => m.OrganizationModule) },
-      { path: 'dashboard', loadChildren: () => import('../dashboard/dashboard.module').then(m => m.DashboardModule) }
-    ]
-  }
+      { path: 'dashboard', loadChildren: () => import('../dashboard/dashboard.module').then(m => m.DashboardModule) },
+      { path: 'home', loadChildren: () => import('../home/home.module').then(m => m.HomeModule) },
+      { path: '', pathMatch: 'full', redirectTo: 'home' }
+    ],
+  },
 ];
 
 @NgModule({
