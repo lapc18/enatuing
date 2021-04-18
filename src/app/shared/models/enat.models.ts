@@ -10,7 +10,6 @@ export class DrawerItem {
 
 }
 
-
 export const DRAWER_OPTIONS:DrawerItem[] = [
     new DrawerItem(
         'Dashboard',
@@ -77,3 +76,25 @@ export const DRAWER_OPTIONS:DrawerItem[] = [
         true
     )
 ];
+
+
+export interface IColumn {
+    name: string,
+    label: string,
+    width?: number,
+    color?: string,
+    isSortable?: boolean
+}
+
+const CONTACTS_COLS: IColumn[] = [];
+
+
+
+
+export interface IColumnSettings {
+    contacts: IColumn[]
+}
+
+export const columnSettings: IColumnSettings = {
+    contacts: CONTACTS_COLS
+}
