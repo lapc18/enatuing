@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { IColumn } from '../../models/enat.models';
+import { IColumn } from '../../../core/models/enat.models';
 
 @Component({
   selector: 'common-table',

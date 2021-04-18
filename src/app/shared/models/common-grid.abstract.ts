@@ -1,4 +1,4 @@
-import { IColumn } from "./enat.models";
+import { IColumn } from "../../core/models/enat.models";
 
 export abstract class CommonAbstractGrid {
 

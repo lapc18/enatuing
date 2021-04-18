@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
+import { Observable } from 'rxjs';
 import { CommonAbstractGrid } from 'src/app/shared/models/common-grid.abstract';
-import { columnSettings } from 'src/app/shared/models/enat.models';
+import { columnSettings } from 'src/app/core/models/enat.models';
 
 @Component({
   selector: 'app-contacts',
@@ -9,7 +11,12 @@ import { columnSettings } from 'src/app/shared/models/enat.models';
 })
 export class ContactsComponent extends CommonAbstractGrid implements OnInit {
 
-  constructor() { 
+
+  public isLoading$: Observable<boolean>;
+
+  constructor(
+    private dialog: MatDialog
+  ) { 
     super(columnSettings.contacts);
   }
 
@@ -30,7 +37,7 @@ export class ContactsComponent extends CommonAbstractGrid implements OnInit {
 
   }
   public onSeeDetails(item: any): void {
-    
+
   }
 
 }

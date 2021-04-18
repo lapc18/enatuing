@@ -1,3 +1,5 @@
+import { CONTACTS_COLS } from "../domain/contacts/contacts.models";
+
 export class DrawerItem {
     constructor(
         public label?: string,
@@ -85,10 +87,6 @@ export interface IColumn {
     color?: string,
     isSortable?: boolean
 }
-
-const CONTACTS_COLS: IColumn[] = [];
-
-
 
 
 export interface IColumnSettings {
