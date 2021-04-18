@@ -1,2 +1,25 @@
-<p>dashboard works!</p>
-<app-footer></app-footer>
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+      <button mat-icon-button>
+        <mat-icon (click)="drawer.toggle()">menu</mat-icon>
+      </button>
+      <div style="width: 100%;" class="row pt-3">
+          <div class="col">
+              <h1 class="">ENAT</h1>
+          </div>
+          <div style="text-align: end;" class="col">
+            <p class="lead">Bienvenido, User name</p>
+          </div>
+      </div>
+    </mat-toolbar-row>
+  </mat-toolbar>
+ <mat-drawer-container  color="primary">
+    <mat-drawer #drawer mode="side" opened>
+        <mat-nav-list routerLinkActive="user-management" [routerLinkActiveOptions]="{exact: true}">
+            <a *ngFor="let item of drawerOptions" [matTooltip]="item.toolTip" [matTooltipPosition]="item.toolTipPosition" mat-list-item [routerLink]="item.route"> {{ item.label }} </a>
+          </mat-nav-list>
+    </mat-drawer>
+    <mat-drawer-content>
+        <router-outlet></router-outlet>
+    </mat-drawer-content>
+</mat-drawer-container>

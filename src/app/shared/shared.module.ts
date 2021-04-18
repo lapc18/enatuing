@@ -2,7 +2,6 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FooterComponent } from './components/footer/footer.component';
 import { CardsComponent } from './components/cards/cards.component';
-import { NavbarComponent } from './components/navbar/navbar.component';
 import { HeaderComponent } from './components/header/header.component';
 
 
@@ -11,7 +10,6 @@ import { HeaderComponent } from './components/header/header.component';
   declarations: [
     FooterComponent,
     CardsComponent,
-    NavbarComponent,
     HeaderComponent
   ],
   imports: [
@@ -20,7 +18,6 @@ import { HeaderComponent } from './components/header/header.component';
   exports: [
     FooterComponent,
     CardsComponent,
-    NavbarComponent,
     HeaderComponent
   ]
 })

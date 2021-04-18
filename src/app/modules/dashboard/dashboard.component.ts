@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { DrawerItem, DRAWER_OPTIONS } from 'src/app/shared/models/enat.models';
 
 @Component({
   selector: 'app-dashboard',
@@ -6,6 +7,8 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
+
+  public drawerOptions: DrawerItem[] = DRAWER_OPTIONS;
 
   constructor() { }
 
