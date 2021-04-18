@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FooterComponent } from './components/footer/footer.component';
 import { CardsComponent } from './components/cards/cards.component';
 import { HeaderComponent } from './components/header/header.component';
+import { CommonTableComponent } from './components/common-table/common-table.component';
+import { MaterialModule } from '../material.module';
 
 
 
@@ -10,15 +12,18 @@ import { HeaderComponent } from './components/header/header.component';
   declarations: [
     FooterComponent,
     CardsComponent,
-    HeaderComponent
+    HeaderComponent,
+    CommonTableComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    MaterialModule
   ], 
   exports: [
     FooterComponent,
     CardsComponent,
-    HeaderComponent
+    HeaderComponent,
+    CommonTableComponent
   ]
 })
 export class SharedModule { }
