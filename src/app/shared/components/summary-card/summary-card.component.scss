@@ -1,0 +1,33 @@
+@import "../../../../sass/variables.scss";
+
+$top-offset: 20px;
+$icon-size: 40px;
+$icon-box-color: rgb(214, 87, 87);
+
+.mat-card {
+    min-width: 350px;
+    margin-top: $top-offset;
+}
+
+.mat-icon {
+    position: absolute;
+    height: 90px;
+    width: 90px;
+    top: 0;
+    transform: translateY(-$top-offset);
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: $icon-box-color;
+    font-size: $icon-size;
+    border-radius: 5px;
+    color: #ffffff;
+    box-shadow: 0 6px 10px rgb(214, 214, 214);
+}
+
+mat-card-title {
+    margin: 0;
+    font-size: .8rem;
+    opacity: .8;
+}
