@@ -1,0 +1,22 @@
+<mat-card>
+  <p *ngIf="title" class="text-center fw-bold m-0">{{ title }}</p>
+
+  <div class="chart-wrapper">
+    <ngx-charts-bar-vertical
+      [view]=""
+      [scheme]="colorScheme"
+      [results]="chartItems"
+      [gradient]="gradient"
+      [xAxis]="showXAxis"   
+      [yAxis]="showYAxis"
+      [legend]="showLegend"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="yAxisLabel"
+      [barPadding]="barSpacing"
+      [roundEdges]="roundedBars"
+      (select)="onSelect($event)">
+    </ngx-charts-bar-vertical>
+  </div>
+</mat-card>

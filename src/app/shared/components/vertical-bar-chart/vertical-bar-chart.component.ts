@@ -1,0 +1,45 @@
+import { Component, OnInit, Input } from '@angular/core';
+
+interface ChartItem {
+  name: string;
+  value: number;
+  hexColor: string;
+}
+
+@Component({
+  selector: 'vertical-bar-chart',
+  templateUrl: './vertical-bar-chart.component.html',
+  styleUrls: ['./vertical-bar-chart.component.scss']
+})
+export class VerticalBarChartComponent implements OnInit {
+  @Input() title?: string;
+  @Input() chartItems: ChartItem[];
+  @Input() roundedBars?: boolean = true;
+  @Input() barSpacing?: number = 40;
+  @Input() showLegend?: boolean = false;
+  @Input() xAxisLabel?: string;
+  @Input() yAxisLabel?: string;
+
+  showXAxisLabel = false;
+  showYAxisLabel = false;
+  showXAxis = true;
+  showYAxis = true;
+  gradient = false;
+  colorScheme = {
+    domain: []
+  };
+
+  constructor() { }
+
+  onSelect(event) {
+    // Do something
+  }
+
+  ngOnInit(): void {
+    const itemColors: string[] = this.chartItems.map(item => item.hexColor);
+    this.colorScheme.domain = itemColors;
+    this.showXAxisLabel = Boolean(this.xAxisLabel);
+    this.showYAxisLabel = Boolean(this.yAxisLabel);
+  }
+
+}

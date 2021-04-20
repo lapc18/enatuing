@@ -1,14 +1,6 @@
-<p>users works</p>
-
-<div class="d-flex justify-content-between">
-
-    <div class="px-4">
-        <app-summary-card 
-        title="Cantidad de metas para Presidencia" 
-        subtitle="Organismos nuevos" 
-        content="0 / 5 N" 
-        materialIconName="article">
-    </app-summary-card>
-
-    </div>
+<div class="p-5">
+    <vertical-bar-chart
+        title="Certificaciones obtenidas en el año actual"
+        [chartItems]="chartData"
+    ></vertical-bar-chart>
 </div>
