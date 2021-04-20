@@ -1,4 +1,5 @@
 import { EventEmitter, Component, OnInit, Input, Output } from '@angular/core';
+import { ChartItem } from '../../models/shared.models';
 
 @Component({
   selector: 'vertical-bar-chart',
