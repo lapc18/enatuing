@@ -16,7 +16,7 @@
       [yAxisLabel]="yAxisLabel"
       [barPadding]="barSpacing"
       [roundEdges]="roundedBars"
-      (select)="onSelect($event)">
+      (select)="onSelect.emit()">
     </ngx-charts-bar-vertical>
   </div>
 </mat-card>

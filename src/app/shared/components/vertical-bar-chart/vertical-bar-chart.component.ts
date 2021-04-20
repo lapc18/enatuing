@@ -1,10 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
-
-interface ChartItem {
-  name: string;
-  value: number;
-  hexColor: string;
-}
+import { EventEmitter, Component, OnInit, Input, Output } from '@angular/core';
 
 @Component({
   selector: 'vertical-bar-chart',
@@ -20,6 +14,8 @@ export class VerticalBarChartComponent implements OnInit {
   @Input() xAxisLabel?: string;
   @Input() yAxisLabel?: string;
 
+  @Output() onSelect: EventEmitter<any> = new EventEmitter<any>()
+
   showXAxisLabel = false;
   showYAxisLabel = false;
   showXAxis = true;
@@ -30,10 +26,6 @@ export class VerticalBarChartComponent implements OnInit {
   };
 
   constructor() { }
-
-  onSelect(event) {
-    // Do something
-  }
 
   ngOnInit(): void {
     const itemColors: string[] = this.chartItems.map(item => item.hexColor);
