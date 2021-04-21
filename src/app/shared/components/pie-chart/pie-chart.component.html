@@ -1,0 +1,14 @@
+<chart-wrapper [title]="title">
+    <ngx-charts-pie-chart
+        [view]=""
+        [scheme]="colorScheme"
+        [results]="chartItems"
+        [legend]="showLegend"
+        [labels]="showLabels"
+        [doughnut]="isDoughnut"
+        [trimLabels]="trimLabels"
+        [maxLabelLength]="maxLabelLength"
+        (select)="onSelect.emit($event)"
+        >
+    </ngx-charts-pie-chart>
+</chart-wrapper>
