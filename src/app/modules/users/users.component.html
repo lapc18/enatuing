@@ -1,3 +1,20 @@
+<div class="d-flex">
+    <div style="flex-basis:50%">
+        <pie-chart
+            [showLabels]="false"
+            title="Certificaciones obtenidas en el año actual"
+            [chartItems]="chartData"
+        ></pie-chart>
+    </div>
+    <div style="flex-basis:50%">
+        <horizontal-bar-chart
+            title="Certificaciones obtenidas en el año actual"
+            [chartItems]="chartData"
+        ></horizontal-bar-chart>
+    </div>
+</div>
+
+
 <div class="p-5">
     <vertical-bar-chart
         title="Certificaciones obtenidas en el año actual"
