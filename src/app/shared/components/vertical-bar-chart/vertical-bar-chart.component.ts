@@ -1,12 +1,12 @@
 import { EventEmitter, Component, OnInit, Input, Output } from '@angular/core';
-import { ChartItem } from '../../models/shared.models';
+import { ChartItem, Chart, BarChart } from '../../models/shared.models';
 
 @Component({
   selector: 'vertical-bar-chart',
   templateUrl: './vertical-bar-chart.component.html',
   styleUrls: ['./vertical-bar-chart.component.scss'],
 })
-export class VerticalBarChartComponent implements OnInit {
+export class VerticalBarChartComponent implements OnInit, Chart, BarChart {
   @Input() title?: string;
   @Input() chartItems: ChartItem[];
   @Input() roundedBars?: boolean = true;
