@@ -10,6 +10,7 @@ import { VerticalBarChartComponent } from './components/vertical-bar-chart/verti
 import { PieChartComponent } from './components/pie-chart/pie-chart.component';
 import { HorizontalBarChartComponent } from './components/horizontal-bar-chart/horizontal-bar-chart.component';
 import { ChartWrapperComponent } from './components/chart-wrapper/chart-wrapper.component';
+import { MixedPieChartComponent } from './components/mixed-pie-chart/mixed-pie-chart.component';
 
 @NgModule({
   declarations: [
@@ -20,6 +21,7 @@ import { ChartWrapperComponent } from './components/chart-wrapper/chart-wrapper.
     HorizontalBarChartComponent,
     PieChartComponent,
     ChartWrapperComponent,
+    MixedPieChartComponent,
   ],
   imports: [
     CommonModule,
@@ -33,6 +35,7 @@ import { ChartWrapperComponent } from './components/chart-wrapper/chart-wrapper.
     VerticalBarChartComponent,
     HorizontalBarChartComponent,
     PieChartComponent,
+    MixedPieChartComponent
   ]
 })
 export class SharedModule { }
