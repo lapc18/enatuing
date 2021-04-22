@@ -1,0 +1,17 @@
+<div class="carousel">
+
+  <div class="slide" *ngFor="let index of currentSlideIndexes">
+    <statistics-card 
+      [label]="statisticList[index].label" 
+      [iconUrl]="statisticList[index].iconUrl"
+      [highlightedText]="statisticList[index].highlightedText">
+    </statistics-card>
+  </div>
+
+  <button class="control prev" (click)="previousClick()">
+    <mat-icon class="arrow left" inline>arrow_back_ios</mat-icon>
+  </button>
+  <button class="control next" (click)="nextClick()">
+    <mat-icon class="arrow right" inline>arrow_forward_ios</mat-icon>
+  </button>
+</div>
