@@ -77,6 +77,14 @@ export const DRAWER_OPTIONS:DrawerItem[] = [
         '/dashboard/users',
         false,
         true
+    ),
+    new DrawerItem(
+        'Statistics',
+        'Statistics',
+        'left',
+        '/dashboard/statistics',
+        false,
+        false
     )
 ];
 

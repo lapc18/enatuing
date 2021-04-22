@@ -1,0 +1,19 @@
+<chart-wrapper [title]="title">
+    <ngx-charts-bar-horizontal
+        [view]=""
+        [scheme]="colorScheme"
+        [results]="chartItems"
+        [legend]="showLegend"
+        [barPadding]="barSpacing"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [maxYAxisTickLength]="maxYAxisTickLength"
+        [maxXAxisTickLength]="maxXAxisTickLength"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        (select)="onSelect.emit($event)">
+    </ngx-charts-bar-horizontal>
+</chart-wrapper>
+

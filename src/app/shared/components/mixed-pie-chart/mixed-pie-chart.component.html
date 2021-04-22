@@ -1,0 +1,15 @@
+<div class="d-flex align-items-center justify-content-between">
+    <div class="pie-chart">
+        <pie-chart
+            showLabels=""
+            isDoughnut="true"
+            [title]="title"
+            [chartItems]="dataSource"
+        ></pie-chart>
+    </div>
+    <div class="horizontal-chart">
+        <horizontal-bar-chart
+            [chartItems]="dataSource"
+        ></horizontal-bar-chart>
+    </div>
+</div>

@@ -1,0 +1,18 @@
+<chart-wrapper [title]="title">
+  <ngx-charts-bar-vertical
+      [view]=""
+      [trimYAxisTicks]="false"
+      [scheme]="colorScheme"
+      [results]="chartItems"
+      [xAxis]="showXAxis"   
+      [yAxis]="showYAxis"
+      [legend]="showLegend"
+      [showXAxisLabel]="showXAxisLabel"
+      [showYAxisLabel]="showYAxisLabel"
+      [xAxisLabel]="xAxisLabel"
+      [yAxisLabel]="yAxisLabel"
+      [barPadding]="barSpacing"
+      [roundEdges]="roundedBars"
+      (select)="onSelect.emit($event)">
+    </ngx-charts-bar-vertical>
+</chart-wrapper>
