@@ -5,6 +5,8 @@ import { CardsComponent } from './components/cards/cards.component';
 import { HeaderComponent } from './components/header/header.component';
 import { CommonTableComponent } from './components/common-table/common-table.component';
 import { MaterialModule } from '../material.module';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -17,9 +19,15 @@ import { MaterialModule } from '../material.module';
   ],
   imports: [
     CommonModule,
-    MaterialModule
+    MaterialModule,
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule
   ], 
   exports: [
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule,
     FooterComponent,
     CardsComponent,
     HeaderComponent,

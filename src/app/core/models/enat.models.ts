@@ -1,3 +1,4 @@
+import { CERTIFICATIONS_COLS } from "../domain/certifications/certifications.models";
 import { CONTACTS_COLS } from "../domain/contacts/contacts.models";
 
 export class DrawerItem {
@@ -88,11 +89,18 @@ export interface IColumn {
     isSortable?: boolean
 }
 
+export interface GenericTypeValue {
+    name: string,
+    value: string
+}
+
 
 export interface IColumnSettings {
-    contacts: IColumn[]
+    contacts: IColumn[],
+    certifications: IColumn[]
 }
 
 export const columnSettings: IColumnSettings = {
-    contacts: CONTACTS_COLS
+    contacts: CONTACTS_COLS,
+    certifications: CERTIFICATIONS_COLS
 }
