@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { DrawerItem, DRAWER_OPTIONS } from 'src/app/shared/models/enat.models';
+import { DrawerItem, DRAWER_OPTIONS } from 'src/app/core/models/enat.models';
 
 @Component({
   selector: 'app-dashboard',

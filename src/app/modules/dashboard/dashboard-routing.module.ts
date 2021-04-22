@@ -14,7 +14,9 @@ const routes: Routes = [
       { path: 'queue', loadChildren: () => import('../queue/queue.module').then(m => m.QueueModule) },
       { path: 'organizations', loadChildren: () => import('../organization/organization.module').then(m => m.OrganizationModule) },
       { path: 'dashboard', loadChildren: () => import('../dashboard/dashboard.module').then(m => m.DashboardModule) },
-      { path: 'statistics', loadChildren: () => import('../statistics/statistics.module').then(m => m.StatisticsModule) }
+      { path: 'statistics', loadChildren: () => import('../statistics/statistics.module').then(m => m.StatisticsModule) },
+      { path: 'home', loadChildren: () => import('../home/home.module').then(m => m.HomeModule) },
+      { path: '', pathMatch: 'full', redirectTo: 'home' }
     ]
   }
 ];

@@ -1,23 +1,16 @@
 <header>
-    <div class="row">
-        <div class="col-sm-8">
-            <a href="http://optic.gob.do">
-                <img src="http://optic.gob.do/wp-content/themes/optic/img/logo.svg" alt="Logo de la Oficina Presidencial de Tecnologías de la Información y Comunicación (OPTIC)" class="img-responsive">
-            </a>
-        </div>
-        <div class="col-sm-4">
-            <div class="site-map">
-                <img src="http://optic.gob.do/wp-content/themes/optic/img/rd.svg" alt="Escudo de la República Dominicana">
-                <form class="search" method="get" action="http://optic.gob.do" role="search">
-                    <span class="input-la input-group">
-                        <input class="search-input form-control" aria-label="Ingresa tu búsqueda" type="search" required="" name="s" placeholder="Ingresa tu búsqueda">
-                        <div class="input-group-btn">
-                            <button class="search-submit" aria-label="Buscar en la página" type="submit" role="button"><i class="fa fa-search" aria-hidden="true"></i></button>
-                        </div>
-                    </span>
-                </form>
-            </div>
-        </div>
+    <div class="search-form">
+        <mat-form-field>
+          <mat-label>Buscar</mat-label>
+          <input [(ngModel)]="filter" matInput type="text" placeholder="Escribe lo que quieres buscar">
+        </mat-form-field>
     </div>
 
+    <button mat-icon-button matTooltip="Click para agregar un nuevo item en la vista actual" matTooltipPosition="above">
+        <mat-icon>add_circle</mat-icon>
+    </button>
+
+    <button mat-icon-button matTooltip="Click para exportar los items de la vista actual a Excel." matTooltipPosition="above">
+        <mat-icon>import_export</mat-icon>
+    </button>
 </header>

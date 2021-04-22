@@ -1,0 +1,50 @@
+<div class="header" mat-dialog-title>
+    <p *ngIf="!isEditing" class="display-4">Contacto</p>
+    <p *ngIf="isEditing" class="display-4">Detalles del contacto: {{ contact.Name }}</p>
+</div>
+<div class="details-container" mat-dialog-content>
+    <div class="row">
+
+        <form class="details" [formGroup]="formGroup">
+
+            <mat-form-field>
+                <mat-label>Nombre</mat-label>
+                <input matInput placeholder="Ingrese un nombre" formControlName="name" type="text">
+            </mat-form-field>            
+
+            <mat-form-field>
+                <mat-label>Posición</mat-label>
+                <input matInput placeholder="Ingrese una posición" formControlName="position" type="text">
+            </mat-form-field>            
+
+            <mat-form-field>
+                <mat-label>Email</mat-label>
+                <input matInput placeholder="Ingrese un e-mail" formControlName="email" type="email">
+            </mat-form-field>                       
+
+            <mat-form-field>
+                <mat-label>Teléfono</mat-label>
+                <input matInput placeholder="Ingrese un teléfono" formControlName="telephoneNumber" type="tel">
+            </mat-form-field>  
+            
+            <mat-form-field>
+                <mat-label>Ext</mat-label>
+                <input matInput placeholder="Ingrese una extensión" formControlName="ext" type="number">
+            </mat-form-field> 
+
+            <mat-form-field>
+                <mat-label>Celular</mat-label>
+                <input matInput placeholder="Ingrese un celular" formControlName="phoneNumber" type="tel">
+            </mat-form-field>            
+
+            <br />
+            <div mat-dialog-actions>
+                <button class="btn btn-danger" mat-dialog-close>
+                    <span *ngIf="!isEditing">Cerrar</span>
+                    <span *ngIf="isEditing">Cancelar</span>
+                </button>
+                <button [disabled]="!formGroup.valid" class="btn btn-success" *ngIf="isEditing || isCreating" (click)="onSaveChanges()">Guardar cambios</button>
+            </div>
+        </form>
+    </div>
+</div>

@@ -1,1 +1,19 @@
-<p>contacts works!</p>
+<div class="user-container">
+    <ng-container *ngIf="data; else nodata">
+        <common-header></common-header>
+        <common-table 
+            [isLoading]="isLoading$ | async" 
+            [columns]="columns" 
+            [dataSource]="data" 
+            (onDelete)="onDelete($event)" 
+            (onEdit)="onEdit($event)" 
+            (onDetails)="onSeeDetails($event)"> 
+        </common-table>
+    </ng-container>   
+    <ng-template #nodata>
+        <div class="p-5 mb-5 text-center">
+            <p class="display-3">No se han encontrado datos</p>
+            <img class="svg" src="../../../assets/svg/empty_data.svg" alt="">
+        </div>
+    </ng-template>
+</div>

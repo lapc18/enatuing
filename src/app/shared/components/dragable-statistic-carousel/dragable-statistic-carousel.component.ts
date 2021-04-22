@@ -8,8 +8,8 @@ import { StatisticsCard } from '../../models/shared.models';
   styleUrls: ['./dragable-statistic-carousel.component.scss']
 })
 export class DragableStatisticCarouselComponent implements OnInit {
-  @Input() cardContentList: StatisticsCard[];
   @ViewChild('dragScroll', { read: DragScrollComponent }) dragScroll: DragScrollComponent;
+  @Input() cardContentList: StatisticsCard[];
   @Input() transitionInterval = 40000;
   interval: any;
 

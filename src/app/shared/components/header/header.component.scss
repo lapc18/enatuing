@@ -1,5 +1,17 @@
+@import '../../../../sass/variables.scss';
+
 header {
-    min-height: 25vh;
-    padding: 2rem;
+    padding: 1rem;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    background-color: white;
+
+    .search-form {
+        mat-form-field {
+            width: 10rem;
+        }
+    }
 
 }

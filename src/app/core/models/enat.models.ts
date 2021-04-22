@@ -1,3 +1,6 @@
+import { CERTIFICATIONS_COLS } from "../domain/certifications/certifications.models";
+import { CONTACTS_COLS } from "../domain/contacts/contacts.models";
+
 export class DrawerItem {
     constructor(
         public label?: string,
@@ -10,13 +13,12 @@ export class DrawerItem {
 
 }
 
-
 export const DRAWER_OPTIONS:DrawerItem[] = [
     new DrawerItem(
         'Dashboard',
         'Dashboard',
         'left',
-        '/dashboard',
+        '/dashboard/home',
         false,
         true
     ),
@@ -85,3 +87,28 @@ export const DRAWER_OPTIONS:DrawerItem[] = [
         false
     )
 ];
+
+
+export interface IColumn {
+    name: string,
+    label: string,
+    width?: number,
+    color?: string,
+    isSortable?: boolean
+}
+
+export interface GenericTypeValue {
+    name: string,
+    value: string
+}
+
+
+export interface IColumnSettings {
+    contacts: IColumn[],
+    certifications: IColumn[]
+}
+
+export const columnSettings: IColumnSettings = {
+    contacts: CONTACTS_COLS,
+    certifications: CERTIFICATIONS_COLS
+}

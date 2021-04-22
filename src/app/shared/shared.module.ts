@@ -5,8 +5,11 @@ import { DragScrollModule } from 'ngx-drag-scroll';
 
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
-import { SummaryCardComponent } from './components/summary-card/summary-card.component';
+import { CommonTableComponent } from './components/common-table/common-table.component';
 import { MaterialModule } from '../material.module';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { SummaryCardComponent } from './components/summary-card/summary-card.component';
 import { VerticalBarChartComponent } from './components/vertical-bar-chart/vertical-bar-chart.component';
 import { PieChartComponent } from './components/pie-chart/pie-chart.component';
 import { HorizontalBarChartComponent } from './components/horizontal-bar-chart/horizontal-bar-chart.component';
@@ -19,6 +22,8 @@ import { DragableStatisticCarouselComponent } from './components/dragable-statis
 @NgModule({
   declarations: [
     FooterComponent,
+    HeaderComponent,
+    CommonTableComponent,
     HeaderComponent,
     SummaryCardComponent,
     VerticalBarChartComponent,
@@ -33,11 +38,19 @@ import { DragableStatisticCarouselComponent } from './components/dragable-statis
   imports: [
     CommonModule,
     MaterialModule,
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule,
     NgxChartsModule,
     DragScrollModule
   ],
   exports: [
+    ReactiveFormsModule,
+    FormsModule,
+    HttpClientModule,
     FooterComponent,
+    HeaderComponent,
+    CommonTableComponent,
     HeaderComponent,
     SummaryCardComponent,
     VerticalBarChartComponent,
