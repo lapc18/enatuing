@@ -1,0 +1,15 @@
+<drag-scroll 
+  #dragScroll
+  [scrollbar-hidden]="true"
+  [drag-scroll-y-disabled]="true"
+  [snap-offset]="200"
+  [snap-duration]="300"
+>
+    <div class="drag-scroll-item" drag-scroll-item *ngFor="let cardContent of cardContentList">
+        <statistics-card 
+          [label]="cardContent.label"
+          [iconUrl]="cardContent.iconUrl" 
+          [highlightedText]="cardContent.highlightedText">
+      </statistics-card>
+    </div>
+</drag-scroll>

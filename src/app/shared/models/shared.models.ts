@@ -26,3 +26,10 @@ export interface BarChart {
     showXAxis: boolean;
     showYAxis: boolean;
 }
+
+export interface StatisticsCard {
+    label: string;
+    highlightedText: string;
+    iconUrl: string;
+
+}

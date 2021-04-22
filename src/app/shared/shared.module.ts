@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { DragScrollModule } from 'ngx-drag-scroll';
 
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
@@ -11,6 +12,9 @@ import { PieChartComponent } from './components/pie-chart/pie-chart.component';
 import { HorizontalBarChartComponent } from './components/horizontal-bar-chart/horizontal-bar-chart.component';
 import { ChartWrapperComponent } from './components/chart-wrapper/chart-wrapper.component';
 import { MixedPieChartComponent } from './components/mixed-pie-chart/mixed-pie-chart.component';
+import { StatisticsCardComponent } from './components/statistics-card/statistics-card.component';
+import { StatisticsCarouselComponent } from './components/statistics-carousel/statistics-carousel.component';
+import { DragableStatisticCarouselComponent } from './components/dragable-statistic-carousel/dragable-statistic-carousel.component';
 
 @NgModule({
   declarations: [
@@ -22,11 +26,15 @@ import { MixedPieChartComponent } from './components/mixed-pie-chart/mixed-pie-c
     PieChartComponent,
     ChartWrapperComponent,
     MixedPieChartComponent,
+    StatisticsCardComponent,
+    StatisticsCarouselComponent,
+    DragableStatisticCarouselComponent,
   ],
   imports: [
     CommonModule,
     MaterialModule,
     NgxChartsModule,
+    DragScrollModule
   ],
   exports: [
     FooterComponent,
@@ -35,7 +43,10 @@ import { MixedPieChartComponent } from './components/mixed-pie-chart/mixed-pie-c
     VerticalBarChartComponent,
     HorizontalBarChartComponent,
     PieChartComponent,
-    MixedPieChartComponent
+    MixedPieChartComponent,
+    StatisticsCardComponent,
+    StatisticsCarouselComponent,
+    DragableStatisticCarouselComponent
   ]
 })
 export class SharedModule { }
