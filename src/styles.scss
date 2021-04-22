@@ -1,13 +1,9 @@
 /* You can add global styles to this file, and also import other style files */
 @import "bootstrap/dist/css/bootstrap.min.css";
 @import "~@angular/material/theming";
-
 @import "./sass/variables.scss";
 
 @include mat-core();
-$primary-color: mat-palette($mat-pink);
-$accent-color: mat-palette($mat-blue-gray, A200, A100, A400);
-$warn-color: mat-palette($mat-red);
 $global-theme: mat-light-theme($primary-color, $accent-color, $warn-color);
 @include angular-material-theme($global-theme);
 
