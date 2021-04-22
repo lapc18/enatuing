@@ -29,10 +29,16 @@ const reducer = createReducer(
     on(actions.createContactsuccess, (state) => ({ ...state, isLoading: false })),
     on(actions.createContactsFailed, (state, { payload }) => ({ ...state, isLoading: false, hasError: true, errorMessage: payload })),
 
-    on(actions.editContacts, (state, { payload }) => ({
+    on(actions.editContacts, (state, { payload, id }) => ({
         ...state,
         isLoading: true,
-        contacts: state.contacts.map(contact => (contact.id === payload.id ? payload : contact)),
+        contacts: state.contacts.map((contact) => {
+            if(contact.id == id){
+                payload.id = id;
+                return payload;
+            }
+            return contact;
+        })
     })),
     on(actions.editContactsuccess, (state) => ({ ...state, isLoading: false })),
     on(actions.editContactsFailed, (state, { payload }) => ({ ...state, isLoading: false, hasError: true, errorMessage: payload })),
