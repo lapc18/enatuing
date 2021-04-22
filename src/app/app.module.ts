@@ -8,6 +8,7 @@ import { StoreModule } from '@ngrx/store';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
 import { MaterialModule } from './material.module';
+import * as reducers from './core/stores/reducers';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,9 @@ import { MaterialModule } from './material.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
-    StoreModule.forRoot({  }),
+    StoreModule.forRoot({ 
+      contact: reducers.contactReducer
+    }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
