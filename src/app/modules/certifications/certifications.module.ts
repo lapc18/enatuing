@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 
 import { CertificationsRoutingModule } from './certifications-routing.module';
 import { CertificationsComponent } from './certifications.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 
 @NgModule({
@@ -11,7 +12,8 @@ import { CertificationsComponent } from './certifications.component';
   ],
   imports: [
     CommonModule,
-    CertificationsRoutingModule
+    CertificationsRoutingModule,
+    SharedModule
   ]
 })
 export class CertificationsModule { }
