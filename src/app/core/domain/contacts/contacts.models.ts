@@ -3,12 +3,12 @@ import { IColumn } from "src/app/core/models/enat.models";
 
 export interface Contact {
     id: any;
-    Name: string,
-    Position: string,
-    Email: string,
-    TelephoneNumber: string,
-    Ext: string,
-    PhoneNumber: string
+    name: string,
+    position: string,
+    email: string,
+    telephoneNumber: string,
+    ext: string,
+    phoneNumber: string
 }
 
 export const CONTACTS_COLS: IColumn[] = [
