@@ -8,10 +8,10 @@ import { StatisticsCard } from '../../models/shared.models';
 })
 export class StatisticsCarouselComponent implements OnInit, OnDestroy {
   @Input() statisticList: StatisticsCard[];
-  @Input() size = 5;
-  @Input() transitionInterval = 3000;
+  @Input() size: number = 5;
+  @Input() transitionInterval: number = 3000;
   
-  currentSlideIndexes = [];
+  currentSlideIndexes: number[] = [];
   interval: any;
 
   constructor() { }
@@ -28,14 +28,14 @@ export class StatisticsCarouselComponent implements OnInit, OnDestroy {
     clearInterval(this.interval);
   }
 
-  previousClick() {
+  previousClick(): void {
     const previous = this.currentSlideIndexes[0] - 1;
     const previousIndex = previous < 0 ? this.statisticList.length - 1 : previous;
     this.currentSlideIndexes.unshift(previousIndex);
     this.currentSlideIndexes.pop()
   }
 
-  nextClick() {
+  nextClick(): void {
     const next = this.currentSlideIndexes[this.currentSlideIndexes.length - 1] + 1;
     const startPosition = next === this.statisticList.length ? 0 : next;
     this.currentSlideIndexes.shift()

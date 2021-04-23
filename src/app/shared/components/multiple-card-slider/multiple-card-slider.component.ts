@@ -10,28 +10,28 @@ export class MultipleCardSliderComponent implements OnInit, OnDestroy {
 
   @Input() sliderCardList: SliderCard[];
   @ViewChild('scrollArea') scrollArea: any; 
-  @Input() transitionInterval = 3000;
+  @Input() transitionInterval: number = 3000;
   interval: any;
 
   constructor() { }
 
-  ngOnInit() {}
+  ngOnInit(): void {}
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
       this.interval = setInterval(() => {
           this.nextSlide()
       }, this.transitionInterval);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     this.interval.clear();
   }
 
-  previousSlide() {
+  previousSlide(): void {
     this.scrollArea.nativeElement.scrollLeft -= 300;
   }
 
-  nextSlide() {
+  nextSlide(): void {
     this.scrollArea.nativeElement.scrollLeft += 300;
   }
 

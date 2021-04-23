@@ -10,28 +10,28 @@ import { StatisticsCard } from '../../models/shared.models';
 export class DragableStatisticCarouselComponent implements OnInit {
   @ViewChild('dragScroll', { read: DragScrollComponent }) dragScroll: DragScrollComponent;
   @Input() cardContentList: StatisticsCard[];
-  @Input() transitionInterval = 40000;
+  @Input() transitionInterval: number = 40000;
   interval: any;
 
   constructor() { }
 
   ngOnInit(): void {}
 
-  ngAfterViewInit() {
+  ngAfterViewInit(): void {
     this.interval = setInterval(() => {
       this.moveRight();
     }, this.transitionInterval);
   }
 
-  ngOnDestroy() {
+  ngOnDestroy(): void {
     clearInterval(this.interval);
   }
 
-  moveLeft() {
+  moveLeft(): void {
     this.dragScroll.moveLeft();
   }
 
-  moveRight() {
+  moveRight(): void {
     this.dragScroll.moveRight();
   }
 }
