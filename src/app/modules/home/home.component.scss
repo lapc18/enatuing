@@ -1,23 +1,31 @@
 @import "src/sass/variables";
 
 .section {
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem;
 }
 
 .charts {
-    @media (min-width: $large-device) {
-        display: flex;
-        justify-content: space-between;
-        align-items: stretch;
+    .vertical,
+    .horizontal {
+        margin-bottom: 2rem;
+    }
+}
 
-        .vertical {
-            flex-basis: 50%;
-            max-width: 700px;
+@media (min-width: $large-device) {
+    .charts {
+        margin-bottom: 0;
+        display: flex;
+        justify-content: center;
+
+        .vertical,
+        .horizontal {
+            margin-bottom: 0;
+            display: inline-block;
+            width: 45%;
         }
 
-        .horizontal {
-            flex-basis: 40%;
-            max-width: 500px;
+        .vertical {
+            margin-right: 2rem;
         }
     }
 }

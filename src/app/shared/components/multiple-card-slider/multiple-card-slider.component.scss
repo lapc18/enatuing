@@ -11,6 +11,7 @@
 
     .back-btn,
     .next-btn {
+        min-width: 30px;
         padding: 0.9rem 0;
         flex-basis: 5%;
 
@@ -23,8 +24,6 @@
     .carousel-cards {
         flex: 1;
         border-radius: 5px;
-        border-right: 3px solid rgb(245, 245, 245);
-        border-left: 3px solid rgb(245, 245, 245);
         padding: 1rem;
         display: flex;
         overflow: hidden;
