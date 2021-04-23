@@ -9,7 +9,7 @@ import { StatisticsCard } from '../../models/shared.models';
 export class StatisticsCarouselComponent implements OnInit, OnDestroy {
   @Input() statisticList: StatisticsCard[];
   @Input() size = 5;
-  @Input() transitionInterval = 60000;
+  @Input() transitionInterval = 3000;
   
   currentSlideIndexes = [];
   interval: any;

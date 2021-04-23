@@ -14,6 +14,10 @@
     &:hover {
         transform: scale(1.025);
     }
+
+    &:not(:last-child) {
+        margin-right: 1.5rem;
+    }
 }
 
 .control {

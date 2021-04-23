@@ -8,6 +8,7 @@ import { ChartItem, Chart, BarChart } from './../../models/shared.models';
 })
 export class HorizontalBarChartComponent implements OnInit, Chart, BarChart {
   @Input() title?: string;
+  @Input() subtitle?: string;
   @Input() chartItems: ChartItem[];
   @Input() barSpacing?: number = 15;
   @Input() showLegend?: boolean = false;

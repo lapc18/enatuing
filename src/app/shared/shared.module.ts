@@ -18,6 +18,7 @@ import { MixedPieChartComponent } from './components/mixed-pie-chart/mixed-pie-c
 import { StatisticsCardComponent } from './components/statistics-card/statistics-card.component';
 import { StatisticsCarouselComponent } from './components/statistics-carousel/statistics-carousel.component';
 import { DragableStatisticCarouselComponent } from './components/dragable-statistic-carousel/dragable-statistic-carousel.component';
+import { MultipleCardSliderComponent } from './components/multiple-card-slider/multiple-card-slider.component';
 
 @NgModule({
   declarations: [
@@ -34,6 +35,7 @@ import { DragableStatisticCarouselComponent } from './components/dragable-statis
     StatisticsCardComponent,
     StatisticsCarouselComponent,
     DragableStatisticCarouselComponent,
+    MultipleCardSliderComponent,
   ],
   imports: [
     CommonModule,
@@ -59,7 +61,8 @@ import { DragableStatisticCarouselComponent } from './components/dragable-statis
     MixedPieChartComponent,
     StatisticsCardComponent,
     StatisticsCarouselComponent,
-    DragableStatisticCarouselComponent
+    DragableStatisticCarouselComponent,
+    MultipleCardSliderComponent
   ]
 })
 export class SharedModule { }

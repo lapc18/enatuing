@@ -6,7 +6,8 @@ import { Component, Input, OnInit } from '@angular/core';
   styleUrls: ['./chart-wrapper.component.scss']
 })
 export class ChartWrapperComponent implements OnInit {
-  @Input() title: string;
+  @Input() title?: string;
+  @Input() subtitle?: string;
 
   constructor() { }
 
