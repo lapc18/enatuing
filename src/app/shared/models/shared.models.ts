@@ -1,4 +1,5 @@
 import { EventEmitter } from "@angular/core";
+import { CardType } from "./shared.enums";
 
 export interface ChartItem {
     name: string;
@@ -12,6 +13,7 @@ export interface ChartColorScheme {
 
 export interface Chart {
     title?: string;
+    subtitle?: string;
     showLegend?: boolean;
     chartItems: ChartItem[];
     colorScheme: ChartColorScheme;
@@ -32,4 +34,13 @@ export interface StatisticsCard {
     highlightedText: string;
     iconUrl: string;
 
+}
+
+export interface SliderCard {
+    title: string;
+    subtitle: string;
+    content: string;
+    type: CardType;
+    materialIconName?: string;
+    iconUrl?: string;
 }

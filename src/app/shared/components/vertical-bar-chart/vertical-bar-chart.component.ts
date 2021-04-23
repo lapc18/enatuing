@@ -8,6 +8,7 @@ import { ChartItem, Chart, BarChart } from '../../models/shared.models';
 })
 export class VerticalBarChartComponent implements OnInit, Chart, BarChart {
   @Input() title?: string;
+  @Input() subtitle?: string;
   @Input() chartItems: ChartItem[];
   @Input() roundedBars?: boolean = true;
   @Input() barSpacing?: number = 40;
