@@ -1,5 +1,8 @@
 <div class="container">
-    <p *ngIf="title" class="text-center fw-bold mb-2">{{ title }}</p>
+    <div class="text-center" *ngIf="title || subtitle">
+        <p *ngIf="title" class="fw-bold m-0">{{ title }}</p>
+        <small *ngIf="subtitle" class="text-secondary">{{ subtitle }}</small>
+    </div>
 
     <div class="content">
         <ng-content></ng-content>

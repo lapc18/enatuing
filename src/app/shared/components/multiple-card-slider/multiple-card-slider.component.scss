@@ -1,0 +1,38 @@
+@mixin flex-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.carousel-container {
+    position: relative;
+    @include flex-content();
+    border-radius: 10px;
+
+    .back-btn,
+    .next-btn {
+        min-width: 30px;
+        padding: 0.9rem 0;
+        flex-basis: 5%;
+
+        mat-icon {
+            opacity: .4;
+            font-size: 25px;
+        }
+    }
+
+    .carousel-cards {
+        flex: 1;
+        border-radius: 5px;
+        padding: 1rem;
+        display: flex;
+        overflow: hidden;
+        @include flex-content();
+        scroll-behavior: smooth;
+        flex-wrap: nowrap;
+
+        .carousel-card-item {
+            padding-right: 2rem;
+        }
+    }
+}

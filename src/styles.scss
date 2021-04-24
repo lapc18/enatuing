@@ -157,10 +157,13 @@ mat-checkbox {
 }
 
 mat-drawer-container {
-    width: 100vw;
+    width: 100%;
     height: 100vh;
     mat-drawer {
         min-width: 15%;
+    }
+    mat-drawer-content {
+        padding: 1rem;
     }
 }
 

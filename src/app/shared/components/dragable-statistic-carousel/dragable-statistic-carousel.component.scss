@@ -1,0 +1,11 @@
+drag-scroll {
+    width: 100%;
+    height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.drag-scroll-item:not(:last-child) {
+    margin-right: 20px;
+}

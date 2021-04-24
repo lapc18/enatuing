@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgxChartsModule } from '@swimlane/ngx-charts';
+import { DragScrollModule } from 'ngx-drag-scroll';
+
 import { FooterComponent } from './components/footer/footer.component';
 import { HeaderComponent } from './components/header/header.component';
 import { CommonTableComponent } from './components/common-table/common-table.component';
@@ -16,6 +18,10 @@ import { MixedPieChartComponent } from './components/mixed-pie-chart/mixed-pie-c
 import { YesOrNoComponent } from './dialogs/yes-or-no/yes-or-no.component';
 import { WarningComponent } from './dialogs/warning/warning.component';
 import { InformationComponent } from './dialogs/information/information.component';
+import { StatisticsCardComponent } from './components/statistics-card/statistics-card.component';
+import { StatisticsCarouselComponent } from './components/statistics-carousel/statistics-carousel.component';
+import { DragableStatisticCarouselComponent } from './components/dragable-statistic-carousel/dragable-statistic-carousel.component';
+import { MultipleCardSliderComponent } from './components/multiple-card-slider/multiple-card-slider.component';
 
 @NgModule({
   declarations: [
@@ -32,6 +38,10 @@ import { InformationComponent } from './dialogs/information/information.componen
     YesOrNoComponent,
     WarningComponent,
     InformationComponent,
+    StatisticsCardComponent,
+    StatisticsCarouselComponent,
+    DragableStatisticCarouselComponent,
+    MultipleCardSliderComponent,
   ],
   imports: [
     CommonModule,
@@ -40,6 +50,7 @@ import { InformationComponent } from './dialogs/information/information.componen
     FormsModule,
     HttpClientModule,
     NgxChartsModule,
+    DragScrollModule
   ],
   exports: [
     ReactiveFormsModule,
@@ -57,6 +68,10 @@ import { InformationComponent } from './dialogs/information/information.componen
     YesOrNoComponent,
     WarningComponent,
     InformationComponent,
+    StatisticsCardComponent,
+    StatisticsCarouselComponent,
+    DragableStatisticCarouselComponent,
+    MultipleCardSliderComponent
   ]
 })
 export class SharedModule { }

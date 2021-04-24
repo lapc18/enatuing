@@ -1,1 +1,34 @@
-<p>home works!</p>
+<div class="section">
+    <multiple-card-slider 
+        [sliderCardList]="goals"
+        [transitionInterval]="60000"
+    ></multiple-card-slider>
+</div>
+
+<div class="section">
+    <multiple-card-slider 
+        [sliderCardList]="statistics"
+        [transitionInterval]="60000"
+    >
+    </multiple-card-slider>
+</div>
+
+<div class="charts section">
+    <mat-card class="vertical">
+        <vertical-bar-chart 
+            title="Certifications worked by user" 
+            subtitle="January" 
+            [chartItems]="userCertifications"
+        >
+        </vertical-bar-chart>
+    </mat-card>
+    <mat-card class="horizontal">
+        <horizontal-bar-chart 
+            [chartItems]="userCertifications" 
+            title="Certifications Worked" 
+            subtitle="Last 7 days"
+            barSpacing="40"
+            >
+        </horizontal-bar-chart>
+    </mat-card>
+</div>
