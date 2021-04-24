@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { CommonAbstractGrid } from 'src/app/core/models/common-grid.abstract';
 import { columnSettings } from 'src/app/core/models/enat.models';
 import { DynamicDetailContactComponent } from './dynamic-detail-contact/dynamic-detail-contact.component';
+import { ExportService } from 'src/app/core/services/export.service';
 
 @Component({
   selector: 'app-contacts',
@@ -16,6 +17,7 @@ export class ContactsComponent extends CommonAbstractGrid implements OnInit {
 
   constructor(
     private dialog: MatDialog,
+    private exportService: ExportService
     
   ) { 
     super(columnSettings.contacts);
