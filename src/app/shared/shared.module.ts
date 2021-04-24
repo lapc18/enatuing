@@ -15,9 +15,6 @@ import { PieChartComponent } from './components/pie-chart/pie-chart.component';
 import { HorizontalBarChartComponent } from './components/horizontal-bar-chart/horizontal-bar-chart.component';
 import { ChartWrapperComponent } from './components/chart-wrapper/chart-wrapper.component';
 import { MixedPieChartComponent } from './components/mixed-pie-chart/mixed-pie-chart.component';
-import { YesOrNoComponent } from './dialogs/yes-or-no/yes-or-no.component';
-import { WarningComponent } from './dialogs/warning/warning.component';
-import { InformationComponent } from './dialogs/information/information.component';
 import { StatisticsCardComponent } from './components/statistics-card/statistics-card.component';
 import { StatisticsCarouselComponent } from './components/statistics-carousel/statistics-carousel.component';
 import { DragableStatisticCarouselComponent } from './components/dragable-statistic-carousel/dragable-statistic-carousel.component';
@@ -35,9 +32,6 @@ import { MultipleCardSliderComponent } from './components/multiple-card-slider/m
     PieChartComponent,
     ChartWrapperComponent,
     MixedPieChartComponent,
-    YesOrNoComponent,
-    WarningComponent,
-    InformationComponent,
     StatisticsCardComponent,
     StatisticsCarouselComponent,
     DragableStatisticCarouselComponent,
@@ -65,9 +59,6 @@ import { MultipleCardSliderComponent } from './components/multiple-card-slider/m
     HorizontalBarChartComponent,
     PieChartComponent,
     MixedPieChartComponent,
-    YesOrNoComponent,
-    WarningComponent,
-    InformationComponent,
     StatisticsCardComponent,
     StatisticsCarouselComponent,
     DragableStatisticCarouselComponent,
