@@ -7,7 +7,6 @@ import { ContactState } from 'src/app/core/stores/contacts/contacts.reducers';
 import { DynamicDetailContactComponent } from './dynamic-detail-contact/dynamic-detail-contact.component';
 import * as actions from '../../core/stores/contacts/contacts.actions';
 import { Contact } from 'src/app/core/domain/contacts/contacts.models';
-import { YesOrNoComponent } from 'src/app/shared/dialogs/yes-or-no/yes-or-no.component';
 
 @Component({
   selector: 'app-contacts',
@@ -48,7 +47,6 @@ export class ContactsComponent extends CommonAbstractGrid<Contact> implements On
       }));
     }
   }
-
   public onCreate(): void {
     this.dialog.open(DynamicDetailContactComponent, {
       data: { isCreating: true },
@@ -57,7 +55,6 @@ export class ContactsComponent extends CommonAbstractGrid<Contact> implements On
       disableClose: true,
     });
   }
-
   public onEdit(item: Contact): void {
     this.dialog.open(DynamicDetailContactComponent, {
       data: { 
@@ -71,13 +68,7 @@ export class ContactsComponent extends CommonAbstractGrid<Contact> implements On
   }
 
   public onDelete(item: Contact): void {
-    this.dialog.open(YesOrNoComponent, {
-      data: {
-        message: '¿Está seguro que desea eliminar este contacto?',
-        onYes: () => this.store.dispatch(actions.removeContacts(item.id)),
-      }
-    });
-    
+
   }
   
   public onSeeDetails(item: Contact): void {
