@@ -1,9 +1,12 @@
 import { Component, Inject, OnInit } from "@angular/core";
-import { AbstractControl, FormBuilder, FormGroup, Validators } from "@angular/forms";
+import { FormBuilder, Validators } from "@angular/forms";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import { Store } from "@ngrx/store";
 import { ContactsEntity } from "src/app/core/domain/contacts/contacts.entity";
 import { Contact } from "src/app/core/domain/contacts/contacts.models";
 import { CommonGridAbstractDetails } from "src/app/core/models/common-details.abstract";
+import { ContactState } from "src/app/core/stores/contacts/contacts.reducers";
+import * as actions from '../../../core/stores/contacts/contacts.actions';
 
 
 @Component({
@@ -17,17 +20,16 @@ export class DynamicDetailContactComponent extends CommonGridAbstractDetails<Con
     public contact: Contact = null;
     
     constructor(
-        // private store: Store<{  }>,
+        private store: Store<{contact: ContactState}>,
         public formBuilder: FormBuilder,
         @Inject(MAT_DIALOG_DATA) public data: any,
         private dialogRef: MatDialogRef<DynamicDetailContactComponent>
       ) {
         super(formBuilder);
-        this.loadComponent();
     }
 
     ngOnInit(): void {
-        console.log(this.contact);
+        this.loadComponent();
         this.buildContactForm();
     }
 
@@ -38,6 +40,12 @@ export class DynamicDetailContactComponent extends CommonGridAbstractDetails<Con
     }
 
     public onSaveChanges(): void {
+        console.log(this.getFormValue());
+        if(this.isEditing) {
+            this.store.dispatch(actions.editContacts({ payload: this.getFormValue(), id: this.contact.id }));
+        } else if(this.isCreating) {
+            this.store.dispatch(actions.createContacts({ payload: this.getFormValue() }));
+        }
         this.dialogRef.close();
     }
     
