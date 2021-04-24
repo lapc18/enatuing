@@ -6,12 +6,12 @@ import { FileType } from 'src/app/core/models/enat.models';
   providedIn: 'root'
 })
 export class ExportService {
-  private fileFactory = new FileHandlerFactory()
+  private fileHandlerFactory = new FileHandlerFactory()
 
   constructor() { }
 
   saveToFile(as: FileType, data: any[], fileName: string): void {
-    const fileHandler = this.fileFactory.create(as);
+    const fileHandler = this.fileHandlerFactory.create(as);
     fileHandler.export(data, fileName);
   }
 
