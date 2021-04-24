@@ -1,26 +1,31 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { Observable } from 'rxjs';
+import { select, Store } from '@ngrx/store';
 import { CommonAbstractGrid } from 'src/app/core/models/common-grid.abstract';
 import { columnSettings } from 'src/app/core/models/enat.models';
+import { ContactState } from 'src/app/core/stores/contacts/contacts.reducers';
 import { DynamicDetailContactComponent } from './dynamic-detail-contact/dynamic-detail-contact.component';
 import { ExportService } from 'src/app/core/services/export.service';
+import * as actions from '../../core/stores/contacts/contacts.actions';
+import { Contact } from 'src/app/core/domain/contacts/contacts.models';
+import { FileType } from 'src/app/core/models/enat.models';
 
 @Component({
   selector: 'app-contacts',
   templateUrl: './contacts.component.html',
   styleUrls: ['./contacts.component.scss']
 })
-export class ContactsComponent extends CommonAbstractGrid implements OnInit {
+export class ContactsComponent extends CommonAbstractGrid<Contact> implements OnInit {
 
-  public isLoading$: Observable<boolean>;
 
   constructor(
     private dialog: MatDialog,
+    private store: Store<{contact: ContactState}>,
     private exportService: ExportService
-    
-  ) { 
+
+  ) {
     super(columnSettings.contacts);
+    this.data$ = this.store.pipe(select(state => state.contact.contacts));
   }
 
   ngOnInit(): void {
@@ -29,11 +34,22 @@ export class ContactsComponent extends CommonAbstractGrid implements OnInit {
 
 
   public loadData(): void {
-    this.data = [{
-      name: 'Jacuno',
-      position: 'Any'
-    }];
-
+    this.store.dispatch(actions.loadContacts());
+    this.data$.subscribe((res: Contact[]) => this.data = res);
+    //temp use:
+    for(let i: number = 0; i < 100; i++){
+      this.store.dispatch(actions.createContacts({
+        payload: {
+          id: i,
+          name: 'Luis Pimentel Colon',
+          position: 'Gerente de sistemas: ' + i,
+          email: 'luis.pimentel@optic.gob.do',
+          telephoneNumber: (8099081200+i).toString(),
+          ext: '1234',
+          phoneNumber: (8099081200+i).toString(),
+        }
+      }));
+    }
   }
   public onCreate(): void {
     this.dialog.open(DynamicDetailContactComponent, {
@@ -43,10 +59,10 @@ export class ContactsComponent extends CommonAbstractGrid implements OnInit {
       disableClose: true,
     });
   }
-  public onEdit(item: any): void {
+  public onEdit(item: Contact): void {
     this.dialog.open(DynamicDetailContactComponent, {
-      data: { 
-        isEditing: true, 
+      data: {
+        isEditing: true,
         contact: item
       },
       width: '50%',
@@ -54,11 +70,12 @@ export class ContactsComponent extends CommonAbstractGrid implements OnInit {
       disableClose: true,
     });
   }
-  public onDelete(item: any): void {
+
+  public onDelete(item: Contact): void {
 
   }
-  
-  public onSeeDetails(item: any): void {
+
+  public onSeeDetails(item: Contact): void {
     this.dialog.open(DynamicDetailContactComponent, {
       data: {
         isEditing: false,
@@ -67,6 +84,10 @@ export class ContactsComponent extends CommonAbstractGrid implements OnInit {
       width: '50%',
       hasBackdrop: true
     });
+  }
+
+  public onExportData(as: FileType): void {
+    this.exportService.saveToFile(as, this.data, 'Contacts');
   }
 
 }

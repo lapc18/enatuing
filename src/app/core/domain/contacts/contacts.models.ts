@@ -35,7 +35,7 @@ export const CONTACTS_COLS: IColumn[] = [
     {
         label: "Teléfono",
         name: 'telephoneNumber',
-        width: 200
+        width: 150
     },
     {
         label: "Extensión",
@@ -45,6 +45,6 @@ export const CONTACTS_COLS: IColumn[] = [
     {
         label: "Celular",
         name: 'phoneNumber',
-        width: 200
+        width: 150
     },
 ];

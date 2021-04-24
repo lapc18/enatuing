@@ -9,7 +9,7 @@ import { CommonAbstractGrid } from 'src/app/core/models/common-grid.abstract';
   templateUrl: './certifications.component.html',
   styleUrls: ['./certifications.component.scss']
 })
-export class CertificationsComponent extends CommonAbstractGrid implements OnInit {
+export class CertificationsComponent extends CommonAbstractGrid<{}> implements OnInit {
 
 
   public isLoading$: Observable<boolean>;

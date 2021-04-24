@@ -1,8 +1,11 @@
+import { Observable } from "rxjs";
 import { IColumn } from "./enat.models";
 
-export abstract class CommonAbstractGrid {
+export abstract class CommonAbstractGrid<T> {
 
-    public data: any[] = [];
+    public isLoading$: Observable<boolean>;
+    public data$: Observable<T[]>;
+    public data: T[] = [];
     public columns: IColumn[] = [];
 
     constructor(
@@ -13,8 +16,8 @@ export abstract class CommonAbstractGrid {
 
     public abstract loadData(): void;
     public abstract onCreate(): void;
-    public abstract onEdit(item: any): void;
-    public abstract onDelete(item: any): void;
-    public abstract onSeeDetails(item: any): void;
+    public abstract onEdit(item: T): void;
+    public abstract onDelete(item: T): void;
+    public abstract onSeeDetails(item: T): void;
 
 }

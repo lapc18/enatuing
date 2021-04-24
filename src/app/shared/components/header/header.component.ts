@@ -1,5 +1,5 @@
 import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
-import { FileType } from 'src/app/core/services/export.service';
+import { FileType } from 'src/app/core/models/enat.models';
 
 @Component({
   selector: 'common-header',
@@ -11,7 +11,7 @@ export class HeaderComponent implements OnInit {
   @Input() data: any = [];
   @Input() filter: string;
 
-  @Output() onExport: EventEmitter<string> = new EventEmitter();
+  @Output() onExport: EventEmitter<FileType> = new EventEmitter();
 
 
   constructor() { }

@@ -1,6 +1,6 @@
 <div class="user-container">
     <ng-container *ngIf="data; else nodata">
-        <common-header></common-header>
+        <common-header (onExport)="onExportData($event)"></common-header>
         <common-table 
             [isLoading]="isLoading$ | async" 
             [columns]="columns" 
