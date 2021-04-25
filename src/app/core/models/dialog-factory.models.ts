@@ -16,3 +16,7 @@ export interface IDialogFactory {
     warning(options?: DialogFactoryOptions): void;
     information(options?: DialogFactoryOptions): void;
 }
+
+export interface IDialogComponent {
+    close(): void;
+}

@@ -43,10 +43,10 @@ const reducer = createReducer(
     on(actions.editContactsuccess, (state) => ({ ...state, isLoading: false })),
     on(actions.editContactsFailed, (state, { payload }) => ({ ...state, isLoading: false, hasError: true, errorMessage: payload })),
 
-    on(actions.removeContacts, (state, { payload }) => ({
+    on(actions.removeContacts, (state, { payload, id }) => ({
         ...state,
         isLoading: true,
-        contacts: state.contacts.filter(contact => contact !== payload),
+        contacts: state.contacts.filter(contact => contact.id !== id),
     })),
     on(actions.removeContactsuccess, (state) => ({ ...state, isLoading: false })),
     on(actions.removeContactsFailed, (state, { payload }) => ({ ...state, isLoading: false, hasError: true, errorMessage: payload })),

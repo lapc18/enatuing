@@ -8,6 +8,7 @@ import { DynamicDetailContactComponent } from './dynamic-detail-contact/dynamic-
 import { ExportService } from 'src/app/core/services/export.service';
 import * as actions from '../../core/stores/contacts/contacts.actions';
 import { Contact } from 'src/app/core/domain/contacts/contacts.models';
+import { DialogFactory } from 'src/app/core/factory/dialogs/dialog.factory';
 import { FileType } from 'src/app/core/models/enat.models';
 
 @Component({
@@ -21,8 +22,8 @@ export class ContactsComponent extends CommonAbstractGrid<Contact> implements On
   constructor(
     private dialog: MatDialog,
     private store: Store<{contact: ContactState}>,
+    public dialogFactory: DialogFactory,
     private exportService: ExportService
-
   ) {
     super(columnSettings.contacts);
     this.data$ = this.store.pipe(select(state => state.contact.contacts));
@@ -72,6 +73,10 @@ export class ContactsComponent extends CommonAbstractGrid<Contact> implements On
   }
 
   public onDelete(item: Contact): void {
+    this.dialogFactory.confirmation({
+      message: '¿Está seguro que desea eliminar este contacto?',
+      callback:() => this.store.dispatch(actions.removeContacts({ payload: item, id: item.id}))
+    });
 
   }
 
