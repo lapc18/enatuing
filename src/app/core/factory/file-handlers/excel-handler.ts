@@ -22,9 +22,4 @@ export class ExcelFileHandler implements FileHandler {
 
         this.save(excelBuffer, fileName);
     }
-
-    static exportFromTable(tableRef: ElementRef): void {
-        throw new Error('Not implemented');
-    }
-
 }
