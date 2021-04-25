@@ -11,6 +11,6 @@ export const createContactsFailed = createAction('[Contact Module] Creating Cont
 export const editContacts = createAction('[Contact Module] Editing Contacts', props<{ payload: Contact, id: string | number}>());
 export const editContactsuccess = createAction('[Contact Module] Contacts Edited Successfully');
 export const editContactsFailed = createAction('[Contact Module] Editing Contacts Failed', props<{ payload: string }>());
-export const removeContacts = createAction('[Contact Module] Removing Contacts', props<{ payload: Contact }>());
+export const removeContacts = createAction('[Contact Module] Removing Contacts', props<{ payload: Contact, id: string | number }>());
 export const removeContactsuccess = createAction('[Contact Module] Contacts Removed Successfully');
 export const removeContactsFailed = createAction('[Contact Module] Removing Contacts Failed', props<{ payload: string }>());
