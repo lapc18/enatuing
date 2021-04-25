@@ -24,7 +24,7 @@ export class MultipleCardSliderComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
-    this.interval.clear();
+    clearInterval(this.interval);
   }
 
   previousSlide(): void {
