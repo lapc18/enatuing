@@ -1,1 +1,7 @@
-<p>yes-or-no works!</p>
+<div class="header" mat-dialog-title>
+    <p class="display-3">{{ data.message }}</p>
+</div>
+<div mat-dialog-actions>
+    <button class="btn btn-danger" mat-dialog-close="true" (click)="close()">No</button>
+    <button class="btn btn-success" (click)="onConfirm()">Si</button>
+</div>

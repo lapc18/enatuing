@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-just-ok',
@@ -7,9 +8,16 @@ import { Component, OnInit } from '@angular/core';
 })
 export class JustOkComponent implements OnInit {
 
-  constructor() { }
+  constructor(
+    @Inject(MAT_DIALOG_DATA) public data: any,
+    private dialogRef: MatDialogRef<JustOkComponent>
+  ) {  }
 
   ngOnInit(): void {
+  }
+
+  public close(): void {
+    this.dialogRef.close();
   }
 
 }

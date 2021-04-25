@@ -1,1 +1,9 @@
-<p>warning works!</p>
+<div class="header" mat-dialog-title>
+    <p class="display-3">Advertencia</p>
+</div>
+<div class="details-container" mat-dialog-content>
+    <p class="lead">{{ data.message }}</p>
+</div>
+<div mat-dialog-actions>
+    <button class="btn btn-danger" mat-dialog-close="true" (click)="close()">Ok</button>
+</div>
