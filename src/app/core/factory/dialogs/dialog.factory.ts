@@ -19,7 +19,7 @@ export class DialogFactory implements IDialogFactory{
             data: {
                 message: options.message? options.message : '',
                 data: options.data ? options.data : {},
-                callback: () => options.callback() || void 0,
+                callback: options.callback ? () => options.callback() : void 0,
             },
             hasBackdrop: options.hasBackdrop ? options.hasBackdrop : false,
             height: `${options.height ? options.height : ''}`,
