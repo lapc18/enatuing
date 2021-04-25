@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild, OnDestroy } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
 import { SliderCard } from '../../models/shared.models';
 
 @Component({
@@ -6,7 +6,7 @@ import { SliderCard } from '../../models/shared.models';
   templateUrl: './multiple-card-slider.component.html',
   styleUrls: ['./multiple-card-slider.component.scss']
 })
-export class MultipleCardSliderComponent implements OnInit, OnDestroy {
+export class MultipleCardSliderComponent implements OnInit, OnDestroy, AfterViewInit {
 
   @Input() sliderCardList: SliderCard[];
   @ViewChild('scrollArea') scrollArea: any; 
