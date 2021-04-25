@@ -5,8 +5,10 @@ import { CommonAbstractGrid } from 'src/app/core/models/common-grid.abstract';
 import { columnSettings } from 'src/app/core/models/enat.models';
 import { ContactState } from 'src/app/core/stores/contacts/contacts.reducers';
 import { DynamicDetailContactComponent } from './dynamic-detail-contact/dynamic-detail-contact.component';
+import { ExportService } from 'src/app/core/services/export.service';
 import * as actions from '../../core/stores/contacts/contacts.actions';
 import { Contact } from 'src/app/core/domain/contacts/contacts.models';
+import { FileType } from 'src/app/core/models/enat.models';
 
 @Component({
   selector: 'app-contacts',
@@ -18,8 +20,10 @@ export class ContactsComponent extends CommonAbstractGrid<Contact> implements On
 
   constructor(
     private dialog: MatDialog,
-    private store: Store<{contact: ContactState}>
-  ) { 
+    private store: Store<{contact: ContactState}>,
+    private exportService: ExportService
+
+  ) {
     super(columnSettings.contacts);
     this.data$ = this.store.pipe(select(state => state.contact.contacts));
   }
@@ -57,8 +61,8 @@ export class ContactsComponent extends CommonAbstractGrid<Contact> implements On
   }
   public onEdit(item: Contact): void {
     this.dialog.open(DynamicDetailContactComponent, {
-      data: { 
-        isEditing: true, 
+      data: {
+        isEditing: true,
         contact: item
       },
       width: '50%',
@@ -70,7 +74,7 @@ export class ContactsComponent extends CommonAbstractGrid<Contact> implements On
   public onDelete(item: Contact): void {
 
   }
-  
+
   public onSeeDetails(item: Contact): void {
     this.dialog.open(DynamicDetailContactComponent, {
       data: {
@@ -80,6 +84,10 @@ export class ContactsComponent extends CommonAbstractGrid<Contact> implements On
       width: '50%',
       hasBackdrop: true
     });
+  }
+
+  public onExportData(as: FileType): void {
+    this.exportService.saveToFile(as, this.data, 'Contacts');
   }
 
 }

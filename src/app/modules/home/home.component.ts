@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { StatisticsCard } from './../../shared/models/shared.models';
-import { CardType } from '../../shared/models/shared.enums';
+import { CardTemplate } from 'src/app/core/models/enat.models';
+import { StatisticsCard } from 'src/app/shared/models/shared.models';
 
 @Component({
   selector: 'app-home',
@@ -14,42 +14,42 @@ export class HomeComponent implements OnInit {
       title: 'Cantidad para llegar la la meta 1',
       subtitle: 'Organismos nuevos 1',
       content: '75,000',
-      template: CardType.goal,
+      template: CardTemplate.goal,
       materialIconName: 'article'
     },
     {
       title: 'Cantidad para llegar la la meta 2',
       subtitle: 'Organismos nuevos 2',
       content: '75,000',
-      template: CardType.goal,
+      template: CardTemplate.goal,
       materialIconName: 'article'
     },
     {
       title: 'Cantidad para llegar la la meta 3',
       subtitle: 'Organismos nuevos 3',
       content: '75,000',
-      template: CardType.goal,
+      template: CardTemplate.goal,
       materialIconName: 'article'
     },
     {
       title: 'Cantidad para llegar la la meta 4',
       subtitle: 'Organismos nuevos 4',
       content: '75,000',
-      template: CardType.goal,
+      template: CardTemplate.goal,
       materialIconName: 'article'
     },
     {
       title: 'Cantidad para llegar la la meta 5',
       subtitle: 'Organismos nuevos 5',
       content: '75,000',
-      template: CardType.goal,
+      template: CardTemplate.goal,
       materialIconName: 'article'
     },
     {
       title: 'Cantidad para llegar la la meta 5',
       subtitle: 'Organismos nuevos 6',
       content: '75,000',
-      template: CardType.goal,
+      template: CardTemplate.goal,
       materialIconName: 'article'
     }
   ]
@@ -58,37 +58,37 @@ export class HomeComponent implements OnInit {
     {
       title: 'Nortic A1',
       content: '75,000',
-      template: CardType.statistic,
+      template: CardTemplate.statistic,
       iconUrl: 'http://optic.gob.do/nortic/images/sello_nortic.png'
     },
     {
       title: 'Nortic A2',
       content: '75,000',
-      template: CardType.statistic,
+      template: CardTemplate.statistic,
       iconUrl: 'http://optic.gob.do/nortic/images/sello_nortic.png'
     },
     {
       title: 'Nortic A3',
       content: '75,000',
-      template: CardType.statistic,
+      template: CardTemplate.statistic,
       iconUrl: 'http://optic.gob.do/nortic/images/sello_nortic.png'
     },
     {
       title: 'Nortic A4',
       content: '75,000',
-      template: CardType.statistic,
+      template: CardTemplate.statistic,
       iconUrl: 'http://optic.gob.do/nortic/images/sello_nortic.png'
     },
     {
       title: 'Nortic A5',
       content: '75,000',
-      template: CardType.statistic,
+      template: CardTemplate.statistic,
       iconUrl: 'http://optic.gob.do/nortic/images/sello_nortic.png'
     },
     {
       title: 'Nortic A5',
       content: '75,000',
-      template: CardType.statistic,
+      template: CardTemplate.statistic,
       iconUrl: 'http://optic.gob.do/nortic/images/sello_nortic.png'
     }
   ]
