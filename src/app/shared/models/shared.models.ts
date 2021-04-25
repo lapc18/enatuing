@@ -1,5 +1,5 @@
 import { EventEmitter } from "@angular/core";
-import { CardType } from "./shared.enums";
+import { CardTemplate } from "src/app/core/models/enat.models";
 
 export interface ChartItem {
     name: string;
@@ -40,7 +40,7 @@ export interface SliderCard {
     title: string;
     subtitle: string;
     content: string;
-    type: CardType;
+    type: CardTemplate;
     materialIconName?: string;
     iconUrl?: string;
 }

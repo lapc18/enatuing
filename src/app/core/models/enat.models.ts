@@ -9,11 +9,11 @@ export class DrawerItem {
         public route: string = 'javascript:void(0)',
         public isLink: boolean = false,
         public isEnabled: boolean = true,
-    ){}
+    ) { }
 
 }
 
-export const DRAWER_OPTIONS:DrawerItem[] = [
+export const DRAWER_OPTIONS: DrawerItem[] = [
     new DrawerItem(
         'Dashboard',
         'Dashboard',
@@ -111,4 +111,19 @@ export interface IColumnSettings {
 export const columnSettings: IColumnSettings = {
     contacts: CONTACTS_COLS,
     certifications: CERTIFICATIONS_COLS
+}
+
+export interface FileHandler {
+    fileType: string;
+    fileExtension: string;
+    export: (data: any[], fileName: string) => void;
+}
+
+export enum FileType {
+    excel = 'excel'
+}
+
+export enum CardTemplate {
+    goal = 'goal',
+    statistic = 'statistic'
 }

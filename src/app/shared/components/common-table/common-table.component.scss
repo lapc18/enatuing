@@ -1,4 +1,11 @@
+@import 'src/sass/variables.scss';
+
 table {
     min-width: 100%;
     min-height: 100%;
+}
+
+mat-paginator {
+    position: sticky;
+    bottom: -$drawer-content-padding;
 }

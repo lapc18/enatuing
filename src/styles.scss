@@ -163,7 +163,7 @@ mat-drawer-container {
         min-width: 15%;
     }
     mat-drawer-content {
-        padding: 1rem;
+        padding: $drawer-content-padding;
     }
 }
 
