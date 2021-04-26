@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, OnDestroy, AfterViewInit } from '@angular/core';
 import { DragScrollComponent } from 'ngx-drag-scroll';
 import { StatisticsCard } from '../../models/shared.models';
 
@@ -7,7 +7,7 @@ import { StatisticsCard } from '../../models/shared.models';
   templateUrl: './dragable-statistic-carousel.component.html',
   styleUrls: ['./dragable-statistic-carousel.component.scss']
 })
-export class DragableStatisticCarouselComponent implements OnInit {
+export class DragableStatisticCarouselComponent implements OnInit, OnDestroy, AfterViewInit {
   @ViewChild('dragScroll', { read: DragScrollComponent }) dragScroll: DragScrollComponent;
   @Input() cardContentList: StatisticsCard[];
   @Input() transitionInterval: number = 40000;

@@ -32,7 +32,11 @@
               "src/styles.scss",
               "vendor/fontawesome-free/css/all.min.css"
             ],
-            "scripts": []
+            "scripts": [],
+            "allowedCommonJsDependencies": [
+              "xlsx",
+              "file-saver"
+            ]
           },
           "configurations": {
             "production": {
