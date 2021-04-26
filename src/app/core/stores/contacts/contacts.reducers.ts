@@ -17,6 +17,9 @@ const initialContactState: ContactState = {
 
 const reducer = createReducer(
     initialContactState,
+
+    on(actions.onSuccess, (state) => ({ ...state, isLoading: false })),
+
     on(actions.loadContacts, (state) => ({ ...state, isLoading: true })),
     on(actions.loadContactsSuccess, (state, { payload }) => ({ ...state, isLoading: false, contacts: payload })),
     on(actions.loadContactsFailed, (state, { payload }) => ({ ...state, isLoading: false, hasError: true, errorMessage: payload })),
@@ -26,29 +29,28 @@ const reducer = createReducer(
         isLoading: true,
         contacts: [...state.contacts,  payload],
     })),
-    on(actions.createContactsuccess, (state) => ({ ...state, isLoading: false })),
+    
     on(actions.createContactsFailed, (state, { payload }) => ({ ...state, isLoading: false, hasError: true, errorMessage: payload })),
 
     on(actions.editContacts, (state, { payload, id }) => ({
         ...state,
         isLoading: true,
-        contacts: state.contacts.map((contact) => {
+        contacts: {...state.contacts.map((contact) => {
             if(contact.id == id){
-                payload.id = id;
-                return payload;
+                let object:Contact = {...payload};
+                object.id = id;
+                return object;
             }
             return contact;
-        })
+        })}
     })),
-    on(actions.editContactsuccess, (state) => ({ ...state, isLoading: false })),
     on(actions.editContactsFailed, (state, { payload }) => ({ ...state, isLoading: false, hasError: true, errorMessage: payload })),
 
     on(actions.removeContacts, (state, { payload, id }) => ({
         ...state,
         isLoading: true,
-        contacts: state.contacts.filter(contact => contact.id !== id),
+        contacts: {...state.contacts.filter(contact => contact.id !== id)},
     })),
-    on(actions.removeContactsuccess, (state) => ({ ...state, isLoading: false })),
     on(actions.removeContactsFailed, (state, { payload }) => ({ ...state, isLoading: false, hasError: true, errorMessage: payload })),
 );
 

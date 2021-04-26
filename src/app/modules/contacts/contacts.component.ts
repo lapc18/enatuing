@@ -27,6 +27,7 @@ export class ContactsComponent extends CommonAbstractGrid<Contact> implements On
   ) {
     super(columnSettings.contacts);
     this.data$ = this.store.pipe(select(state => state.contact.contacts));
+    this.isLoading$ = this.store.pipe(select(state => state.contact.isLoading));
   }
 
   ngOnInit(): void {
@@ -36,6 +37,7 @@ export class ContactsComponent extends CommonAbstractGrid<Contact> implements On
 
   public loadData(): void {
     this.store.dispatch(actions.loadContacts());
+    this.isLoading$.subscribe(res => this.isLoading = res);
     this.data$.subscribe((res: Contact[]) => this.data = res);
     //temp use:
     for(let i: number = 0; i < 100; i++){
@@ -51,6 +53,7 @@ export class ContactsComponent extends CommonAbstractGrid<Contact> implements On
         }
       }));
     }
+    this.store.dispatch(actions.onSuccess());
   }
   public onCreate(): void {
     this.dialog.open(DynamicDetailContactComponent, {
