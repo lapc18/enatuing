@@ -1,5 +1,7 @@
+import domtoimage from 'dom-to-image';
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
-import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
+import { FileType } from 'src/app/core/models/enat.models';
+import { ExportService } from 'src/app/core/services/export.service';
 
 @Component({
   selector: 'nortic-stamp',
@@ -9,20 +11,22 @@ import { toPng, toJpeg, toBlob, toPixelData, toSvg } from 'html-to-image';
 export class NorticStampComponent implements OnInit {
   @ViewChild('stamp') stamp: ElementRef;
 
-  @Input() color: string = '#4794cc';
-  @Input() bgColor: string = '#ffffff';
-  @Input() stampCode: string = '13-001-01-A20001';
-  @Input() stampCodeColor: string = '#8c8c8c';
+  @Input() stampCode: string;
+  @Input() stampCodeColor?: string = '#8c8c8c';
+  @Input() color: string;
+  @Input() backgroundColor: string;
+  @Input() year: string;
+  @Input() nortic: string;
 
   public codeDigitDegrees: [string, number][];
 
-  constructor() { }
+  constructor(private exportService: ExportService) { }
 
   ngOnInit(): void {
     this.setCodeDigitDegrees();
   }
 
-  setCodeDigitDegrees() {
+  setCodeDigitDegrees(): void {
     const codeAreaDegrees = 75 / this.stampCode.length,
       digitDegreeList: [string, number][] = [];
     let origin = 0;
@@ -35,15 +39,16 @@ export class NorticStampComponent implements OnInit {
     this.codeDigitDegrees = digitDegreeList;
   }
 
-  saveStamp(): void {
-    const node = this.stamp.nativeElement;
+  exportImage(): void {
+    const node = this.stamp.nativeElement,
+      blobOptions = { width: 250, height: 250, bgColor: '#ffffff' };
+    domtoimage
+      .toBlob(node, blobOptions)
+      .then(this.saveAsPng.bind(this));
+  }
 
-    toJpeg(node, { quality: 0.95 })
-    .then(function (dataUrl) {
-      var link = document.createElement('a');
-      link.download = 'my-image-name.jpeg';
-      link.href = dataUrl;
-      link.click();
-    });
+  saveAsPng(blob: Blob): void {
+    const fileName: string = `nortic-${this.nortic}-${this.year}`;
+    this.exportService.saveToFile(FileType.htmlPng, blob, fileName);
   }
 }

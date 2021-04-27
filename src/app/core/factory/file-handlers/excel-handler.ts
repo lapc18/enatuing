@@ -3,11 +3,11 @@ import { saveAs } from 'file-saver';
 import { FileHandler } from 'src/app/core/models/enat.models';
 
 export class ExcelFileHandler implements FileHandler {
-    fileType: string = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
+    contentType: string = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet;charset=UTF-8';
     fileExtension: string = '.xlsx';
-
+    
     private save(buffer: any, fileName: string): void {
-        const data: Blob = new Blob([buffer], { type: this.fileType });
+        const data: Blob = new Blob([buffer], { type: this.contentType });
         saveAs(data, fileName + this.fileExtension);
     }
 

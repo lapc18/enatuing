@@ -1,6 +1,7 @@
 $circle-size: 250px;
-$inner-circle-size: 210px;
+$inner-circle-size: 205px;
 $border-radius: 50%;
+$bar-width: $circle-size - $inner-circle-size;
 
 @mixin absolute-content-center() {
     top: 50%;
@@ -8,14 +9,29 @@ $border-radius: 50%;
     transform: translateX(-50%) translateY(-50%);
 }
 
-.circular-bar {
+.stamp-wrapper {
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    outline: none;
+    padding: 0;
     position: relative;
     width: $circle-size;
     height: $circle-size;
+    border-radius: 50%;
     overflow: hidden;
+}
+
+.circular-bar {
     border-radius: $border-radius;
-    
-    .text-segment,
+
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+
+    .bar-divider,
     .circular-text,
     .inner-circle {
         position: absolute;
@@ -23,26 +39,46 @@ $border-radius: 50%;
         pointer-events: none;
     }
 
-    .text-segment {
-        width: $circle-size / 2;
-        height: $circle-size / 2;
+    .bar-divider {
+        width: $circle-size / 2 + 1px;
+        height: $circle-size / 2 + 1px;
         top: 50%;
         right: 50%;
-        transform: rotate(-25deg) skew(-5deg);
+        transform: rotate(-25deg);
         transform-origin: top right;
 
+        .left-border,
+        .right-border {
+            position: absolute;
+            width: $bar-width / 2 + 1px;
+            height: $bar-width / 2 + 1px;
+            border-radius: 50%;
+        }
+
+        .left-border {
+            top: 0;
+            left: 0;
+            transform: translateY(-50%);
+        }
+
+        .right-border {
+            bottom: 0;
+            right: 0;
+            transform: translateX(49%);
+        }
     }
 
     .circular-text {
         width: $circle-size;
         height: $circle-size;
-        transform: rotate(240deg);
+        transform: rotate(237deg);
         background-color: transparent;
 
         p {
+            position: absolute;
             letter-spacing: -8px;
             font-weight: bold;
-            position: absolute;
+            font-size: .9rem;
             top: 0;
             right: 0;
             width: 1px;
@@ -88,11 +124,12 @@ $border-radius: 50%;
 
     .nortic {
         letter-spacing: 1px;
+        font-size: 4.5rem;
     }
 
     .year {
         letter-spacing: 6px;
-        margin-top: .5rem;
+        margin-top: 0.5rem;
     }
 
     .stamp-divider {

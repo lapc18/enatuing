@@ -10,7 +10,7 @@ export class ExportService {
 
   constructor() { }
 
-  saveToFile(as: FileType, data: any[], fileName: string): void {
+  saveToFile(as: FileType, data: any, fileName: string): void {
     const fileHandler = this.fileHandlerFactory.create(as);
     fileHandler.export(data, fileName);
   }

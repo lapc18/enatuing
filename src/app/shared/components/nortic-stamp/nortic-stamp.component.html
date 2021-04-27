@@ -1,25 +1,33 @@
-<button class="btn btn-success btn-sm mb-3" (click)="saveStamp()">Save</button>
-
-<div class="circular-bar" [ngStyle]="{'background-color': color }" id="stamp" #stamp>
-    <div class="text-segment" [ngStyle]="{'background-color': bgColor }">
-    </div>
-
-    <div class="circular-text">
-        <p *ngFor="let digitDegree of codeDigitDegrees"
-            [ngStyle]="{'color': stampCodeColor, transform: 'rotate(-'+ digitDegree[1] +'deg)'}">
-            <span>{{ digitDegree[0] }}</span>
-        </p>
-    </div>
-
-    <div class="inner-circle" [ngStyle]="{'background-color': bgColor }">
-        <div class="stamp-content" [ngStyle]="{'color': color }">
-            <p class="title fs-4 mb-1">NORTIC</p>
-            <p class="nortic display-3">A7</p>
-
-            <span class="stamp-divider" [ngStyle]="{'background-color': color }"></span>
-
-            <p class="year fs-4">2016</p>
+<button class="stamp-wrapper" [matMenuTriggerFor]="menu" #stamp>
+    <div class="circular-bar" [ngStyle]="{'background-color': color }">
+        <div class="bar-divider" [ngStyle]="{'background-color': backgroundColor }">
+            <div class="left-border" [ngStyle]="{'background-color': color }"></div>
+            <div class="right-border" [ngStyle]="{'background-color': color }"></div>
         </div>
-    </div>
 
-</div>
+        <div class="circular-text">
+            <p *ngFor="let digitDegree of codeDigitDegrees"
+                [ngStyle]="{'color': stampCodeColor, transform: 'rotate(-'+ digitDegree[1] +'deg)'}">
+                <span>{{ digitDegree[0] }}</span>
+            </p>
+        </div>
+
+        <div class="inner-circle" [ngStyle]="{'background-color': backgroundColor }">
+            <div class="stamp-content" [ngStyle]="{'color': color }">
+                <p class="title fs-4 mb-1 text-uppercase">Nortic</p>
+                <p class="nortic">{{ nortic }}</p>
+
+                <span class="stamp-divider" [ngStyle]="{'background-color': color }"></span>
+
+                <p class="year fs-4">{{ year }}</p>
+            </div>
+        </div>
+
+    </div>
+</button>
+<mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="exportImage()">
+        <mat-icon>save</mat-icon>
+        <span>Guardar</span>
+    </button>
+</mat-menu>
