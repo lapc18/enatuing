@@ -21,7 +21,7 @@ export abstract class CommonGridAbstractDetails<T> {
         if (entity) {
             this.formGroup.patchValue(entity);
         }
-        if (!this.isEditing) {
+        if (!this.isEditing && !this.isCreating) {
             this.formGroup.disable();
         }
     }

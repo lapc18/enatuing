@@ -40,7 +40,6 @@ export class DynamicDetailContactComponent extends CommonGridAbstractDetails<Con
     }
 
     public onSaveChanges(): void {
-        console.log(this.getFormValue());
         if(this.isEditing) {
             this.store.dispatch(actions.editContacts({ payload: this.getFormValue(), id: this.contact.id }));
         } else if(this.isCreating) {

@@ -3,6 +3,7 @@
         <common-header 
             (onExport)="onExport($event)"
             (onFilter)="filter = $event"
+            (onAddItem)="onCreate()"
         ></common-header>
         <common-table #table
             [columns]="columns" 
