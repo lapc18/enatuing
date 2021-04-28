@@ -35,7 +35,8 @@
             "scripts": [],
             "allowedCommonJsDependencies": [
               "xlsx",
-              "file-saver"
+              "file-saver",
+              "dom-to-image"
             ]
           },
           "configurations": {

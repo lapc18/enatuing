@@ -114,13 +114,14 @@ export const columnSettings: IColumnSettings = {
 }
 
 export interface FileHandler {
-    fileType: string;
+    contentType: string;
     fileExtension: string;
-    export: (data: any[], fileName: string) => void;
+    export: (data: any, fileName: string) => void;
 }
 
 export enum FileType {
-    excel = 'excel'
+    excel = 'excel',
+    htmlPng = 'png'
 }
 
 export enum CardTemplate {
