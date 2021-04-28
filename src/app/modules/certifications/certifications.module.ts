@@ -5,11 +5,13 @@ import { CertificationsRoutingModule } from './certifications-routing.module';
 import { CertificationsComponent } from './certifications.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { CoreModule } from 'src/app/core/core.module';
+import { DynamicCertificationsDetailComponent } from './dynamic-certifications-detail/dynamic-certifications-detail.component';
 
 
 @NgModule({
   declarations: [
-    CertificationsComponent
+    CertificationsComponent,
+    DynamicCertificationsDetailComponent
   ],
   imports: [
     CommonModule,
