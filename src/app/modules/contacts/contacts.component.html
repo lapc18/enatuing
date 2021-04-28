@@ -3,8 +3,12 @@
         <mat-spinner></mat-spinner>
     </div>
     <ng-container>
-        <common-header (onExport)="onExportData($event)"></common-header>
-        <common-table 
+        <common-header 
+            (onExport)="onExportData($event)"
+            (onFilter)="filter = $event"
+        ></common-header>
+        <common-table #table
+            [filterBy]="filter"
             [columns]="columns" 
             [dataSource]="data" 
             (onDelete)="onDelete($event)" 

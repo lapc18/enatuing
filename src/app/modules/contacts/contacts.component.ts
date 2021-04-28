@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnChanges, OnInit, SimpleChanges, ViewChild } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { select, Store } from '@ngrx/store';
 import { CommonAbstractGrid } from 'src/app/core/models/common-grid.abstract';
@@ -10,6 +10,8 @@ import * as actions from '../../core/stores/contacts/contacts.actions';
 import { Contact } from 'src/app/core/domain/contacts/contacts.models';
 import { DialogFactory } from 'src/app/core/factory/dialogs/dialog.factory';
 import { FileType } from 'src/app/core/models/enat.models';
+import { CommonTableComponent } from 'src/app/shared/components/common-table/common-table.component';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-contacts',
@@ -18,6 +20,7 @@ import { FileType } from 'src/app/core/models/enat.models';
 })
 export class ContactsComponent extends CommonAbstractGrid<Contact> implements OnInit {
 
+  public filter: string = '';
 
   constructor(
     private dialog: MatDialog,
@@ -34,15 +37,14 @@ export class ContactsComponent extends CommonAbstractGrid<Contact> implements On
     this.loadData();
   }
 
-
   public loadData(): void {
     this.store.dispatch(actions.loadContacts());
     this.isLoading$.subscribe(res => this.isLoading = res);
     this.data$.subscribe((res: Contact[]) => this.data = res);
     //temp use:
+    let payload: any[] = [];
     for(let i: number = 0; i < 100; i++){
-      this.store.dispatch(actions.createContacts({
-        payload: {
+      payload.push({
           id: i,
           name: 'Luis Pimentel Colon',
           position: 'Gerente de sistemas: ' + i,
@@ -50,9 +52,9 @@ export class ContactsComponent extends CommonAbstractGrid<Contact> implements On
           telephoneNumber: (8099081200+i).toString(),
           ext: '1234',
           phoneNumber: (8099081200+i).toString(),
-        }
-      }));
+      });
     }
+    this.store.dispatch(actions.loadContactsSuccess({ payload: payload }));
     this.store.dispatch(actions.onSuccess());
   }
   public onCreate(): void {
@@ -63,6 +65,7 @@ export class ContactsComponent extends CommonAbstractGrid<Contact> implements On
       disableClose: true,
     });
   }
+
   public onEdit(item: Contact): void {
     this.dialog.open(DynamicDetailContactComponent, {
       data: {
@@ -78,7 +81,10 @@ export class ContactsComponent extends CommonAbstractGrid<Contact> implements On
   public onDelete(item: Contact): void {
     this.dialogFactory.confirmation({
       message: '¿Está seguro que desea eliminar este contacto?',
-      callback:() => this.store.dispatch(actions.removeContacts({ payload: item, id: item.id}))
+      callback:() => {
+        this.store.dispatch(actions.removeContacts({ payload: item, id: item.id}));
+        this.store.dispatch(actions.onSuccess());
+      }
     });
 
   }

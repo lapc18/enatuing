@@ -12,6 +12,7 @@ export class CommonTableComponent implements OnInit, AfterViewInit, OnChanges {
  
   @Input() dataSource: any[] = [];
   @Input() columns: IColumn[] = [];
+  @Input() filterBy: string = '';
 
   @Output() onDelete: EventEmitter<any> = new EventEmitter();
   @Output() onDetails: EventEmitter<any> = new EventEmitter();
@@ -50,11 +51,18 @@ export class CommonTableComponent implements OnInit, AfterViewInit, OnChanges {
     this.onEdit.emit(event);
   }
 
+  private onFilter(): void {
+    this.paginatedDataSource.filter = this.filterBy.toLowerCase();
+  }
+
+  private onUpdateDataSource(): void {
+    this.paginatedDataSource = new MatTableDataSource<any[]>(this.dataSource);
+    this.paginatedDataSource.paginator = this.paginator;
+  }
+
   private loadOnChanges(changes: SimpleChanges): void {
-    if((changes as Object).hasOwnProperty('dataSource')) {
-      this.paginatedDataSource = new MatTableDataSource<any[]>(this.dataSource);
-      this.length = this.paginatedDataSource.data.length;
-    }
+    if((changes as Object).hasOwnProperty('dataSource')) this.onUpdateDataSource();
+    if((changes as Object).hasOwnProperty('filterBy')) this.onFilter();
   }
 
 }

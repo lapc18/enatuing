@@ -45,8 +45,8 @@ export class DynamicDetailContactComponent extends CommonGridAbstractDetails<Con
             this.store.dispatch(actions.editContacts({ payload: this.getFormValue(), id: this.contact.id }));
         } else if(this.isCreating) {
             this.store.dispatch(actions.createContacts({ payload: this.getFormValue() }));
-            this.store.dispatch(actions.onSuccess());
         }
+        this.store.dispatch(actions.onSuccess());
         this.dialogRef.close();
     }
     
@@ -64,7 +64,6 @@ export class DynamicDetailContactComponent extends CommonGridAbstractDetails<Con
             phoneNumber: ['', Validators.minLength(10)],
         }
         this.contact ? super.buildForm(form, this.contact) : super.buildForm(form);
-        
     }
 
 

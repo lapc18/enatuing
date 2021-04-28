@@ -8,10 +8,12 @@ import { FileType } from 'src/app/core/models/enat.models';
 })
 export class HeaderComponent implements OnInit {
 
+  public filter: string;
+  
   @Input() data: any = [];
-  @Input() filter: string;
 
   @Output() onExport: EventEmitter<FileType> = new EventEmitter();
+  @Output() onFilter: EventEmitter<string> = new EventEmitter();
 
 
   constructor() { }
