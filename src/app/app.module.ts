@@ -20,7 +20,8 @@ import * as reducers from './core/stores/reducers';
     BrowserAnimationsModule,
     MaterialModule,
     StoreModule.forRoot({ 
-      contact: reducers.contactReducer
+      contact: reducers.contactReducer,
+      certifications: reducers.certificationReducer
     }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
