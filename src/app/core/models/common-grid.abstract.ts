@@ -4,6 +4,7 @@ import { IColumn } from "./enat.models";
 export abstract class CommonAbstractGrid<T> {
 
     public isLoading$: Observable<boolean>;
+    public isLoading: boolean;
     public data$: Observable<T[]>;
     public data: T[] = [];
     public columns: IColumn[] = [];

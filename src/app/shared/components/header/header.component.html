@@ -2,7 +2,7 @@
     <div class="search-form">
         <mat-form-field>
           <mat-label>Buscar</mat-label>
-          <input [(ngModel)]="filter" matInput type="text" placeholder="Escribe lo que quieres buscar">
+          <input [(ngModel)]="filter" (ngModelChange)="onFilter.emit($event)" matInput type="text" placeholder="Escribe lo que quieres buscar">
         </mat-form-field>
     </div>
 
