@@ -9,6 +9,7 @@ export abstract class CommonAbstractGrid<T> {
     public data$: Observable<T[]>;
     public data: T[] = [];
     public columns: IColumn[] = [];
+    public fiter: string = '';
 
     constructor(
         public columnSettings: IColumn[]
