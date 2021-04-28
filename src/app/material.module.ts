@@ -18,6 +18,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSortModule } from '@angular/material/sort';
+import { MatMenuModule } from '@angular/material/menu';
 
 
 
@@ -43,7 +44,8 @@ import { MatSortModule } from '@angular/material/sort';
         MatPaginatorModule,
         MatTooltipModule,
         MatProgressSpinnerModule,
-        MatSortModule
+        MatSortModule,
+        MatMenuModule
     ],
     exports: [
         MatSliderModule,
@@ -63,7 +65,8 @@ import { MatSortModule } from '@angular/material/sort';
         MatPaginatorModule,
         MatTooltipModule,
         MatProgressSpinnerModule,
-        MatSortModule
+        MatSortModule,
+        MatMenuModule
     ]
 })
 export class MaterialModule { }

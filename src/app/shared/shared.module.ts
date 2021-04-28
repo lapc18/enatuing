@@ -19,6 +19,7 @@ import { StatisticsCardComponent } from './components/statistics-card/statistics
 import { StatisticsCarouselComponent } from './components/statistics-carousel/statistics-carousel.component';
 import { DragableStatisticCarouselComponent } from './components/dragable-statistic-carousel/dragable-statistic-carousel.component';
 import { MultipleCardSliderComponent } from './components/multiple-card-slider/multiple-card-slider.component';
+import { NorticStampComponent } from './components/nortic-stamp/nortic-stamp.component';
 
 @NgModule({
   declarations: [
@@ -36,6 +37,7 @@ import { MultipleCardSliderComponent } from './components/multiple-card-slider/m
     StatisticsCarouselComponent,
     DragableStatisticCarouselComponent,
     MultipleCardSliderComponent,
+    NorticStampComponent,
   ],
   imports: [
     CommonModule,
@@ -62,7 +64,8 @@ import { MultipleCardSliderComponent } from './components/multiple-card-slider/m
     StatisticsCardComponent,
     StatisticsCarouselComponent,
     DragableStatisticCarouselComponent,
-    MultipleCardSliderComponent
+    MultipleCardSliderComponent,
+    NorticStampComponent
   ]
 })
 export class SharedModule { }

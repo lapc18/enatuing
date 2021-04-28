@@ -10,6 +10,8 @@ import * as actions from '../../core/stores/contacts/contacts.actions';
 import { Contact } from 'src/app/core/domain/contacts/contacts.models';
 import { DialogFactory } from 'src/app/core/factory/dialogs/dialog.factory';
 import { FileType } from 'src/app/core/models/enat.models';
+import { CommonTableComponent } from 'src/app/shared/components/common-table/common-table.component';
+import { MatTableDataSource } from '@angular/material/table';
 
 @Component({
   selector: 'app-contacts',
