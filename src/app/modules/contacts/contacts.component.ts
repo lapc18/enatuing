@@ -26,7 +26,7 @@ export class ContactsComponent extends CommonAbstractGrid<Contact> implements On
     private dialog: MatDialog,
     private store: Store<{contact: ContactState}>,
     public dialogFactory: DialogFactory,
-    private exportService: ExportService
+    public exportService: ExportService
   ) {
     super(columnSettings.contacts);
     this.data$ = this.store.pipe(select(state => state.contact.contacts));
@@ -100,8 +100,9 @@ export class ContactsComponent extends CommonAbstractGrid<Contact> implements On
     });
   }
 
-  public onExportData(as: FileType): void {
-    this.exportService.saveToFile(as, this.data, 'Contacts');
+  public onExport(fileType: FileType): void {
+    const fileName: string = `some-name-here-${Date.now()}`;
+    this.exportService.saveToFile(fileType, this.data, fileName);
   }
 
 }

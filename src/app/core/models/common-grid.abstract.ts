@@ -1,5 +1,6 @@
 import { Observable } from "rxjs";
-import { IColumn } from "./enat.models";
+import { ExportService } from "../services/export.service";
+import { FileType, IColumn } from "./enat.models";
 
 export abstract class CommonAbstractGrid<T> {
 
@@ -20,5 +21,6 @@ export abstract class CommonAbstractGrid<T> {
     public abstract onEdit(item: T): void;
     public abstract onDelete(item: T): void;
     public abstract onSeeDetails(item: T): void;
+    public abstract onExport(fileType?: FileType): void;
 
 }
