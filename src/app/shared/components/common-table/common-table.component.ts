@@ -2,6 +2,7 @@ import { MatTableDataSource } from '@angular/material/table';
 import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { IColumn } from '../../../core/models/enat.models';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'common-table',
@@ -19,6 +20,7 @@ export class CommonTableComponent implements OnInit, AfterViewInit, OnChanges {
   @Output() onEdit: EventEmitter<any> = new EventEmitter();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) sort: MatSort;
 
   public paginatedDataSource: MatTableDataSource<any[]>;
   public displayedColumns: string[];
@@ -33,6 +35,7 @@ export class CommonTableComponent implements OnInit, AfterViewInit, OnChanges {
 
   ngAfterViewInit(): void {
     this.paginatedDataSource.paginator = this.paginator;
+    this.paginatedDataSource.sort = this.sort;
   }
 
   ngOnChanges(changes: SimpleChanges): void {
@@ -53,6 +56,13 @@ export class CommonTableComponent implements OnInit, AfterViewInit, OnChanges {
 
   private onFilter(): void {
     this.paginatedDataSource.filter = this.filterBy.toLowerCase();
+    this.resetPagination();
+  }
+
+  public resetPagination(): void {
+    if (this.paginatedDataSource.paginator) {
+      this.paginatedDataSource.paginator.firstPage();
+    }
   }
 
   private onUpdateDataSource(): void {

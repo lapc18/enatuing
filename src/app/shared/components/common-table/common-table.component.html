@@ -1,5 +1,9 @@
 <div class="table-container mat-elevation-z8">
-    <table mat-table [dataSource]="paginatedDataSource">  
+    <table mat-table 
+      [dataSource]="paginatedDataSource" 
+      matSort
+      (matSortChange)="resetPagination()"
+    >  
       <ng-container *ngFor="let col of columns" [matColumnDef]="col.name">
         <th [width]="col.width" mat-header-cell *matHeaderCellDef mat-sort-header> <b>{{ col.label }}</b> </th>
         <td mat-cell *matCellDef="let element"> {{ element[col.name] }} </td>        
@@ -20,5 +24,5 @@
       </tr>
     </table>
   
-    <mat-paginator class="mat-paginator-sticky" [pageSizeOptions]="[10, 20, 50]" showFirstLastButtons></mat-paginator>
+    <mat-paginator class="mat-paginator-sticky" [pageSizeOptions]="[10, 25, 50, 100]" showFirstLastButtons></mat-paginator>
 </div>
