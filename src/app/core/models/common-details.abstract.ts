@@ -13,7 +13,6 @@ export abstract class CommonGridAbstractDetails<T> {
     ) { }
 
     public abstract loadComponent(): void;
-    public abstract formToEntity(): void;
     public abstract onSaveChanges(): void;
 
     public buildForm(props: any, entity?: any): void {
