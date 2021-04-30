@@ -6,6 +6,7 @@
             (onAddItem)="onCreate()"
         ></common-header>
         <common-table #table
+            [filterBy]="filter"
             [columns]="columns" 
             [dataSource]="data" 
             (onDelete)="onDelete($event)" 
