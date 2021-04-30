@@ -42,8 +42,8 @@ export class CertificationsComponent extends CommonAbstractGrid<Certification> i
     for(let i: number = 0; i < 100; i++){
       payload.push({
           id: i,
-          niu: '000-00000-000',
-          nortic: 'A5',
+          niu: `000-00000-0${i}`,
+          nortic: `A${i}`,
           organization: 'OPTIC',
           status: 'Activa',
           type: 'Certificacion'
@@ -52,10 +52,12 @@ export class CertificationsComponent extends CommonAbstractGrid<Certification> i
     this.store.dispatch(actions.loadCertificationsSuccess({ payload: payload }));
     this.store.dispatch(actions.onSuccess());
   }
+
   public onCreate(): void {
-    this.dialog.open(null, {
+    this.dialog.open(DynamicCertificationsDetailComponent, {
       data: { isCreating: true },
-      width: '50%',
+      minWidth: '50%',
+      minHeight: '60vh',
       hasBackdrop: true,
       disableClose: true,
     });
@@ -67,7 +69,8 @@ export class CertificationsComponent extends CommonAbstractGrid<Certification> i
         isEditing: true,
         certification: item
       },
-      width: '50%',
+      minWidth: '50%',
+      minHeight: '60vh',
       hasBackdrop: true,
       disableClose: true,
     });
@@ -90,7 +93,8 @@ export class CertificationsComponent extends CommonAbstractGrid<Certification> i
         isEditing: false,
         certification: item
       },
-      width: '50%',
+      minWidth: '50%',
+      minHeight: '60vh',
       hasBackdrop: true
     });
   }

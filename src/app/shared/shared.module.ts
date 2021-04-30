@@ -49,6 +49,7 @@ import { NorticStampComponent } from './components/nortic-stamp/nortic-stamp.com
     DragScrollModule
   ],
   exports: [
+    MaterialModule,
     ReactiveFormsModule,
     FormsModule,
     HttpClientModule,
