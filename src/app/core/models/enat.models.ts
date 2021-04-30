@@ -1,5 +1,6 @@
 import { CERTIFICATIONS_COLS } from "../domain/certifications/certifications.models";
 import { CONTACTS_COLS } from "../domain/contacts/contacts.models";
+import { ORGANIZATION_COLS } from "../domain/organizations/organizations.models";
 
 export class DrawerItem {
     constructor(
@@ -105,12 +106,14 @@ export interface GenericTypeValue {
 
 export interface IColumnSettings {
     contacts: IColumn[],
-    certifications: IColumn[]
+    certifications: IColumn[],
+    organizations: IColumn[]
 }
 
 export const columnSettings: IColumnSettings = {
     contacts: CONTACTS_COLS,
-    certifications: CERTIFICATIONS_COLS
+    certifications: CERTIFICATIONS_COLS,
+    organizations: ORGANIZATION_COLS
 }
 
 export interface FileHandler {

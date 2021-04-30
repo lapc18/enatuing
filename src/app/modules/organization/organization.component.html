@@ -1,1 +1,17 @@
-<p>organization works!</p>
+<div class="user-container">
+    <ng-container>
+        <common-header 
+            (onExport)="onExport($event)"
+            (onFilter)="filter = $event"
+            (onAddItem)="onCreate()"
+        ></common-header>
+        <common-table #table
+            [filterBy]="filter"
+            [columns]="columns" 
+            [dataSource]="data" 
+            (onDelete)="onDelete($event)" 
+            (onEdit)="onEdit($event)" 
+            (onDetails)="onSeeDetails($event)"> 
+        </common-table>
+    </ng-container>
+</div>
