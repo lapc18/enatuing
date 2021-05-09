@@ -20,6 +20,8 @@ import { StatisticsCarouselComponent } from './components/statistics-carousel/st
 import { DragableStatisticCarouselComponent } from './components/dragable-statistic-carousel/dragable-statistic-carousel.component';
 import { MultipleCardSliderComponent } from './components/multiple-card-slider/multiple-card-slider.component';
 import { NorticStampComponent } from './components/nortic-stamp/nortic-stamp.component';
+import { ColorPickerComponent } from './components/color-picker/color-picker.component';
+import { ColorPickerModule } from 'ngx-color-picker';
 
 @NgModule({
   declarations: [
@@ -38,6 +40,7 @@ import { NorticStampComponent } from './components/nortic-stamp/nortic-stamp.com
     DragableStatisticCarouselComponent,
     MultipleCardSliderComponent,
     NorticStampComponent,
+    ColorPickerComponent,
   ],
   imports: [
     CommonModule,
@@ -46,7 +49,8 @@ import { NorticStampComponent } from './components/nortic-stamp/nortic-stamp.com
     FormsModule,
     HttpClientModule,
     NgxChartsModule,
-    DragScrollModule
+    DragScrollModule,
+    ColorPickerModule,
   ],
   exports: [
     MaterialModule,
@@ -66,7 +70,8 @@ import { NorticStampComponent } from './components/nortic-stamp/nortic-stamp.com
     StatisticsCarouselComponent,
     DragableStatisticCarouselComponent,
     MultipleCardSliderComponent,
-    NorticStampComponent
+    NorticStampComponent,
+    ColorPickerComponent,
   ]
 })
 export class SharedModule { }

@@ -1,0 +1,7 @@
+<input 
+       [style.background]="color"
+       [cpOKButton]="true" [disabled]="isEnabled"
+       [cpSaveClickOutside]="false"
+       [cpOKButtonClass]= "'btn btn-primary btn-xs'"
+       (colorPickerChange)="colorChange.emit($event)"
+       [(colorPicker)]="color"/>
