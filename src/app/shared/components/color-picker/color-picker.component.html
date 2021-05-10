@@ -1,7 +1,21 @@
-<input 
-       [style.background]="color"
-       [cpOKButton]="true" [disabled]="isEnabled"
-       [cpSaveClickOutside]="false"
-       [cpOKButtonClass]= "'btn btn-primary btn-xs'"
-       (colorPickerChange)="colorChange.emit($event)"
-       [(colorPicker)]="color"/>
+<ng-container *ngIf="!isFormControl; else isForm">
+       <input
+			type="color"
+			[disabled]="!isEnabled"
+			[(ngModel)]="color"
+			(ngModelChange)="colorChange.emit($event)"
+        >
+</ng-container>
+<ng-template #isForm>
+
+       <form [formGroup]="parentForm">
+              
+			  <mat-form-field>
+				<mat-label>{{ color }}</mat-label>
+				<input matInput
+			  	type="color"
+				[formControlName]="controlName"
+              >
+			</mat-form-field>  
+       </form>
+</ng-template>

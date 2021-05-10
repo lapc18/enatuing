@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
-import { ColorPickerService, Cmyk } from 'ngx-color-picker';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'color-picker',
@@ -8,8 +8,12 @@ import { ColorPickerService, Cmyk } from 'ngx-color-picker';
 })
 export class ColorPickerComponent implements OnInit {
 
-  @Input() color: string = '';
+  @Input() label: string = 'Color';
+  @Input() color: string = '#fff';
   @Input() isEnabled: boolean = false;
+  @Input() isFormControl: boolean = false;
+  @Input() controlName: string = 'colorPicker';
+  @Input() parentForm: FormGroup = new FormGroup({[this.controlName]: new FormControl(this.color, [Validators.required])});
 
 
   @Output() colorChange: EventEmitter<string> = new EventEmitter();

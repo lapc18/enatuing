@@ -28,7 +28,6 @@
     "bootstrap": "^5.0.0-beta3",
     "dom-to-image": "^2.6.0",
     "file-saver": "^2.0.5",
-    "ngx-color-picker": "^11.0.0",
     "ngx-drag-scroll": "^11.0.0-beta.1",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
