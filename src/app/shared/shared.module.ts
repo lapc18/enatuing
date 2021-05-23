@@ -21,7 +21,6 @@ import { DragableStatisticCarouselComponent } from './components/dragable-statis
 import { MultipleCardSliderComponent } from './components/multiple-card-slider/multiple-card-slider.component';
 import { NorticStampComponent } from './components/nortic-stamp/nortic-stamp.component';
 import { ColorPickerComponent } from './components/color-picker/color-picker.component';
-import { ColorPickerModule } from 'ngx-color-picker';
 
 @NgModule({
   declarations: [
@@ -50,7 +49,6 @@ import { ColorPickerModule } from 'ngx-color-picker';
     HttpClientModule,
     NgxChartsModule,
     DragScrollModule,
-    ColorPickerModule,
   ],
   exports: [
     MaterialModule,

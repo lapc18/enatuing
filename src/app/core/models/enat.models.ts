@@ -1,5 +1,6 @@
 import { CERTIFICATIONS_COLS } from "../domain/certifications/certifications.models";
 import { CONTACTS_COLS } from "../domain/contacts/contacts.models";
+import { NORMATIVES_COLS } from "../domain/normatives/normatives.models";
 import { ORGANIZATION_COLS } from "../domain/organizations/organizations.models";
 
 export class DrawerItem {
@@ -95,25 +96,28 @@ export interface IColumn {
     label: string,
     width?: number,
     color?: string,
-    isSortable?: boolean
+    isSortable?: boolean,
+    isColor?: boolean
 }
 
 export interface GenericTypeValue {
     name: string,
-    value: string
+    value?: string
 }
 
 
 export interface IColumnSettings {
     contacts: IColumn[],
     certifications: IColumn[],
-    organizations: IColumn[]
+    organizations: IColumn[],
+    normatives: IColumn[]
 }
 
 export const columnSettings: IColumnSettings = {
     contacts: CONTACTS_COLS,
     certifications: CERTIFICATIONS_COLS,
-    organizations: ORGANIZATION_COLS
+    organizations: ORGANIZATION_COLS,
+    normatives: NORMATIVES_COLS,
 }
 
 export interface FileHandler {

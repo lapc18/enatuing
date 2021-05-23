@@ -22,7 +22,8 @@ import * as reducers from './core/stores/reducers';
     StoreModule.forRoot({ 
       contact: reducers.contactReducer,
       certifications: reducers.certificationReducer,
-      organization: reducers.organizationReducer
+      organization: reducers.organizationReducer,
+      normatives: reducers.normativesReducer,
     }),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
