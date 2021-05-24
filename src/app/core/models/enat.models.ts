@@ -1,3 +1,4 @@
+import { TooltipPosition } from "@angular/material/tooltip";
 import { CERTIFICATIONS_COLS } from "../domain/certifications/certifications.models";
 import { CONTACTS_COLS } from "../domain/contacts/contacts.models";
 import { NORMATIVES_COLS } from "../domain/normatives/normatives.models";
@@ -7,7 +8,7 @@ export class DrawerItem {
     constructor(
         public label?: string,
         public toolTip?: string,
-        public toolTipPosition?: string,
+        public toolTipPosition?: TooltipPosition,
         public route: string = 'javascript:void(0)',
         public isLink: boolean = false,
         public isEnabled: boolean = true,

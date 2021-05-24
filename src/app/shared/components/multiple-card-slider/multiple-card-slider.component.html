@@ -7,7 +7,7 @@
     <div class="carousel-cards" #scrollArea>
         <div class="carousel-card-item" *ngFor="let slideCard of sliderCardList">
             <app-summary-card 
-                *ngIf="slideCard.template == 'goal'"
+                *ngIf="slideCard.type == 'goal'"
                 [title]="slideCard.title"
                 [subtitle]="slideCard.subtitle" 
                 [materialIconName]="slideCard.materialIconName"
@@ -15,7 +15,7 @@
             </app-summary-card>
 
             <statistics-card 
-                *ngIf="slideCard.template == 'statistic'" 
+                *ngIf="slideCard.type == 'statistic'" 
                 [label]="slideCard.title"
                 [highlightedText]="slideCard.content" 
                 [iconUrl]="slideCard.iconUrl">
