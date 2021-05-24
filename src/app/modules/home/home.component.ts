@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CardTemplate } from 'src/app/core/models/enat.models';
-import { StatisticsCard } from 'src/app/shared/models/shared.models';
+import { SliderCard, StatisticsCard } from 'src/app/shared/models/shared.models';
 
 @Component({
   selector: 'app-home',
@@ -54,41 +54,41 @@ export class HomeComponent implements OnInit {
     }
   ]
 
-  statistics = [
+  statistics: SliderCard[] = [
     {
       title: 'Nortic A1',
       content: '75,000',
-      template: CardTemplate.statistic,
+      type: CardTemplate.statistic,
       iconUrl: 'http://optic.gob.do/nortic/images/sello_nortic.png'
     },
     {
       title: 'Nortic A2',
       content: '75,000',
-      template: CardTemplate.statistic,
+      type: CardTemplate.statistic,
       iconUrl: 'http://optic.gob.do/nortic/images/sello_nortic.png'
     },
     {
       title: 'Nortic A3',
       content: '75,000',
-      template: CardTemplate.statistic,
+      type: CardTemplate.statistic,
       iconUrl: 'http://optic.gob.do/nortic/images/sello_nortic.png'
     },
     {
       title: 'Nortic A4',
       content: '75,000',
-      template: CardTemplate.statistic,
+      type: CardTemplate.statistic,
       iconUrl: 'http://optic.gob.do/nortic/images/sello_nortic.png'
     },
     {
       title: 'Nortic A5',
       content: '75,000',
-      template: CardTemplate.statistic,
+      type: CardTemplate.statistic,
       iconUrl: 'http://optic.gob.do/nortic/images/sello_nortic.png'
     },
     {
       title: 'Nortic A5',
       content: '75,000',
-      template: CardTemplate.statistic,
+      type: CardTemplate.statistic,
       iconUrl: 'http://optic.gob.do/nortic/images/sello_nortic.png'
     }
   ]

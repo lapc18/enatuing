@@ -38,9 +38,9 @@ export interface StatisticsCard {
 
 export interface SliderCard {
     title: string;
-    subtitle: string;
-    content: string;
-    type: CardTemplate;
+    subtitle?: string;
+    content?: string;
+    type?: CardTemplate;
     materialIconName?: string;
     iconUrl?: string;
 }
