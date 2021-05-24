@@ -1,0 +1,39 @@
+<div class="login row">
+    <div class="col-sm-6 left text-white">
+        <div class="container">
+            <p class="display-4  bold">Bienvenido a ENAT 2.0</p>
+            <p class="lead">Departamento de Estandarización, Normativa  y Auditoria Técnica</p>
+            <img class="svg" src="../../../../../assets/svg/personal_goals.svg" alt="">
+            <p class="lead m-1">Oficina Presidencial de Tecnologías de la Información y Comunicación</p>
+            <div class="footer">
+                <!-- <app-footer></app-footer> -->
+            </div>
+        </div>
+    </div>
+   
+    <div class="col-sm-6 right">
+        <div class="container">
+            <p class="display-4">Login</p>
+
+            <p class="lead sub-header">¡Bienvenido a ENAT 2.0! Por favor ingresa a tu cuenta.</p>
+
+            <form class="form-group" [formGroup]="loginForm">
+                <mat-form-field appearance="fill">                
+                    <mat-label>Usuario</mat-label>
+                    <input matInput formControlName="email">
+                    <mat-error *ngIf="!isEmailValid">¡Ingrese un correo válido!</mat-error>
+                </mat-form-field>
+                <br>
+                <mat-form-field appearance="fill">                
+                    <mat-label>Contraseña</mat-label>
+                    <input matInput type="password" formControlName="password">
+                    <mat-error *ngIf="!isPwdValid">¡Ingrese unaa contraseña válida!</mat-error>
+                </mat-form-field>
+
+                <button [disabled]="false" class="btn btn-lg btn-primary">Iniciar Sesión</button>
+    
+            </form>
+        </div>
+    </div>   
+  
+</div>

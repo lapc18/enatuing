@@ -1,0 +1,77 @@
+
+@import '../../../../../sass/variables.scss';
+
+
+.primary-color {
+    background-color: $primary;
+}
+.accent-color {
+    background-color: $accent;
+}
+.warn-color {
+    background-color: $warn;
+}
+.white-color {
+    background-color: white;
+}
+
+.padding-top {
+    padding-top: 3rem;
+}
+
+.login {
+    .left {
+        @extend .primary-color;
+        @extend .padding-top;
+        position: fixed;
+        top: 0px;
+        left: 0px;
+        height: 100%;
+        z-index: 0;
+        text-align: center;
+
+        .svg {
+            width: 80%;
+        }
+        .footer {
+            text-align: center;
+            position: fixed;
+            left: 0;
+            bottom: 0;
+            width: 50%;
+        }
+    }
+
+    .right {
+        @extend .white-color;
+        @extend .padding-top;
+        position: fixed;
+        top: 15%;
+        right: 0px;
+        height: 100%;
+        z-index: 0;
+        text-align: center;
+
+        .container {
+            padding-left: 5rem;
+            padding-right: 5rem;
+
+            .sub-header {
+                font-weight: 500;
+                margin-top: 2rem;
+                margin-bottom: 2rem;
+                color: gray;
+            }
+        }
+    }
+}
+
+.display-4 {
+    margin-top: 4rem;
+    margin-bottom: 0;
+    font-weight: bolder;
+}
+
+mat-form-field {
+    width: 100%;
+}

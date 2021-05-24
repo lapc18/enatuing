@@ -20,6 +20,7 @@ import * as reducers from './core/stores/reducers';
     BrowserAnimationsModule,
     MaterialModule,
     StoreModule.forRoot({ 
+      auth: reducers.AuthReducer,
       contact: reducers.contactReducer,
       certifications: reducers.certificationReducer,
       organization: reducers.organizationReducer,
