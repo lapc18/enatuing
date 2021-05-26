@@ -1,0 +1,18 @@
+
+.alert-container {
+    padding: 2rem;
+    display: flex;
+    align-items: flex-end;
+    justify-content: center;
+    flex-direction: column;
+
+    .alert-message {
+        min-width: 20vw;
+        z-index: 10000; 
+        span {
+            text-overflow: ellipsis; 
+            overflow: hidden; 
+            white-space: nowrap;
+        }
+    }
+}

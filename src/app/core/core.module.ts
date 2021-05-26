@@ -6,6 +6,8 @@ import { YesOrNoComponent } from './factory/dialogs/yes-or-no/yes-or-no.componen
 import { InformationComponent } from './factory/dialogs/information/information.component';
 import { WarningComponent } from './factory/dialogs/warning/warning.component';
 import { ConfirmationComponent } from './factory/dialogs/confirmation/confirmation.component';
+import { AlertComponent } from './factory/alerts/alert/alert.component';
+import { AlertFactory } from './factory/alerts/alerts.factory';
 
 
 
@@ -15,13 +17,16 @@ import { ConfirmationComponent } from './factory/dialogs/confirmation/confirmati
     YesOrNoComponent,
     InformationComponent,
     WarningComponent,
-    ConfirmationComponent
+    ConfirmationComponent,
+    AlertComponent
   ],
   imports: [
     CommonModule
   ],
+  exports: [AlertComponent],
   providers: [
-    DialogFactory
+    DialogFactory,
+    AlertFactory
   ]
 })
 export class CoreModule { }
