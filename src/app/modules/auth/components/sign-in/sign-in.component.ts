@@ -1,16 +1,17 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { AuthState } from 'src/app/core/stores/auth/auth.reducer';
 import * as actions from 'src/app/core/stores/auth/auth.actions'
 import { SignIn } from 'src/app/core/domain/auth/auth.models';
+import { AlertFactory } from 'src/app/core/factory/alerts/alerts.factory';
 
 @Component({
   selector: 'app-sign-in',
   templateUrl: './sign-in.component.html',
   styleUrls: ['./sign-in.component.scss']
 })
-export class SignInComponent implements OnInit {
+export class SignInComponent implements OnInit, AfterViewInit {
 
   public loginForm: FormGroup;
   public isEmailValid: boolean;
@@ -19,11 +20,15 @@ export class SignInComponent implements OnInit {
   constructor(
     private store: Store<{ user: AuthState }>,
     private formBuilder: FormBuilder,
+    private alertFactory: AlertFactory
   ) { }
 
   ngOnInit(): void {
     this.buildForm();
-    this.loginForm.valueChanges.subscribe(this.validateInputs);
+  }
+
+  ngAfterViewInit(): void {
+    this.loginForm.valueChanges.subscribe(res => this.validateInputs());
   }
 
   private buildForm(): void {
@@ -44,6 +49,7 @@ export class SignInComponent implements OnInit {
       pwd: this.loginForm.controls['password'].value || ''
     }
     this.store.dispatch(actions.onLogin({ payload: creds }));
+    this.alertFactory.success(`User Logged In: ${JSON.stringify(creds)}`, { autoClose: true, keepAfterRouteChange: false,  });
   }
 
 }

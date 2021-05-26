@@ -17,7 +17,7 @@
 
             <p class="lead sub-header">¡Bienvenido a ENAT 2.0! Por favor ingresa a tu cuenta.</p>
 
-            <form class="form-group" [formGroup]="loginForm">
+            <form class="form-group" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
                 <mat-form-field appearance="fill">                
                     <mat-label>Usuario</mat-label>
                     <input matInput formControlName="email">
@@ -30,7 +30,7 @@
                     <mat-error *ngIf="!isPwdValid">¡Ingrese unaa contraseña válida!</mat-error>
                 </mat-form-field>
 
-                <button [disabled]="false" class="btn btn-lg btn-primary">Iniciar Sesión</button>
+                <button [disabled]="false" type="submit" class="btn btn-lg btn-primary">Iniciar Sesión</button>
     
             </form>
         </div>
