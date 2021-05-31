@@ -24,13 +24,22 @@ export class ContactsEffects {
         )
     ));
 
+    
+    save$ = createEffect(() => this.actions$.pipe(
+        ofType(actions.createContacts),
+        mergeMap((payload) => this.apiService.save(payload.payload).pipe(
+                map(() => (actions.onSuccess())),
+                catchError((err) => of(actions.editContactsFailed({ payload: `${err}` })))
+            )
+        )
+    ));
+
     update$ = createEffect(() => this.actions$.pipe(
         ofType(actions.editContacts),
-        map((action) => action.payload),
-        mergeMap((entity) => this.apiService.update(entity).pipe(
-            map(() => (actions.onSuccess())),
-            catchError((err) => of(actions.editContactsFailed({ payload: `${err}` })))
-        )
+        mergeMap((payload) => this.apiService.update({id: payload.id, payload: payload.payload}).pipe(
+                map(() => (actions.onSuccess())),
+                catchError((err) => of(actions.editContactsFailed({ payload: `${err}` })))
+            )
         )
     ));
 
