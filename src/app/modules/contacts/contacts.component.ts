@@ -10,6 +10,7 @@ import * as actions from '../../core/stores/contacts/contacts.actions';
 import { Contact } from 'src/app/core/domain/contacts/contacts.models';
 import { DialogFactory } from 'src/app/core/factory/dialogs/dialog.factory';
 import { FileType } from 'src/app/core/models/enat.models';
+import { ContactService } from 'src/app/core/services/contacts.service';
 
 @Component({
   selector: 'app-contacts',
@@ -22,7 +23,8 @@ export class ContactsComponent extends CommonAbstractGrid<Contact> implements On
     private dialog: MatDialog,
     private store: Store<{contact: ContactState}>,
     public dialogFactory: DialogFactory,
-    public exportService: ExportService
+    public exportService: ExportService,
+    public service: ContactService
   ) {
     super(columnSettings.contacts);
     this.data$ = this.store.pipe(select(state => state.contact.contacts));
@@ -31,6 +33,7 @@ export class ContactsComponent extends CommonAbstractGrid<Contact> implements On
 
   ngOnInit(): void {
     this.loadData();
+    this.service.search().subscribe(res => console.log(res));
   }
 
   public loadData(): void {

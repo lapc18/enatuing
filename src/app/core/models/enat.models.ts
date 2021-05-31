@@ -1,4 +1,5 @@
 import { TooltipPosition } from "@angular/material/tooltip";
+import { Observable, Subscription } from "rxjs";
 import { CERTIFICATIONS_COLS } from "../domain/certifications/certifications.models";
 import { CONTACTS_COLS } from "../domain/contacts/contacts.models";
 import { NORMATIVES_COLS } from "../domain/normatives/normatives.models";
@@ -135,4 +136,12 @@ export enum FileType {
 export enum CardTemplate {
     goal = 'goal',
     statistic = 'statistic'
+}
+
+export interface IBaseService<T> {
+    addSubscription(subscription: Subscription): void;
+    unsubscribe(): void;
+    search(params?: any): Observable<T[]>;
+    softDelete(id?: string): Observable<any>;
+    save(item?: T): Observable<any>;
 }

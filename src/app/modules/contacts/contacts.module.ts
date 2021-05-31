@@ -7,6 +7,7 @@ import { SharedModule } from 'src/app/shared/shared.module';
 import { MaterialModule } from 'src/app/material.module';
 import { DynamicDetailContactComponent } from './dynamic-detail-contact/dynamic-detail-contact.component';
 import { CoreModule } from 'src/app/core/core.module';
+import { ContactService } from 'src/app/core/services/contacts.service';
 
 
 @NgModule({
@@ -20,6 +21,7 @@ import { CoreModule } from 'src/app/core/core.module';
     SharedModule,
     MaterialModule,
     CoreModule
-  ]
+  ],
+  providers: [ ContactService ]
 })
 export class ContactsModule { }
