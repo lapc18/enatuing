@@ -9,6 +9,9 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from 'src/environments/environment';
 import { MaterialModule } from './material.module';
 import * as reducers from './core/stores/reducers';
+import { EffectsModule } from '@ngrx/effects';
+import { ContactsEffects } from './core/stores/contacts/contats.effects';
+import { CoreModule } from './core/core.module';
 
 @NgModule({
   declarations: [
@@ -19,6 +22,7 @@ import * as reducers from './core/stores/reducers';
     AppRoutingModule,
     BrowserAnimationsModule,
     MaterialModule,
+    CoreModule,
     StoreModule.forRoot({ 
       auth: reducers.AuthReducer,
       contact: reducers.contactReducer,
@@ -26,6 +30,9 @@ import * as reducers from './core/stores/reducers';
       organization: reducers.organizationReducer,
       normatives: reducers.normativesReducer,
     }),
+    EffectsModule.forRoot([
+      ContactsEffects,
+    ]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
       logOnly: environment.production,
