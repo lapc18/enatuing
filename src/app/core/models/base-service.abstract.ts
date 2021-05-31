@@ -5,8 +5,8 @@ import { IServiceOptions } from "./service-properties.model";
 
 export abstract class AbstractEnatService<T, E> implements IBaseService<T> {
 
-    public item: E;
-    private subscriptions:Subscription = new Subscription();
+    public item: E = ({} as E);
+    private subscriptions:Subscription[] = [];
 
     constructor(
         protected http: HttpClient,
@@ -17,11 +17,11 @@ export abstract class AbstractEnatService<T, E> implements IBaseService<T> {
     }
 
     public addSubscription(subscription: Subscription): void {
-        this.subscriptions.add(subscription);
+        this.subscriptions.push(subscription);
     }
 
     public unsubscribe(): void {
-        this.subscriptions.unsubscribe();
+        this.subscriptions.forEach(subscription => subscription.unsubscribe());
     }
 
     public search(params?: any): Observable<T[]> {
@@ -38,8 +38,9 @@ export abstract class AbstractEnatService<T, E> implements IBaseService<T> {
         let url:string = this.options.endpoint;
         let body: any = {};
         if(params){
-            if((params as Object).hasOwnProperty('id') && (params as Object).hasOwnProperty('body')) {
+            if((params as Object).hasOwnProperty('id') && (params as Object).hasOwnProperty('payload')) {
                 url = `${url}/${params.id}`;
+                body = {...params.payload}
             }
         }
 
@@ -48,17 +49,12 @@ export abstract class AbstractEnatService<T, E> implements IBaseService<T> {
     
     public softDelete(id?: string): Observable<any> {
         if(!id) throw new Error("No ID param provided.");
-        let url:string = `${this.options.endpoint}?id=${id}`;
+        let url:string = `${this.options.endpoint}/${id}`;
         return this.http.delete<any>(url);
     }
 
     public save(item: T): Observable<any> {
-        Object.assign(item, this.item);
-        console.log(this.item)
-        console.log(item)
-        if(!this.item) {
-            throw new Error("Method not implemented.");
-        }
+        Object.assign(this.item, item);
         return this.http.post(this.options.endpoint, this.item);
     }
 

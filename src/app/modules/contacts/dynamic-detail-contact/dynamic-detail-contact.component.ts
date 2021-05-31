@@ -2,7 +2,6 @@ import { Component, Inject, OnInit } from "@angular/core";
 import { FormBuilder, Validators } from "@angular/forms";
 import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 import { Store } from "@ngrx/store";
-import { ContactsEntity } from "src/app/core/domain/contacts/contacts.entity";
 import { Contact } from "src/app/core/domain/contacts/contacts.models";
 import { CommonGridAbstractDetails } from "src/app/core/models/common-details.abstract";
 import { ContactState } from "src/app/core/stores/contacts/contacts.reducers";
@@ -16,7 +15,6 @@ import * as actions from '../../../core/stores/contacts/contacts.actions';
 })
 export class DynamicDetailContactComponent extends CommonGridAbstractDetails<Contact> implements OnInit {
     
-    private contactsEntity: ContactsEntity;
     public contact: Contact = null;
     
     constructor(
@@ -48,10 +46,6 @@ export class DynamicDetailContactComponent extends CommonGridAbstractDetails<Con
         this.store.dispatch(actions.onSuccess());
         this.dialogRef.close();
     }
-    
-    public formToEntity(): void {
-         this.contactsEntity = new ContactsEntity('','','','');
-    }
 
     private buildContactForm(): void {
         const form: any = {
@@ -64,7 +58,5 @@ export class DynamicDetailContactComponent extends CommonGridAbstractDetails<Con
         }
         this.contact ? super.buildForm(form, this.contact) : super.buildForm(form);
     }
-
-
 
 }
