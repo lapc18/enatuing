@@ -8,6 +8,8 @@ import { WarningComponent } from './factory/dialogs/warning/warning.component';
 import { ConfirmationComponent } from './factory/dialogs/confirmation/confirmation.component';
 import { AlertComponent } from './factory/alerts/alert/alert.component';
 import { AlertFactory } from './factory/alerts/alerts.factory';
+import { HTTP_INTERCEPTORS } from '@angular/common/http';
+import { ApiInterceptor } from './interceptors/api.interceptor';
 
 
 
@@ -25,6 +27,7 @@ import { AlertFactory } from './factory/alerts/alerts.factory';
   ],
   exports: [AlertComponent],
   providers: [
+    { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },
     DialogFactory,
     AlertFactory
   ]
