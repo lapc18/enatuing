@@ -13,6 +13,7 @@ import { EffectsModule } from '@ngrx/effects';
 import { ContactsEffects } from './core/stores/contacts/contats.effects';
 import { CoreModule } from './core/core.module';
 import { NormativesEffects } from './core/stores/normatives/normatives.effects';
+import { CertificationsEffects } from './core/stores/certifications/certifications.effects';
 
 @NgModule({
   declarations: [
@@ -33,7 +34,8 @@ import { NormativesEffects } from './core/stores/normatives/normatives.effects';
     }),
     EffectsModule.forRoot([
       ContactsEffects,
-      NormativesEffects
+      NormativesEffects,
+      CertificationsEffects,
     ]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,
