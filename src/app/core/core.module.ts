@@ -11,6 +11,7 @@ import { AlertFactory } from './factory/alerts/alerts.factory';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ApiInterceptor } from './interceptors/api.interceptor';
 import { ContactService } from './services/contacts.service';
+import { NormativesService } from './services/normatives.service';
 
 
 
@@ -32,7 +33,8 @@ import { ContactService } from './services/contacts.service';
     { provide: HTTP_INTERCEPTORS, useClass: ApiInterceptor, multi: true },
     DialogFactory,
     AlertFactory,
-    ContactService
+    ContactService,
+    NormativesService
   ]
 })
 export class CoreModule { }
