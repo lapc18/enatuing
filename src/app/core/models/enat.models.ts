@@ -103,8 +103,8 @@ export interface IColumn {
 }
 
 export interface GenericTypeValue {
-    name: string,
-    value?: string
+    description: string,
+    id?: string
 }
 
 

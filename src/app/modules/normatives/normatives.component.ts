@@ -36,24 +36,16 @@ export class NormativesComponent extends CommonAbstractGrid<Normative> implement
     this.store.dispatch(actions.loadNormatives());
     this.isLoading$.subscribe(res => this.isLoading = res);
     this.data$.subscribe((res: Normative[]) => this.data = res);
-    //temp use:
-    let payload: Normative[] = [];
-    for(let i: number = 0; i < 100; i++){
-      payload.push({
-          id: i,
-          publishedAt: `${2000 + i}`,
-          description: `this is a description random for: ${i}`,
-          color: '#646464',
-          status: 'Activa'
-      });
-    }
-    this.store.dispatch(actions.loadNormativesSuccess({ payload: payload }));
-    this.store.dispatch(actions.onSuccess());
   }
 
   public onCreate(): void {
-    this.dialog.open(null, {
-      data: { isCreating: true },
+    this.dialog.open(DynamicNormativeDetailComponent, {
+      data: { 
+        isCreating: true, 
+        callback:() => {
+          this.loadData();
+        } 
+      },
       minWidth: '50%',
       minHeight: '60vh',
       hasBackdrop: true,
@@ -65,7 +57,10 @@ export class NormativesComponent extends CommonAbstractGrid<Normative> implement
     this.dialog.open(DynamicNormativeDetailComponent, {
       data: {
         isEditing: true,
-        organization: item
+        normative: item,
+        callback:() => {
+          this.loadData();
+        }
       },
       minWidth: '50%',
       minHeight: '60vh',
@@ -80,6 +75,7 @@ export class NormativesComponent extends CommonAbstractGrid<Normative> implement
       callback:() => {
         this.store.dispatch(actions.removeNormatives({ payload: item, id: item.id}));
         this.store.dispatch(actions.onSuccess());
+        this.loadData();
       }
     });
 
@@ -89,7 +85,7 @@ export class NormativesComponent extends CommonAbstractGrid<Normative> implement
     this.dialog.open(DynamicNormativeDetailComponent, {
       data: {
         isEditing: false,
-        organization: item
+        normative: item
       },
       minWidth: '50%',
       minHeight: '60vh',

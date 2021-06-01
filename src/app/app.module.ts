@@ -12,6 +12,7 @@ import * as reducers from './core/stores/reducers';
 import { EffectsModule } from '@ngrx/effects';
 import { ContactsEffects } from './core/stores/contacts/contats.effects';
 import { CoreModule } from './core/core.module';
+import { NormativesEffects } from './core/stores/normatives/normatives.effects';
 
 @NgModule({
   declarations: [
@@ -32,6 +33,7 @@ import { CoreModule } from './core/core.module';
     }),
     EffectsModule.forRoot([
       ContactsEffects,
+      NormativesEffects
     ]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,

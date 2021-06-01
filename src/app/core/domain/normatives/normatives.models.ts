@@ -3,8 +3,9 @@ import { GenericTypeValue, IColumn } from "src/app/core/models/enat.models";
 
 export interface Normative {
     id?: any,
-    status?: string,
-    publishedAt?: string,
+    statusId?: string,
+    status?: string | GenericTypeValue,
+    publishetAt?: string,
     color?: string,
     description?: string
 }
@@ -18,7 +19,7 @@ export const NORMATIVES_COLS: IColumn[] = [
     
     {
         label: "Año de publicación",
-        name: 'publishedAt',
+        name: 'publishetAt',
         width: 150
     },
 
@@ -44,15 +45,15 @@ export const NORMATIVES_COLS: IColumn[] = [
 
 export const NORMATIVE_STATUSES:GenericTypeValue[] = [
     {
-        name: 'Activa',
-        value: 'ACTIVA'
+        description: 'Activa',
+        id: 'ACTIVA'
     },
     {
-        name: 'Buenas Prácticas',
-        value: 'BUENAS_PRACTICAS'
+        description: 'Buenas Prácticas',
+        id: 'BUENAS_PRACTICAS'
     },
     {
-        name: 'Periodo de Prueba',
-        value: 'PERIODO_PRUEBA'
+        description: 'Periodo de Prueba',
+        id: 'PERIODO_PRUEBA'
     },
 ]

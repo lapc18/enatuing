@@ -1,16 +1,21 @@
 import { Action, createReducer, on } from "@ngrx/store";
 import { Normative } from "../../domain/normatives/normatives.models";
 import { CommonState } from "../../models/common-state.model";
+import { GenericTypeValue } from "../../models/enat.models";
 import * as actions from './normatives.actions';
 
 
 export interface NormativesState extends CommonState {
     normatives: Array<Normative>,
+    normativeStatuses: Array<GenericTypeValue>,
+    isLoadingNormativeStatuses: boolean
 }
 
 const initialNormativestate: NormativesState = {
     normatives: [],
+    normativeStatuses: [],
     isLoading: false,
+    isLoadingNormativeStatuses: false,
     hasError: false,
     errorMessage: '',
 }
@@ -23,6 +28,10 @@ const reducer = createReducer(
     on(actions.loadNormatives, (state) => ({ ...state, isLoading: true })),
     on(actions.loadNormativesSuccess, (state, { payload }) => ({ ...state, isLoading: false, normatives: [...payload] })),
     on(actions.loadNormativesFailed, (state, { payload }) => ({ ...state, isLoading: false, hasError: true, errorMessage: payload })),
+
+    on(actions.loadNormativeStatuses, (state) => ({ ...state, isLoadingNormativeStatuses: true })),
+    on(actions.loadNormativeStatusesSuccess, (state, { payload }) => ({ ...state, isLoadingNormativeStatuses: false, normativeStatuses: [...payload] })),
+    on(actions.loadNormativeStatusesFailed, (state, { payload }) => ({ ...state, isLoadingNormativeStatuses: false, hasError: true, errorMessage: payload })),
 
     on(actions.createNormatives, (state, { payload }) => ({
         ...state,

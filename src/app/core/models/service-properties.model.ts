@@ -29,12 +29,12 @@ const contactServiceOptions:IServiceOptions = {
     endpoint: '/optic/enat/api/Contacts',
 }
 
-const normativeServiceOptions:IServiceOptions = {
-    endpoint: '​/optic/enat/api/Normatives',
+const normativeServiceOptions:IServiceOptions = {    
+    endpoint: '/optic/enat/api/Normatives'
 }
 
 const organizationServiceOptions:IServiceOptions = {
-    endpoint: '​/optic/enat/api/Organization',
+    endpoint: '/optic/enat/api/Organization'
 }
 
 

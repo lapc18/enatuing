@@ -37,8 +37,8 @@ export abstract class CommonGridAbstractDetails<T> {
         let result: GenericTypeValue[] = [];
         props.forEach(e => {
             result.push({
-                name: e,
-                value: this.formGroup.controls[e].value
+                description: e,
+                id: this.formGroup.controls[e].value
             });
         });
         return result;

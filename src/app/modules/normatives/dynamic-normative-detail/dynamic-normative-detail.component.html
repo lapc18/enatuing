@@ -1,7 +1,7 @@
 <div class="dialog-container">
     <div class="header" mat-dialog-title>
-        <p *ngIf="isCreating" class="display-4">Organización</p>
-        <p *ngIf="isEditing || !isCreating" class="display-4">Detalles de la organización: {{ organization.id }}</p>
+        <p *ngIf="isCreating" class="display-4">Normativas</p>
+        <p *ngIf="isEditing || !isCreating" class="display-4">Detalles de la normativa: {{ normative.publishetAt }}</p>
     </div>
     <div class="details-container" mat-dialog-content>
         <div class="row">
@@ -10,7 +10,7 @@
     
                 <mat-form-field>
                     <mat-label>Año de publicación</mat-label>
-                    <input matInput placeholder="Ej: 2021" formControlName="publishedAt" type="text">
+                    <input matInput placeholder="Ej: 2021" formControlName="publishetAt" type="number">
                 </mat-form-field>            
 
                 <mat-form-field>
@@ -20,12 +20,11 @@
 
                 <mat-form-field>
                     <mat-label>Estatus</mat-label>
-                    <mat-select placeholder="Estatus" formControlName="status">
-                        <mat-option *ngFor="let item of organizationStatuses" [value]="item.value">{{item.name}}</mat-option>
+                    <mat-select placeholder="Estatus" formControlName="statusId">
+                        <mat-option *ngFor="let item of normativeStatuses" [value]="item.id">{{item.description}}</mat-option>
                     </mat-select>
                 </mat-form-field>
     
-                <br/>
                 <mat-form-field>
                     <mat-label>Descripción</mat-label>
                     <textarea 
