@@ -104,7 +104,7 @@ export interface IColumn {
 
 export interface GenericTypeValue {
     description: string,
-    id?: string
+    id?: string  | number,
 }
 
 
@@ -145,3 +145,14 @@ export interface IBaseService<T> {
     softDelete(id?: string): Observable<any>;
     save(item?: T): Observable<any>;
 }
+
+export const CERTIFICATION_STATUS: GenericTypeValue[] = [
+    {
+        id: 0,
+        description: 'Activo'
+    },
+    {
+        id: 1,
+        description: 'Inactivo'
+    },
+]

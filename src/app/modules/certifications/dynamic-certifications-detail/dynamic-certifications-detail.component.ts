@@ -6,6 +6,7 @@ import { Certification } from 'src/app/core/domain/certifications/certifications
 import { CommonGridAbstractDetails } from 'src/app/core/models/common-details.abstract';
 import { Certificationstate } from 'src/app/core/stores/certifications/certifications.reducers';
 import * as actions from 'src/app/core/stores/certifications/certifications.actions';
+import { CERTIFICATION_STATUS, GenericTypeValue } from 'src/app/core/models/enat.models';
 
 @Component({
   selector: 'app-dynamic-certifications-detail',
@@ -14,8 +15,8 @@ import * as actions from 'src/app/core/stores/certifications/certifications.acti
 })
 export class DynamicCertificationsDetailComponent extends CommonGridAbstractDetails<Certification> implements OnInit {
 
-  private certificationssEntity: any;
   public certification: Certification = null;
+  public certificationStatuses: GenericTypeValue[] = CERTIFICATION_STATUS;
   
   constructor(
       private store: Store<{certifications: Certificationstate}>,
@@ -53,7 +54,7 @@ export class DynamicCertificationsDetailComponent extends CommonGridAbstractDeta
           nortic: ['', Validators.required],
           niu: ['', [Validators.required]],
           type: ['', [Validators.required]],
-          status: ['', [Validators.required]],
+          statusId: ['', [Validators.required]],
       }
       this.certification ? super.buildForm(form, this.certification) : super.buildForm(form);
   }

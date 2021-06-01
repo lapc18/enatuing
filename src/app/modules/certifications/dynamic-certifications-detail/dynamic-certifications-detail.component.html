@@ -30,8 +30,10 @@
                 
                 <mat-form-field>
                     <mat-label>Estado</mat-label>
-                    <input matInput placeholder="Ingrese una estado" formControlName="status" type="text">
-                </mat-form-field>           
+                    <mat-select placeholder="Estatus" formControlName="statusId">
+                        <mat-option *ngFor="let item of certificationStatuses" [value]="item.id">{{item.description}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
     
                 <br />
                 <div mat-dialog-actions>
