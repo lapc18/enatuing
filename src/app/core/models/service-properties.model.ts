@@ -37,11 +37,16 @@ const organizationServiceOptions:IServiceOptions = {
     endpoint: '/optic/enat/api/Organization'
 }
 
+const queueServiceOptions:IServiceOptions = {
+    endpoint: '/optic/enat/api/Queue'
+}
+
 
 export const baseServiceOptions: BaseServiceOptions = {
     certifications: certificationsServiceOptions,
     dashboard: dashboardServiceOptions,
     contacts: contactServiceOptions,
     normatives: normativeServiceOptions,
-    organization: organizationServiceOptions
+    organization: organizationServiceOptions,
+    queue: queueServiceOptions
 }

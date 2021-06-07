@@ -4,6 +4,7 @@ import { CERTIFICATIONS_COLS } from "../domain/certifications/certifications.mod
 import { CONTACTS_COLS } from "../domain/contacts/contacts.models";
 import { NORMATIVES_COLS } from "../domain/normatives/normatives.models";
 import { ORGANIZATION_COLS } from "../domain/organizations/organizations.models";
+import { QUEUE_COLS } from "../domain/queue/queue.models";
 
 export class DrawerItem {
     constructor(
@@ -112,7 +113,8 @@ export interface IColumnSettings {
     contacts: IColumn[],
     certifications: IColumn[],
     organizations: IColumn[],
-    normatives: IColumn[]
+    normatives: IColumn[],
+    queue: IColumn[],
 }
 
 export const columnSettings: IColumnSettings = {
@@ -120,6 +122,7 @@ export const columnSettings: IColumnSettings = {
     certifications: CERTIFICATIONS_COLS,
     organizations: ORGANIZATION_COLS,
     normatives: NORMATIVES_COLS,
+    queue: QUEUE_COLS,
 }
 
 export interface FileHandler {
@@ -146,7 +149,7 @@ export interface IBaseService<T> {
     save(item?: T): Observable<any>;
 }
 
-export const CERTIFICATION_STATUS: GenericTypeValue[] = [
+export const GLOBAL_STATUS: GenericTypeValue[] = [
     {
         id: 0,
         description: 'Activo'
