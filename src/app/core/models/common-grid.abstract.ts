@@ -1,7 +1,7 @@
 import { Observable } from "rxjs";
 import { FileType, IColumn } from "./enat.models";
 
-export abstract class CommonAbstractGrid<T> {
+export abstract class CommonAbstractGrid<T, E = any> {
 
     public isLoading$: Observable<boolean>;
     public isLoading: boolean;
@@ -18,9 +18,9 @@ export abstract class CommonAbstractGrid<T> {
 
     public abstract loadData(): void;
     public abstract onCreate(): void;
-    public abstract onEdit(item: T): void;
-    public abstract onDelete(item: T): void;
-    public abstract onSeeDetails(item: T): void;
+    public abstract onEdit(item: T | E): void;
+    public abstract onDelete(item: T | E): void;
+    public abstract onSeeDetails(item: T | E): void;
     public abstract onExport(fileType?: FileType): void;
 
 }
