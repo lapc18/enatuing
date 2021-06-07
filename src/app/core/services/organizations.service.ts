@@ -13,7 +13,7 @@ export class OrganizationService extends AbstractEnatService<Organization, Organ
     constructor(
         public http: HttpClient,
     ) {
-        super(http, columnSettings.contacts, baseServiceOptions.contacts);
+        super(http, columnSettings.contacts, baseServiceOptions.organization);
     }
 
 }

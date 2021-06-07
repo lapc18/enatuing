@@ -15,6 +15,7 @@ import { CoreModule } from './core/core.module';
 import { NormativesEffects } from './core/stores/normatives/normatives.effects';
 import { CertificationsEffects } from './core/stores/certifications/certifications.effects';
 import { QueueEffects } from './core/stores/queue/queue.effects';
+import { OrganizationEffects } from './core/stores/organizations/organization.effects';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,7 @@ import { QueueEffects } from './core/stores/queue/queue.effects';
       NormativesEffects,
       CertificationsEffects,
       QueueEffects,
+      OrganizationEffects
     ]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,

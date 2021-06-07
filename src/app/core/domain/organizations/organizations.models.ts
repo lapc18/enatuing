@@ -12,12 +12,12 @@ export const ORGANIZATION_COLS: IColumn[] = [
     {
         label: "Id",
         name: 'id',
-        width: 100
+        width: 200
     },
     {
         label: "Nombre",
         name: 'name',
-        width: 150
+        width: 350
     },
     {
         label: "Siglas",
@@ -27,6 +27,6 @@ export const ORGANIZATION_COLS: IColumn[] = [
     {
         label: "Ciudad",
         name: 'city',
-        width: 250
+        width: 200
     }
 ];

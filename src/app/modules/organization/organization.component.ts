@@ -36,18 +36,6 @@ export class OrganizationComponent extends CommonAbstractGrid<Organization> impl
     this.store.dispatch(actions.loadOrganizations());
     this.isLoading$.subscribe(res => this.isLoading = res);
     this.data$.subscribe((res: Organization[]) => this.data = res);
-    //temp use:
-    let payload: Organization[] = [];
-    for(let i: number = 0; i < 100; i++){
-      payload.push({
-          id: i,
-          name: `OPT${i * 1}C`,
-          acronym: `OPT${i * 2}C`,
-          city: `OPT${i * 3}C`
-      });
-    }
-    this.store.dispatch(actions.loadOrganizationsSuccess({ payload: payload }));
-    this.store.dispatch(actions.onSuccess());
   }
 
   public onCreate(): void {
