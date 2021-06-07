@@ -4,12 +4,13 @@ import { AuthComponent } from './auth.component';
 import { SignInComponent } from './components/sign-in/sign-in.component';
 
 const routes: Routes = [
-  { path: '', 
+  { path: 'enat', 
     component: AuthComponent, 
     children: [
       { path: 'signin', component: SignInComponent }
     ] 
   },
+  { path: '', pathMatch: 'full', redirectTo: 'enat/signin' }
 ];
 
 @NgModule({
