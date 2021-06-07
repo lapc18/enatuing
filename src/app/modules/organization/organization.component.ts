@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { select, Store } from '@ngrx/store';
+import { Subscription } from 'rxjs';
 import { Organization } from 'src/app/core/domain/organizations/organizations.models';
 import { DialogFactory } from 'src/app/core/factory/dialogs/dialog.factory';
 import { CommonAbstractGrid } from 'src/app/core/models/common-grid.abstract';
@@ -15,7 +16,9 @@ import { DynamicOrganizationDetailComponent } from './dynamic-organization-detai
   templateUrl: './organization.component.html',
   styleUrls: ['./organization.component.scss']
 })
-export class OrganizationComponent extends CommonAbstractGrid<Organization> implements OnInit {
+export class OrganizationComponent extends CommonAbstractGrid<Organization> implements OnInit, OnDestroy {
+
+  private subscriptions: Subscription[] = [];
 
   constructor(
     private dialog: MatDialog,
@@ -32,10 +35,14 @@ export class OrganizationComponent extends CommonAbstractGrid<Organization> impl
     this.loadData();
   }
 
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(subscription => subscription.unsubscribe());
+  }
+
   public loadData(): void {
     this.store.dispatch(actions.loadOrganizations());
-    this.isLoading$.subscribe(res => this.isLoading = res);
-    this.data$.subscribe((res: Organization[]) => this.data = res);
+    this.subscriptions.push(this.isLoading$.subscribe(res => this.isLoading = res));
+    this.subscriptions.push(this.data$.subscribe((res: Organization[]) => this.data = res));
   }
 
   public onCreate(): void {
@@ -67,6 +74,7 @@ export class OrganizationComponent extends CommonAbstractGrid<Organization> impl
       callback:() => {
         this.store.dispatch(actions.removeOrganizations({ payload: item, id: item.id}));
         this.store.dispatch(actions.onSuccess());
+        this.loadData();
       }
     });
 
