@@ -13,6 +13,7 @@ import { ApiInterceptor } from './interceptors/api.interceptor';
 import { ContactService } from './services/contacts.service';
 import { NormativesService } from './services/normatives.service';
 import { CertificationsService } from './services/Certifications.service';
+import { QueueService } from './services/Queue.service';
 
 
 
@@ -37,6 +38,7 @@ import { CertificationsService } from './services/Certifications.service';
     ContactService,
     NormativesService,
     CertificationsService,
+    QueueService,
   ]
 })
 export class CoreModule { }
