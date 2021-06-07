@@ -14,44 +14,53 @@ import * as actions from 'src/app/core/stores/organizations/organizations.action
 })
 export class DynamicOrganizationDetailComponent extends CommonGridAbstractDetails<Organization> implements OnInit {
 
-  public organization: Organization = null;
-  
-  constructor(
+    public organization: Organization = null;
+    
+    constructor(
       private store: Store<{organization: OrganizationState}>,
       public formBuilder: FormBuilder,
       @Inject(MAT_DIALOG_DATA) public data: any,
       private dialogRef: MatDialogRef<DynamicOrganizationDetailComponent>
     ) {
       super(formBuilder);
-  }
+    }
 
-  ngOnInit(): void {
+    ngOnInit(): void {
       this.loadComponent();
       this.buildOrganizationForm();
-  }
+    }
 
-  public loadComponent(): void {
+    public loadComponent(): void {
       this.organization = this.data ? { ...this.data['organization'] } : null;
       this.isEditing = this.data ? this.data['isEditing'] : false;
       this.isCreating = this.data ? this.data['isCreating'] : false;
-  }
+    }
 
-  public onSaveChanges(): void {
+    public onSaveChanges(): void {
       if(this.isEditing) {
-          this.store.dispatch(actions.editOrganizations({ payload: this.getFormValue(), id: this.organization.id }));
+        this.store.dispatch(actions.editOrganizations({ payload: this.getFormValue(), id: this.organization.id }));
       } else if(this.isCreating) {
-          this.store.dispatch(actions.createOrganizations({ payload: this.getFormValue() }));
+        this.store.dispatch(actions.createOrganizations({ payload: this.getFormValue() }));
       }
       this.store.dispatch(actions.onSuccess());
       this.dialogRef.close();
-  }
+    }
 
-  private buildOrganizationForm(): void {
+    private buildOrganizationForm(): void {
       const form: any = {
         name: ['', Validators.required],
         acronym: ['', Validators.required],
         city: ['', [Validators.required]],
       }
       this.organization ? super.buildForm(form, this.organization) : super.buildForm(form);
-  }
+    }
+
+	public setAcronymOnValueChange(): void {
+		const name = this.formGroup.get('name');
+		let arr:string[] = (name.value as string).split(' ');
+		let acronym:string[] = [];
+		arr.forEach(e => acronym.push(e.split('')[0]));
+		this.setPropValue('acronym', acronym.join('').toUpperCase());
+	}
+
 }
