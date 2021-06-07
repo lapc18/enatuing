@@ -1,14 +1,14 @@
 import { HttpClient } from "@angular/common/http";
 import { Injectable } from "@angular/core";
-import { Observable } from "rxjs";
-import { Certification } from "../domain/certifications/certifications.models";
+import { OrganizationEntity } from "../domain/organizations/organizations.entity";
+import { Organization } from "../domain/organizations/organizations.models";
 import { AbstractEnatService } from "../models/base-service.abstract";
 import { columnSettings } from "../models/enat.models";
 import { baseServiceOptions } from "../models/service-properties.model";
 
 
 @Injectable()
-export class OrganizationService extends AbstractEnatService<Certification, {}> {
+export class OrganizationService extends AbstractEnatService<Organization, OrganizationEntity> {
 
     constructor(
         public http: HttpClient,
