@@ -1,0 +1,64 @@
+<div class="dialog-container">
+    <div class="header" mat-dialog-title>
+        <p *ngIf="isCreating" class="display-4">Solicitud de certificación</p>
+        <p *ngIf="isEditing || !isCreating" class="display-4">Detalles de la solicitud: {{ queue.id }}</p>
+    </div>
+    <div class="details-container" mat-dialog-content>
+        <div class="row">
+    
+            <form class="details" [formGroup]="formGroup">
+    
+                <mat-form-field>
+                    <mat-label>Organización</mat-label>
+                    <mat-select placeholder="Seleccione un Estatus" formControlName="organizationId">
+                        <mat-option *ngFor="let item of organizations" [value]="item.id">{{item.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                
+                <mat-form-field>
+                    <mat-label>Contacto</mat-label>
+                    <mat-select placeholder="Seleccione un contacto" formControlName="contactId">
+                        <mat-option *ngFor="let item of contacts" [value]="item.id">{{item.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                
+                <mat-form-field>
+                    <mat-label>NORTIC</mat-label>
+                    <mat-select placeholder="Seleccione una NORTIC" formControlName="normativeId">
+                        <mat-option *ngFor="let item of normatives" [value]="item.id">{{item.description}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                
+                <mat-form-field>
+                    <mat-label>Consultor</mat-label>
+                    <mat-select placeholder="Seleccione un/a Consultor/a" formControlName="consultantId">
+                        <mat-option *ngFor="let item of consultants" [value]="item.id">{{item.name}} {{item.lastName}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                
+                <mat-form-field>
+                    <mat-label>Auditor</mat-label>
+                    <mat-select placeholder="Seleccione un/a Auditor/a" formControlName="auditorId">
+                        <mat-option *ngFor="let item of auditors" [value]="item.id">{{item.name}} {{item.lastName}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Estado</mat-label>
+                    <mat-select placeholder="Estatus" formControlName="statusId">
+                        <mat-option *ngFor="let item of queueStatuses" [value]="item.id">{{item.description}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+    
+                <br />
+                <div mat-dialog-actions>
+                    <button class="btn btn-danger" mat-dialog-close>
+                        <span *ngIf="!isEditing">Cerrar</span>
+                        <span *ngIf="isEditing">Cancelar</span>
+                    </button>
+                    <button [disabled]="!formGroup.valid" class="btn btn-success" *ngIf="isEditing || isCreating" (click)="onSaveChanges()">Guardar cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
