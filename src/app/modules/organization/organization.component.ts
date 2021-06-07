@@ -70,7 +70,7 @@ export class OrganizationComponent extends CommonAbstractGrid<Organization> impl
 
   public onDelete(item: Organization): void {
     this.dialogFactory.confirmation({
-      message: '¿Está seguro que desea eliminar este Organizationo?',
+      message: '¿Está seguro que desea eliminar este Organización?',
       callback:() => {
         this.store.dispatch(actions.removeOrganizations({ payload: item, id: item.id}));
         this.store.dispatch(actions.onSuccess());
