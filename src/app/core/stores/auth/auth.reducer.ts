@@ -27,6 +27,15 @@ const reducer = createReducer(
     })),
 
     on(actions.onLoginFails, (state, { payload }) => ({ ...state, isLoading: false, hasError: true, errorMessage: payload })),
+
+    on(actions.onRemoveUserSuccess, (state, { payload }) => ({ ...state, isLoading: false, hasError: payload })),
+
+    on(actions.onRemoveUser, (state, { payload }) => ({
+        ...state,
+        isLoading: true,
+    })),
+
+    on(actions.onRemoveUserFails, (state, { payload }) => ({ ...state, isLoading: false, hasError: true, errorMessage: payload })),
 );
 
 
