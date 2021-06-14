@@ -4,7 +4,7 @@ import { User } from '../../domain/users/users.models';
 
 //Auth actions
 export const onLogin = createAction('[Auth Module] Loggin in...', props<{ payload: SignIn }>());
-export const onLoginSuccess = createAction('[Auth Module] Logged in Successfully', props<{ payload: User }>());
+export const onLoginSuccess = createAction('[Auth Module] Logged in Successfully', props<{ payload: User, tkn: string }>());
 export const onLoginFails = createAction('[Auth Module] Logged in Fails', props<{ payload: string }>());
 export const onRemoveUser = createAction('[Auth Module] Removing User...', props<{ payload: string }>());
 export const onRemoveUserSuccess = createAction('[Auth Module] User removed Successfully', props<{ payload: boolean }>());

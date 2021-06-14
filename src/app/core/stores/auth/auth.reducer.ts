@@ -6,11 +6,13 @@ import * as actions from './auth.actions';
 
 
 export interface AuthState extends CommonState {
-    user: User
+    user: User,
+    tkn: string
 }
 
 const initialAuthState: AuthState = {
     user: {},
+    tkn: '',
     isLoading: false,
     hasError: false,
     errorMessage: '',
@@ -19,7 +21,7 @@ const initialAuthState: AuthState = {
 const reducer = createReducer(
     initialAuthState,
 
-    on(actions.onLoginSuccess, (state) => ({ ...state, user: {...state.user}, isLoading: false })),
+    on(actions.onLoginSuccess, (state, { payload, tkn }) => ({ ...state, user: {...payload}, tkn: tkn, isLoading: false })),
 
     on(actions.onLogin, (state, { payload }) => ({
         ...state,
