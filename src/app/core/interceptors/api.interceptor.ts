@@ -7,25 +7,39 @@ import {
 } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { TOKEN } from '../models/constants.model';
+import { Router } from '@angular/router';
+import { select, Store } from '@ngrx/store';
+import { AuthState } from '../stores/auth/auth.reducer';
+import { User } from '../domain/users/users.models';
+
 
 @Injectable()
 export class ApiInterceptor implements HttpInterceptor {
-
-  constructor() {}
+  public user: User = null;
+  public tkn: string = '';
+  
+  constructor(
+    private router: Router,
+    private store: Store<{ auth: AuthState }>
+  ) {
+    this.store.pipe(select(state => state.auth.user)).subscribe(res => this.user = res);
+    this.store.pipe(select(state => state.auth.tkn)).subscribe(res => this.tkn = res);
+  }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
     const url:string = `${environment.api}${request.url}`.toString();
     console.log(`requesting to::: `, url);
-    const token = localStorage.getItem(TOKEN);
-    if (!token) {
-      console.log('token null');
-    } 
+    console.log(`requesting tkn::: `, this.tkn);
+    console.log(`requesting user::: `, this.user.email);
     
+    if (!this.user || !this.tkn) {
+			this.router.navigate(['auth/enat/signin']);
+		}
+
     let req = request.clone({
       url: url,
       setHeaders: {
-        // 'Authorization': `Bearer ${token}`,
+        'Authorization': `Bearer ${this.tkn}`,
         'access-control-allow-origin': '*'
       }
     });

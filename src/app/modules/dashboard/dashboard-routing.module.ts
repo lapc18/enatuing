@@ -1,10 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { AuthGuard } from 'src/app/core/guards/auth.guard';
 import { DashboardComponent } from './dashboard.component';
 
 const routes: Routes = [
   {
-    path: '', component: DashboardComponent, children: [
+    path: '', component: DashboardComponent, canActivate: [AuthGuard],  children: [
       { path: 'contacts', loadChildren: () => import('../contacts/contacts.module').then(m => m.ContactsModule) },
       { path: 'users', loadChildren: () => import('../users/users.module').then(m => m.UsersModule) },
       { path: 'normatives', loadChildren: () => import('../normatives/normatives.module').then(m => m.NormativesModule) },

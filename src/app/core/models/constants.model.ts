@@ -1,1 +1,1 @@
-export const TOKEN: string = 'enatuing.user.tkn';
+export const USER: string = 'enatuing.current.user';

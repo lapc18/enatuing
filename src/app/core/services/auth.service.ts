@@ -23,8 +23,8 @@ export class AuthService {
 
     }
 
-    signin(model: SignIn): Observable<User> {
-        return this.http.post<User>(this.api.signin, model);
+    signin(model: SignIn): Observable<{tkn: string, user: User}> {
+        return this.http.post<{tkn: string, user: User}>(this.api.signin, model);
     }
 
     signup(model: User): Observable<User> {

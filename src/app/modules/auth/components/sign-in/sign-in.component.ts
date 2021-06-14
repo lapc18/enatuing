@@ -20,7 +20,7 @@ export class SignInComponent implements OnInit, AfterViewInit {
   constructor(
     private store: Store<{ user: AuthState }>,
     private formBuilder: FormBuilder,
-    private alertFactory: AlertFactory
+    // private alertFactory: AlertFactory
   ) { }
 
   ngOnInit(): void {
@@ -46,10 +46,10 @@ export class SignInComponent implements OnInit, AfterViewInit {
   public onSubmit() {
     const creds: SignIn = {
       email: this.loginForm.controls['email'].value || '',
-      pwd: this.loginForm.controls['password'].value || ''
+      password: this.loginForm.controls['password'].value || ''
     }
     this.store.dispatch(actions.onLogin({ payload: creds }));
-    this.alertFactory.success(`User Logged In: ${JSON.stringify(creds)}`, { autoClose: true, keepAfterRouteChange: false,  });
+    // this.alertFactory.success(`User Logged In: ${JSON.stringify(creds)}`, { autoClose: true, keepAfterRouteChange: false,  });
   }
 
 }
