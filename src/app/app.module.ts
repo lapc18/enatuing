@@ -17,6 +17,7 @@ import { CertificationsEffects } from './core/stores/certifications/certificatio
 import { QueueEffects } from './core/stores/queue/queue.effects';
 import { OrganizationEffects } from './core/stores/organizations/organization.effects';
 import { AuthEffects } from './core/stores/auth/auth.effects';
+import { UserEffects } from './core/stores/users/users.effects';
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { AuthEffects } from './core/stores/auth/auth.effects';
       organization: reducers.organizationReducer,
       normatives: reducers.normativesReducer,
       queue: reducers.queueReducer,
+      users: reducers.userReducer,
     }),
     EffectsModule.forRoot([
       ContactsEffects,
@@ -43,6 +45,7 @@ import { AuthEffects } from './core/stores/auth/auth.effects';
       QueueEffects,
       OrganizationEffects,
       AuthEffects,
+      UserEffects
     ]),
     StoreDevtoolsModule.instrument({
       maxAge: 25,

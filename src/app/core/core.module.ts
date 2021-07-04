@@ -16,6 +16,7 @@ import { CertificationsService } from './services/Certifications.service';
 import { QueueService } from './services/Queue.service';
 import { OrganizationService } from './services/organizations.service';
 import { AuthService } from './services/auth.service';
+import { UserService } from './services/user.service';
 
 
 
@@ -42,7 +43,8 @@ import { AuthService } from './services/auth.service';
     CertificationsService,
     QueueService,
     OrganizationService,
-    AuthService
+    AuthService,
+    UserService
   ]
 })
 export class CoreModule { }

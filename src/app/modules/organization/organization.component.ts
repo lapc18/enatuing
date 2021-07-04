@@ -18,8 +18,6 @@ import { DynamicOrganizationDetailComponent } from './dynamic-organization-detai
 })
 export class OrganizationComponent extends CommonAbstractGrid<Organization> implements OnInit, OnDestroy {
 
-  private subscriptions: Subscription[] = [];
-
   constructor(
     private dialog: MatDialog,
     private store: Store<{ organization: OrganizationState }>,

@@ -1,0 +1,47 @@
+<div class="loader" *ngIf="(isLoading)">
+    <mat-spinner></mat-spinner>
+</div>
+<div class="dialog-container" *ngIf="(!isLoading)">
+    <div class="header" mat-dialog-title>
+        <p *ngIf="isCreating" class="display-4">Usuario</p>
+        <p *ngIf="isEditing || !isCreating" class="display-4">Detalles del usuario: {{ user.email }}</p>
+    </div>
+    <div class="details-container" mat-dialog-content>
+        <div class="row">
+    
+            <form class="details" [formGroup]="formGroup">
+    
+                <mat-form-field>
+                    <mat-label>Nombre</mat-label>
+                    <input matInput placeholder="Ej: Juan" formControlName="name" type="text" [readonly]="isEditing">
+                </mat-form-field>            
+    
+                <mat-form-field>
+                    <mat-label>Apellido</mat-label>
+                    <input matInput placeholder="Ej: Pimentel" formControlName="lastName" type="text" [readonly]="isEditing">
+                </mat-form-field>            
+    
+                <mat-form-field>
+                    <mat-label>Correo Electrónico</mat-label>
+                    <input matInput placeholder="Ingrese un E-mail" formControlName="email" type="email" [readonly]="isEditing">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Roles</mat-label>
+                    <mat-select placeholder="Seleccione un role" formControlName="roles" multiple [(value)]="selectedRoles" >
+                        <mat-option *ngFor="let item of roles" [value]="item.id">{{item.name}}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+
+                <br />
+                <div mat-dialog-actions>
+                    <button class="btn btn-danger" mat-dialog-close>
+                        <span *ngIf="!isEditing">Cerrar</span>
+                        <span *ngIf="isEditing">Cancelar</span>
+                    </button>
+                    <button type="button" [disabled]="!formGroup.valid  || !formGroup.dirty" class="btn btn-success" *ngIf="isEditing || isCreating" (click)="onSaveChanges()">Guardar cambios</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

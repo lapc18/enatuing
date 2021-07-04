@@ -5,3 +5,4 @@ export { certificationReducer } from './certifications/certifications.reducers';
 export { organizationReducer } from './organizations/organizations.reducers';
 export { normativesReducer } from './normatives/normatives.reducers';
 export { queueReducer } from './queue/queue.reducers';
+export { userReducer } from './users/users.reducers';

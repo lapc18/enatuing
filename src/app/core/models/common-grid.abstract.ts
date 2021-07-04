@@ -1,8 +1,9 @@
-import { Observable } from "rxjs";
+import { Observable, Subscription } from "rxjs";
 import { FileType, IColumn } from "./enat.models";
 
 export abstract class CommonAbstractGrid<T, E = any> {
 
+    public subscriptions: Subscription[] = [];
     public isLoading$: Observable<boolean>;
     public isLoading: boolean;
     public data$: Observable<T[]>;

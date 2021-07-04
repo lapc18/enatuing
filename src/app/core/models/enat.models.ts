@@ -5,6 +5,7 @@ import { CONTACTS_COLS } from "../domain/contacts/contacts.models";
 import { NORMATIVES_COLS } from "../domain/normatives/normatives.models";
 import { ORGANIZATION_COLS } from "../domain/organizations/organizations.models";
 import { QUEUE_COLS } from "../domain/queue/queue.models";
+import { USER_COLS } from "../domain/users/users.models";
 
 export class DrawerItem {
     constructor(
@@ -115,6 +116,7 @@ export interface IColumnSettings {
     organizations: IColumn[],
     normatives: IColumn[],
     queue: IColumn[],
+    user: IColumn[],
 }
 
 export const columnSettings: IColumnSettings = {
@@ -123,6 +125,7 @@ export const columnSettings: IColumnSettings = {
     organizations: ORGANIZATION_COLS,
     normatives: NORMATIVES_COLS,
     queue: QUEUE_COLS,
+    user: USER_COLS
 }
 
 export interface FileHandler {
