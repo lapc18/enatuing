@@ -6,12 +6,14 @@ import * as actions from './auth.actions';
 
 
 export interface AuthState extends CommonState {
-    user: User,
+    currentUser: User,
+    users: User[],
     tkn: string
 }
 
 const initialAuthState: AuthState = {
-    user: {},
+    currentUser: {},
+    users: [],
     tkn: '',
     isLoading: false,
     hasError: false,
@@ -21,7 +23,7 @@ const initialAuthState: AuthState = {
 const reducer = createReducer(
     initialAuthState,
 
-    on(actions.onLoginSuccess, (state, { payload, tkn }) => ({ ...state, user: {...payload}, tkn: tkn, isLoading: false })),
+    on(actions.onLoginSuccess, (state, { payload, tkn }) => ({ ...state, currentUser: {...payload}, tkn: tkn, isLoading: false })),
 
     on(actions.onLogin, (state, { payload }) => ({
         ...state,
@@ -38,6 +40,10 @@ const reducer = createReducer(
     })),
 
     on(actions.onRemoveUserFails, (state, { payload }) => ({ ...state, isLoading: false, hasError: true, errorMessage: payload })),
+
+    on(actions.loadUsers, (state) => ({ ...state, isLoading: true })),
+    on(actions.loadUsersSuccess, (state, { payload }) => ({ ...state, isLoading: false, users: [...payload] })),
+    on(actions.loadUsersFailed, (state, { payload }) => ({ ...state, isLoading: false, hasError: true, errorMessage: payload })),
 );
 
 

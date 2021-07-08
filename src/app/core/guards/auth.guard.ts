@@ -19,7 +19,7 @@ export class AuthGuard implements CanActivate {
 		private router: Router,
 		private store: Store<{ auth: AuthState }>
 	) {
-		this.store.pipe(select(state => state.auth.user)).subscribe(res => this.user = res);
+		this.store.pipe(select(state => state.auth.currentUser)).subscribe(res => this.user = res);
 		this.store.pipe(select(state => state.auth.tkn)).subscribe(res => this.tkn = res);
 	}
 

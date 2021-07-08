@@ -11,6 +11,24 @@ export class QueueEntity {
     constructor(public init?:Partial<QueueEntity>) {
         Object.assign(this, init);
     }
+
+    copyOf(): {
+        id?: string,
+        statusId?: string,
+        contactId?: string,
+        organizationId?: string,
+        consultantId?: string,
+        auditorId?: string,
+    } {
+        return {
+            id: this.id,
+            statusId: this.statusId,
+            contactId: this.contactId,
+            organizationId: this.organizationId,
+            consultantId: this.consultantId,
+            auditorId: this.auditorId,
+        };
+    }
 }
 
 export class QueueStatusEntity {

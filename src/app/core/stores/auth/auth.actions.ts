@@ -9,3 +9,8 @@ export const onLoginFails = createAction('[Auth Module] Logged in Fails', props<
 export const onRemoveUser = createAction('[Auth Module] Removing User...', props<{ payload: string }>());
 export const onRemoveUserSuccess = createAction('[Auth Module] User removed Successfully', props<{ payload: boolean }>());
 export const onRemoveUserFails = createAction('[Auth Module] Remove user action Fails', props<{ payload: string }>());
+
+
+export const loadUsers = createAction('[Auth Module] Loading Users');
+export const loadUsersSuccess = createAction('[Auth Module] Users Loaded Successfully', props<{ payload: User[] }>());
+export const loadUsersFailed = createAction('[Auth Module] Users Loaded Failed', props<{ payload: string }>());

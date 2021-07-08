@@ -19,6 +19,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSortModule } from '@angular/material/sort';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+
 
 
 
@@ -45,7 +47,8 @@ import { MatMenuModule } from '@angular/material/menu';
         MatTooltipModule,
         MatProgressSpinnerModule,
         MatSortModule,
-        MatMenuModule
+        MatMenuModule,
+        MatAutocompleteModule
     ],
     exports: [
         MatSliderModule,
@@ -66,7 +69,8 @@ import { MatMenuModule } from '@angular/material/menu';
         MatTooltipModule,
         MatProgressSpinnerModule,
         MatSortModule,
-        MatMenuModule
+        MatMenuModule,
+        MatAutocompleteModule
     ]
 })
 export class MaterialModule { }

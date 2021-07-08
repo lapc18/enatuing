@@ -18,7 +18,7 @@ export class DashboardComponent implements OnInit {
   constructor(
     private store: Store<{ auth: AuthState }>
   ) {
-    this.store.pipe(select(state => state.auth.user)).subscribe(res => this.user = res);
+    this.store.pipe(select(state => state.auth.currentUser)).subscribe(res => this.user = res);
   }
 
   ngOnInit(): void {

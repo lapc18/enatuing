@@ -2,10 +2,10 @@ import { IColumn } from "src/app/core/models/enat.models";
 
 
 export interface Organization {
-    id: any;
-    name: string,
-    acronym: string,
-    city: string,
+    id?: any;
+    name?: string,
+    acronym?: string,
+    city?: string,
 }
 
 export const ORGANIZATION_COLS: IColumn[] = [

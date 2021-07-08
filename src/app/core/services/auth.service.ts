@@ -11,7 +11,7 @@ export class AuthService {
     private api: any = {
         signin: '/optic/Identity/auth',
         signup: '/optic/Identity/user',
-        users: '/optic​/Identity​/user',
+        users: '/optic/Identity/user',
         role: '/optic/Roles'
     };
 
@@ -34,6 +34,10 @@ export class AuthService {
 
     getAllRoles(): Observable<Role[]> {
         return this.http.get<Role[]>(this.api.role).pipe(map((res: any) => res.data));
+    }
+
+    getAllUser(): Observable<User[]> {
+        return this.http.get<User[]>(this.api.users).pipe(map((res: any) => res.data as User[]));
     }
 
     getUser(email: string): Observable<User> {

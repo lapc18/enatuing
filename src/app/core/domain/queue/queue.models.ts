@@ -8,8 +8,8 @@ import { User } from "../users/users.models";
 
 export interface QueueStatus {
     id?: any,
-    description: string,
-    metricId: string,
+    description?: string,
+    metricId?: string,
     metric?: Metric
 }
 

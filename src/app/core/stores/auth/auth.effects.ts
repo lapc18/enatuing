@@ -36,4 +36,14 @@ export class AuthEffects {
         )
     ));
 
+    loadUsers$ = createEffect(() => this.actions$.pipe(
+        ofType(actions.loadUsers),
+        mergeMap(() => this.apiService.getAllUser()
+            .pipe(
+                map(data => (actions.loadUsersSuccess({ payload: data }))),
+                catchError((err) => of(actions.loadUsersFailed({ payload: `${err}` })))
+            )
+        )
+    ));
+
 }

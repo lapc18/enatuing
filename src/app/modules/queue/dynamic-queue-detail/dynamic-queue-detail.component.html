@@ -11,23 +11,36 @@
                 <mat-form-field>
                     <mat-label>Organización</mat-label>
                     <mat-select placeholder="Seleccione un Estatus" formControlName="organizationId">
-                        <mat-option *ngFor="let item of organizations" [value]="item.id">{{item.name}}</mat-option>
+                        <mat-option *ngFor="let item of organizations" [value]="item.id">{{item.name}}-({{item.acronym}})</mat-option>
                     </mat-select>
                 </mat-form-field>
                 
                 <mat-form-field>
                     <mat-label>Contacto</mat-label>
                     <mat-select placeholder="Seleccione un contacto" formControlName="contactId">
-                        <mat-option *ngFor="let item of contacts" [value]="item.id">{{item.name}}</mat-option>
+                        <mat-option *ngFor="let item of contacts" [value]="item.id">{{item.name}}-({{item.email}})</mat-option>
                     </mat-select>
                 </mat-form-field>
                 
-                <mat-form-field>
+                <!-- <mat-form-field>
                     <mat-label>NORTIC</mat-label>
                     <mat-select placeholder="Seleccione una NORTIC" formControlName="normativeId">
                         <mat-option *ngFor="let item of normatives" [value]="item.id">{{item.description}}</mat-option>
                     </mat-select>
-                </mat-form-field>
+                </mat-form-field> -->
+
+                <mat-form-field>
+                    <mat-label>NORTIC</mat-label>
+                    <input type="text"
+                        matInput
+                        placeholder="Seleccione una NORTIC"
+                        aria-label="NORTIC"
+                        formControlName="normativeId"
+                        [matAutocomplete]="auto">
+                    <mat-autocomplete #auto="matAutocomplete">
+                        <mat-option *ngFor="let item of filteredNormatives | async" value="{{item.description}}-{{item.publishetAt}}">{{item.description}}-{{item.publishetAt}}</mat-option>
+                    </mat-autocomplete>
+                  </mat-form-field>
                 
                 <mat-form-field>
                     <mat-label>Consultor</mat-label>
