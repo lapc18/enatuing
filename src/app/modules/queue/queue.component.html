@@ -4,7 +4,17 @@
             (onExport)="onExport($event)"
             (onFilter)="filter = $event"
             (onAddItem)="onCreate()"
-        ></common-header>
+        >
+            <button  
+                mat-icon-button matTooltip="Click para mostrar el cuadro de asignaciones." 
+                matTooltipPosition="above" 
+            >
+                <mat-icon>assignment_ind</mat-icon>
+            </button>
+        </common-header>
+
+        
+
         <common-table #table
             [filterBy]="filter"
             [columns]="columns" 

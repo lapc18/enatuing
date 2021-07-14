@@ -57,7 +57,10 @@ export class OrganizationComponent extends CommonAbstractGrid<Organization> impl
     this.dialog.open(DynamicOrganizationDetailComponent, {
       data: {
         isEditing: true,
-        organization: item
+        organization: item,
+        callback:() => {
+          this.loadData();
+        }
       },
       minWidth: '50%',
       minHeight: '60vh',
@@ -71,7 +74,6 @@ export class OrganizationComponent extends CommonAbstractGrid<Organization> impl
       message: '¿Está seguro que desea eliminar este Organización?',
       callback:() => {
         this.store.dispatch(actions.removeOrganizations({ payload: item, id: item.id}));
-        this.store.dispatch(actions.onSuccess());
         this.loadData();
       }
     });

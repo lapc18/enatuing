@@ -42,7 +42,7 @@ export class DynamicOrganizationDetailComponent extends CommonGridAbstractDetail
       } else if(this.isCreating) {
         this.store.dispatch(actions.createOrganizations({ payload: this.getFormValue() }));
       }
-      this.store.dispatch(actions.onSuccess());
+      this.data && this.data.callback ? this.data.callback() : void 0;
       this.dialogRef.close();
     }
 

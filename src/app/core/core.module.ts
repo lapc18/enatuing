@@ -17,6 +17,7 @@ import { QueueService } from './services/Queue.service';
 import { OrganizationService } from './services/organizations.service';
 import { AuthService } from './services/auth.service';
 import { UserService } from './services/user.service';
+import { QueueActionService } from './services/queue-action.service';
 
 
 
@@ -44,7 +45,8 @@ import { UserService } from './services/user.service';
     QueueService,
     OrganizationService,
     AuthService,
-    UserService
+    UserService,
+    QueueActionService,
   ]
 })
 export class CoreModule { }

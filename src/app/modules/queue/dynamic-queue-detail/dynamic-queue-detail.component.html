@@ -42,7 +42,7 @@
                     </mat-autocomplete>
                   </mat-form-field>
                 
-                <mat-form-field>
+                <!-- <mat-form-field>
                     <mat-label>Consultor</mat-label>
                     <mat-select placeholder="Seleccione un/a Consultor/a" formControlName="consultantId">
                         <mat-option *ngFor="let item of consultants" [value]="item.id">{{item.name}} {{item.lastName}}</mat-option>
@@ -54,6 +54,16 @@
                     <mat-select placeholder="Seleccione un/a Auditor/a" formControlName="auditorId">
                         <mat-option *ngFor="let item of auditors" [value]="item.id">{{item.name}} {{item.lastName}}</mat-option>
                     </mat-select>
+                </mat-form-field> -->
+
+                <mat-form-field>
+                    <mat-label>Fecha de inicio</mat-label>
+                    <input matInput placeholder="DD/MM/YYYY" formControlName="startDate" type="date">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Fecha de finalización</mat-label>
+                    <input matInput placeholder="DD/MM/YYYY" formControlName="endDate" type="date">
                 </mat-form-field>
 
                 <mat-form-field>

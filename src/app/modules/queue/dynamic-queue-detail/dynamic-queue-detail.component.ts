@@ -115,11 +115,11 @@ export class DynamicQueueDetailComponent extends CommonGridAbstractDetails<Queue
 	private buildQueueForm(): void {
 		const form: any = {
 			statusId: ['', [Validators.required]],
-			contactId: ['', Validators.required],
-			normativeId: ['', Validators.required],
-			organizationId: ['', Validators.required],
-			consultantId: [''],
-			auditorId: [''],
+			contactId: ['', [Validators.required]],
+			normativeId: ['', [Validators.required]],
+			organizationId: ['', [Validators.required]],
+			startDate: ['', [Validators.required]],
+			endDate: ['', [Validators.required]],
 		}
 		this.queue ? super.buildForm(form, this.queue) : super.buildForm(form);
 	}

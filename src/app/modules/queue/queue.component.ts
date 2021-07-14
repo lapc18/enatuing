@@ -45,7 +45,7 @@ export class QueueComponent extends CommonAbstractGrid<QueueModel, Queue> implem
         if(item) {
           itemMapped.nortic = `${item.normative.description || ''}`;
           itemMapped.organization = `${item.organization.name || ''}-(${item.organization.acronym || ''})`;
-          itemMapped.status = `${item.status.description || ''}`;
+          itemMapped.status = `${item.status && item.status.description? item.status.description : ''}`;
           itemMapped.contact = `${item.contact && item.contact.name ? item.contact.name : ''}`;
           // itemMapped.auditor = `${item.auditor && item.auditor.name ? item.auditor.name : ''}`;
           // itemMapped.consultant = `${item.auditor && item.auditor.name ? item.auditor.name : ''}`;

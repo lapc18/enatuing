@@ -75,4 +75,14 @@ export const QUEUE_COLS: IColumn[] = [
         name: 'status',
         width: 150
     },
+    {
+        label: "Fecha de Inicio",
+        name: 'startDate',
+        width: 150
+    },
+    {
+        label: "Fecha de finalización",
+        name: 'endDate',
+        width: 150
+    },
 ];
