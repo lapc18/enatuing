@@ -9,6 +9,7 @@ import { USER_COLS } from "../domain/users/users.models";
 
 export class DrawerItem {
     constructor(
+        public icon?: string,
         public label?: string,
         public toolTip?: string,
         public toolTipPosition?: TooltipPosition,
@@ -21,6 +22,7 @@ export class DrawerItem {
 
 export const DRAWER_OPTIONS: DrawerItem[] = [
     new DrawerItem(
+        'dashboard',
         'Dashboard',
         'Dashboard',
         'left',
@@ -29,6 +31,7 @@ export const DRAWER_OPTIONS: DrawerItem[] = [
         true
     ),
     new DrawerItem(
+        'receipt_long',
         'Matríz',
         'Matríz',
         'left',
@@ -37,6 +40,7 @@ export const DRAWER_OPTIONS: DrawerItem[] = [
         true
     ),
     new DrawerItem(
+        'card_membership',
         'Normativas',
         'Normativas',
         'left',
@@ -45,6 +49,7 @@ export const DRAWER_OPTIONS: DrawerItem[] = [
         true
     ),
     new DrawerItem(
+        'verified_user',
         'Certificaciones',
         'Certificaciones',
         'left',
@@ -53,6 +58,7 @@ export const DRAWER_OPTIONS: DrawerItem[] = [
         true
     ),
     new DrawerItem(
+        'corporate_fare',
         'Organizaciones',
         'Organizaciones',
         'left',
@@ -61,6 +67,7 @@ export const DRAWER_OPTIONS: DrawerItem[] = [
         true
     ),
     new DrawerItem(
+        'contacts',
         'Contactos',
         'Contactos',
         'left',
@@ -69,6 +76,7 @@ export const DRAWER_OPTIONS: DrawerItem[] = [
         true
     ),
     new DrawerItem(
+        'insights',
         'Métricas',
         'Métricas',
         'left',
@@ -77,6 +85,7 @@ export const DRAWER_OPTIONS: DrawerItem[] = [
         true
     ),
     new DrawerItem(
+        'people',
         'Usuarios',
         'Usuarios',
         'left',
@@ -85,6 +94,7 @@ export const DRAWER_OPTIONS: DrawerItem[] = [
         true
     ),
     new DrawerItem(
+        'analytics',
         'Statistics',
         'Statistics',
         'left',

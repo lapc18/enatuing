@@ -117,7 +117,6 @@ small {
 
 .btn {
     padding: 1rem;
-    min-width: 15rem;
     border-radius: 2rem;
     border-color: transparent !important;
     font-weight: bolder;
@@ -137,7 +136,12 @@ small {
     }
 }
 
+.btn.btn-success {
+    min-width: 15rem;
+}
+
 .btn.btn-danger {
+    min-width: 15rem;
     @extend .danger-color;
     border-color: transparent !important;
     &:hover:enabled {
