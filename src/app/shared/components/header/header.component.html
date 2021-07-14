@@ -8,7 +8,7 @@
 
     <button 
         mat-icon-button 
-        matTooltip="Click para agregar un nuevo item en la vista actual" 
+        matTooltip="Click para agregar un nuevo item en la vista actual." 
         matTooltipPosition="above"
         (click)="onAddItem.emit();"
     >
@@ -20,6 +20,11 @@
         matTooltipPosition="above"
         (click)="exportToExcel($event)"
     >
-        <mat-icon>import_export</mat-icon>
+        <mat-icon>file_download</mat-icon>
     </button>
+
+    <ng-container>
+        <ng-content></ng-content>
+    </ng-container>
+    
 </header>
