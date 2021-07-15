@@ -14,6 +14,7 @@ export class CommonTableComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() dataSource: any[] = [];
   @Input() columns: IColumn[] = [];
   @Input() filterBy: string = '';
+  @Input() showCustomActions: boolean = false;
 
   @Output() onDelete: EventEmitter<any> = new EventEmitter();
   @Output() onDetails: EventEmitter<any> = new EventEmitter();
