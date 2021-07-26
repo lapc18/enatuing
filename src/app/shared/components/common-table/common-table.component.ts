@@ -17,6 +17,7 @@ export class CommonTableComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() filterBy: string = '';
   @Input() showCustomActions: boolean = false;
   @Input() showDefaultActions: boolean = true;
+  @Input() showActions: boolean = true;
 
   @Output() onDelete: EventEmitter<any> = new EventEmitter();
   @Output() onDetails: EventEmitter<any> = new EventEmitter();
@@ -36,7 +37,9 @@ export class CommonTableComponent implements OnInit, AfterViewInit, OnChanges {
 
   ngOnInit(): void {
     this.displayedColumns = this.columns.map(c => c.name);
-    this.displayedColumns.push('actions');
+    if(this.showActions) {
+      this.displayedColumns.push('actions');
+    }
     this.displayedColumns.unshift('select');
   }
 
