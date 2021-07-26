@@ -37,20 +37,6 @@ export class CertificationsComponent extends CommonAbstractGrid<Certification> i
     this.store.dispatch(actions.loadCertifications());
     this.isLoading$.subscribe(res => this.isLoading = res);
     this.data$.subscribe((res: Certification[]) => this.data = res);
-    //temp use:
-    let payload: Certification[] = [];
-    for(let i: number = 0; i < 100; i++){
-      payload.push({
-          id: i,
-          niu: `000-00000-0${i}`,
-          nortic: `A${i}`,
-          organization: 'OPTIC',
-          status: 'Activa',
-          type: 'Certificacion'
-      });
-    }
-    this.store.dispatch(actions.loadCertificationsSuccess({ payload: payload }));
-    this.store.dispatch(actions.onSuccess());
   }
 
   public onCreate(): void {
@@ -78,7 +64,7 @@ export class CertificationsComponent extends CommonAbstractGrid<Certification> i
 
   public onDelete(item: Certification): void {
     this.dialogFactory.confirmation({
-      message: '¿Está seguro que desea eliminar este Certificationo?',
+      message: '¿Está seguro que desea eliminar este Certificacion?',
       callback:() => {
         this.store.dispatch(actions.removeCertifications({ payload: item, id: item.id}));
         this.store.dispatch(actions.onSuccess());
