@@ -14,12 +14,6 @@ export interface Normative {
 
 export const NORMATIVES_COLS: IColumn[] = [
     {
-        label: "Id",
-        name: 'id',
-        width: 100
-    },
-    
-    {
         label: "Año de publicación",
         name: 'publishetAt',
         width: 150

@@ -13,11 +13,6 @@ export interface Contact {
 
 export const CONTACTS_COLS: IColumn[] = [
     {
-        label: "Id",
-        name: 'id',
-        width: 100
-    },
-    {
         label: "Nombre",
         name: 'name',
         width: 150

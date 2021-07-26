@@ -12,11 +12,6 @@ export interface Certification {
 
 export const CERTIFICATIONS_COLS: IColumn[] = [
     {
-        label: "Id",
-        name: 'id',
-        width: 100
-    },
-    {
         label: "Organizacion",
         name: 'organization',
         width: 200

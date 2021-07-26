@@ -39,12 +39,7 @@ export interface Queue {
     endDate?: string,
 }
 
-export const QUEUE_COLS: IColumn[] = [
-    {
-        label: "Id",
-        name: 'id',
-        width: 100
-    },    
+export const QUEUE_COLS: IColumn[] = [   
     {
         label: "Organismo",
         name: 'organization',

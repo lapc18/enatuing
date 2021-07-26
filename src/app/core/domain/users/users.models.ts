@@ -18,11 +18,6 @@ export interface User {
 
 export const USER_COLS: IColumn[] = [
     {
-        label: "Id",
-        name: 'id',
-        width: 200
-    },    
-    {
         label: "Nombre",
         name: 'name',
         width: 250

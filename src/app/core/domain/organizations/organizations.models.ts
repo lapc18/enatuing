@@ -10,11 +10,6 @@ export interface Organization {
 
 export const ORGANIZATION_COLS: IColumn[] = [
     {
-        label: "Id",
-        name: 'id',
-        width: 200
-    },
-    {
         label: "Nombre",
         name: 'name',
         width: 350

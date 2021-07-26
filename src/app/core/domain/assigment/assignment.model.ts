@@ -1,12 +1,7 @@
 import { IColumn } from "../../models/enat.models";
 
 
-export const ASSIGNMENT_COLS: IColumn[] = [
-    {
-        label: "Id",
-        name: 'id',
-        width: 100
-    },    
+export const ASSIGNMENT_COLS: IColumn[] = [   
     {
         label: "Organismo",
         name: 'organization',

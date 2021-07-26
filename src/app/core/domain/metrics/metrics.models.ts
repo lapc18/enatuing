@@ -10,11 +10,6 @@ export interface Metric {
 
 export const METRICS_COLS: IColumn[] = [
     {
-        label: "Id",
-        name: 'id',
-        width: 100
-    },
-    {
         label: "Nombre de la Política",
         name: 'policyName',
         width: 350
