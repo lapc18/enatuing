@@ -80,7 +80,7 @@ export class UsersComponent extends CommonAbstractGrid<User> implements OnInit, 
 
 	public onDelete(item: User): void {
 		this.dialogFactory.confirmation({
-		message: '¿Está seguro que desea eliminar esta Normativa?',
+		message: '¿Está seguro que desea eliminar este usuario?',
 		callback:() => {
 				this.store.dispatch(actions.removeUser({ payload: item, id: item.id}));
 				this.store.dispatch(actions.loadUsers());
