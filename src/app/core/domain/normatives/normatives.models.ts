@@ -6,6 +6,8 @@ export interface Normative {
     statusId?: string,
     status?: string | GenericTypeValue,
     publishetAt?: string,
+    category?: string,
+    order?: string,
     color?: string,
     description?: string
 }
@@ -26,7 +28,17 @@ export const NORMATIVES_COLS: IColumn[] = [
     {
         label: "Descripción",
         name: 'description',
-        width: 350
+        width: 450
+    },
+    {
+        label: "Categoria",
+        name: 'category',
+        width: 150
+    },
+    {
+        label: "Orden",
+        name: 'order',
+        width: 150
     },
     {
         label: "Color",

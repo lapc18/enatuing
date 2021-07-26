@@ -82,9 +82,9 @@ export class DynamicQueueDetailComponent extends CommonGridAbstractDetails<Queue
 		
 		Object.assign(queue, this.getFormValue());
 
-		//{{item.description}}-{{item.publishetAt}}
+		//{{item.category}}{{item.order}}-{{item.publishetAt}}
 		let normativeLabel: string = this.formGroup.controls['normativeId'].value as string;
-		normative = this.normatives.find(x => (x.description + '-' + x.publishetAt).includes(normativeLabel)) || {}
+		normative = this.normatives.find(x => (x.category + x.order + '-' + x.publishetAt).includes(normativeLabel)) || {}
 		contact = this.contacts.find(x => (x.id as string).includes(queue.contactId || '')) || {};
 		organization = this.organizations.find(x => (x.id as string).includes(queue.organizationId || '')) || {};
 		consultant = this.consultants.find(x => (x.id as string).includes(queue.consultantId || '')) || {};
@@ -97,7 +97,9 @@ export class DynamicQueueDetailComponent extends CommonGridAbstractDetails<Queue
 			normativeId: normative.id || '',
 			contactId: contact.id || '',
 			statusId: status.id || '',
-			organizationId: organization.id || ''
+			organizationId: organization.id || '',
+			endDate: queue.endDate || '',
+			startDate: queue.startDate || '',
 		}		
 
 		console.log(queueModel)

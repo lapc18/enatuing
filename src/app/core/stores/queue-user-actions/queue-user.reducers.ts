@@ -1,12 +1,13 @@
 import { Action, createReducer, on } from "@ngrx/store";
-import { QueueModel, QueueStatus } from "../../domain/queue/queue.models";
+import { QueueAction, QueueUserAction } from "../../domain/queue-user/queue-user.model";
+import { QueueModel } from "../../domain/queue/queue.models";
 import { CommonState } from "../../models/common-state.model";
 import * as actions from './queue-user.actions';
 
 
 export interface QueueActionState extends CommonState {
-    queueActions: Array<QueueModel>,
-    queueUserActions: Array<QueueStatus>
+    queueActions: Array<QueueAction>,
+    queueUserActions: Array<QueueUserAction>
 }
 
 const initialQueuetate: QueueActionState = {
@@ -27,7 +28,7 @@ const reducer = createReducer(
     on(actions.loadQueueActionsFailed, (state, { payload }) => ({ ...state, isLoading: false, hasError: true, errorMessage: payload })),
 
     on(actions.loadQueueUserAction, (state) => ({ ...state, isLoading: true })),
-    on(actions.loadQueueActionsSuccess, (state, { payload }) => ({ ...state, isLoading: false, queueUserActions: [...payload] })),
+    on(actions.loadQueueUserActionSuccess, (state, { payload }) => ({ ...state, isLoading: false, queueUserActions: [...payload] })),
     on(actions.loadQueueActionsFailed, (state, { payload }) => ({ ...state, isLoading: false, hasError: true, errorMessage: payload })),
 
     on(actions.createQueueAction, (state, { payload }) => ({
@@ -43,7 +44,7 @@ const reducer = createReducer(
         isLoading: true,
         queueActions: [...state.queueActions.map((item) => {
             if(item.id == id){
-                let object:QueueModel = {...payload};
+                let object:QueueAction = {...payload};
                 object.id = id;
                 return object;
             }
@@ -51,6 +52,28 @@ const reducer = createReducer(
         })]
     })),
     on(actions.editQueueActionFailed, (state, { payload }) => ({ ...state, isLoading: false, hasError: true, errorMessage: payload })),
+
+    on(actions.createQueueUserAction, (state, { payload }) => ({
+        ...state,
+        isLoading: true,
+        queueUserActions: [...state.queueUserActions,  payload],
+    })),
+    
+    on(actions.createQueueUserActionFailed, (state, { payload }) => ({ ...state, isLoading: false, hasError: true, errorMessage: payload })),
+
+    on(actions.editQueueUserAction, (state, { payload, id }) => ({
+        ...state,
+        isLoading: true,
+        queueUserActions: [...state.queueUserActions.map((item) => {
+            if(item.queueId == id){
+                let object:QueueUserAction = {...payload};
+                object.queueId = id as string;
+                return object;
+            }
+            return {...item};
+        })]
+    })),
+    on(actions.editQueueUserActionFailed, (state, { payload }) => ({ ...state, isLoading: false, hasError: true, errorMessage: payload })),
 
 );
 

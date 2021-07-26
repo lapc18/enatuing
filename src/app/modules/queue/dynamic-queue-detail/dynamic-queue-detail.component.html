@@ -38,23 +38,10 @@
                         formControlName="normativeId"
                         [matAutocomplete]="auto">
                     <mat-autocomplete #auto="matAutocomplete">
-                        <mat-option *ngFor="let item of filteredNormatives | async" value="{{item.description}}-{{item.publishetAt}}">{{item.description}}-{{item.publishetAt}}</mat-option>
+                        <mat-option *ngFor="let item of filteredNormatives | async" value="{{item.category}}{{item.order}}-{{item.publishetAt}}">{{item.category}}{{item.order}}-{{item.publishetAt}}</mat-option>
                     </mat-autocomplete>
-                  </mat-form-field>
-                
-                <!-- <mat-form-field>
-                    <mat-label>Consultor</mat-label>
-                    <mat-select placeholder="Seleccione un/a Consultor/a" formControlName="consultantId">
-                        <mat-option *ngFor="let item of consultants" [value]="item.id">{{item.name}} {{item.lastName}}</mat-option>
-                    </mat-select>
                 </mat-form-field>
                 
-                <mat-form-field>
-                    <mat-label>Auditor</mat-label>
-                    <mat-select placeholder="Seleccione un/a Auditor/a" formControlName="auditorId">
-                        <mat-option *ngFor="let item of auditors" [value]="item.id">{{item.name}} {{item.lastName}}</mat-option>
-                    </mat-select>
-                </mat-form-field> -->
 
                 <mat-form-field>
                     <mat-label>Fecha de inicio</mat-label>

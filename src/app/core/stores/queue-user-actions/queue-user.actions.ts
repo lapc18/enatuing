@@ -3,7 +3,7 @@ import { QueueAction, QueueUserAction } from "../../domain/queue-user/queue-user
 
 
 //Queue User actions
-export const loadQueueActions = createAction('[Queue User] Loading Queue User');
+export const loadQueueActions = createAction('[Queue User] Loading Queue Actions');
 export const loadQueueActionsSuccess = createAction('[Queue User] Queue Actions Loaded Successfully', props<{ payload: QueueAction[] }>());
 export const loadQueueActionsFailed = createAction('[Queue User] Queue Actions Load Failed', props<{ payload: string }>());
 export const createQueueAction = createAction('[Queue User] Creating Queue Action', props<{ payload: QueueAction }>());
@@ -16,3 +16,8 @@ export const onSuccess = createAction('[Action Status] Action excuted Successful
 export const loadQueueUserAction = createAction('[Queue User] Loading Queue User Statuses');
 export const loadQueueUserActionSuccess = createAction('[Queue User] Queue User Statuses Loaded Successfully', props<{ payload: QueueUserAction[] }>());
 export const loadQueueUserActionFailed = createAction('[Queue User] Queue User Statuses Load Failed', props<{ payload: string }>());
+
+export const createQueueUserAction = createAction('[Queue User] Creating User Queue Action', props<{ payload: QueueUserAction }>());
+export const createQueueUserActionFailed = createAction('[Queue User] Creating Queue User Action Failed', props<{ payload: string }>());
+export const editQueueUserAction = createAction('[Queue User] Editing Queue User Action', props<{ payload: QueueUserAction, id: string | number}>());
+export const editQueueUserActionFailed = createAction('[Queue User] Editing Queue User Action Failed', props<{ payload: string }>());

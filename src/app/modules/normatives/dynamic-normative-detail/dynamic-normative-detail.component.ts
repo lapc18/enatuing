@@ -69,6 +69,8 @@ export class DynamicNormativeDetailComponent extends CommonGridAbstractDetails<N
       publishetAt: [0, [Validators.required, Validators.minLength(4)]],
       color: ['#000000', [Validators.required]],
       description: ['', [Validators.required]],
+      category: ['', [Validators.required]],
+      order: [1, [Validators.required]],
     }
     this.normative ? super.buildForm(form, this.normative) : super.buildForm(form);
   }

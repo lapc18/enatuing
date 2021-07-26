@@ -1,0 +1,26 @@
+
+.container {
+    
+    .header {
+        margin-top: 25px;
+        margin-bottom: 25px;
+    }
+
+    .controls {
+
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        justify-content: center;
+
+        form {
+            display: flex;
+            flex-direction: row;
+        }
+    
+        .action-btns {
+            display: flex;
+        }
+    }
+
+}

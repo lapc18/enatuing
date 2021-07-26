@@ -38,7 +38,7 @@ export class QueueEffects {
     save$ = createEffect(() => this.actions$.pipe(
         ofType(actions.createQueue),
         mergeMap(({payload}) => this.apiService.save(payload).pipe(
-                map(() => (actions.onSuccess())),
+                map(() => (actions.loadQueue())),
                 catchError((err) => of(actions.createQueueFailed({ payload: `${err}` })))
             )
         )
@@ -47,7 +47,7 @@ export class QueueEffects {
     update$ = createEffect(() => this.actions$.pipe(
         ofType(actions.editQueue),
         mergeMap((payload) => this.apiService.update({id: payload.id, payload: payload.payload}).pipe(
-                map(() => (actions.onSuccess())),
+                map(() => (actions.loadQueue())),
                 catchError((err) => of(actions.editQueueFailed({ payload: `${err}` })))
             )
         )

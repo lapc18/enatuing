@@ -4,6 +4,7 @@ import { Contact } from "../contacts/contacts.models";
 import { Metric } from "../metrics/metrics.models";
 import { Normative } from "../normatives/normatives.models";
 import { Organization } from "../organizations/organizations.models";
+import { QueueUserAction } from "../queue-user/queue-user.model";
 import { User } from "../users/users.models";
 
 export interface QueueStatus {
@@ -19,8 +20,10 @@ export interface QueueModel {
     contact?: Contact,
     organization?: Organization,
     normative?: Normative,
-    auditor?: User,
-    consultant?: User
+    startDate?: string,
+    endDate?: string,
+    type?: string;
+    queueActions?: QueueUserAction[];
 }
 
 export interface Queue {
@@ -32,6 +35,8 @@ export interface Queue {
     auditor?: string,
     consultant?: string,
     status?: string,
+    startDate?: string,
+    endDate?: string,
 }
 
 export const QUEUE_COLS: IColumn[] = [

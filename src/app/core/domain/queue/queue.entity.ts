@@ -7,6 +7,8 @@ export class QueueEntity {
     public normativeId?: string;
     public consultantId?: string;
     public auditorId?: string;
+    public startDate?: string;
+    public endDate?: string;
 
     constructor(public init?:Partial<QueueEntity>) {
         Object.assign(this, init);

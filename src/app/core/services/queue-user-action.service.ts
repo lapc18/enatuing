@@ -10,17 +10,12 @@ import { baseServiceOptions } from "../models/service-properties.model";
 
 
 @Injectable()
-export class QueueActionService extends AbstractEnatService<QueueAction, any> {
+export class QueueUserActionService extends AbstractEnatService<QueueUserAction, any> {
 
     constructor(
         public http: HttpClient,
     ) {
-        super(http, columnSettings.queue, baseServiceOptions.queueAction);
-    }
-
-    public searchQueueUserActions(): Observable<QueueUserAction[]> {
-        const url: string = '/optic/enat/api/QueueAction';
-        return this.http.get<QueueUserAction[]>(url);
+        super(http, columnSettings.queue, baseServiceOptions.queueUserAction);
     }
 
 }

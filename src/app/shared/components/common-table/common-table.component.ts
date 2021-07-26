@@ -3,6 +3,7 @@ import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Outpu
 import { MatPaginator } from '@angular/material/paginator';
 import { IColumn } from '../../../core/models/enat.models';
 import { MatSort } from '@angular/material/sort';
+import { SelectionModel } from '@angular/cdk/collections';
 
 @Component({
   selector: 'common-table',
@@ -15,15 +16,19 @@ export class CommonTableComponent implements OnInit, AfterViewInit, OnChanges {
   @Input() columns: IColumn[] = [];
   @Input() filterBy: string = '';
   @Input() showCustomActions: boolean = false;
+  @Input() showDefaultActions: boolean = true;
 
   @Output() onDelete: EventEmitter<any> = new EventEmitter();
   @Output() onDetails: EventEmitter<any> = new EventEmitter();
   @Output() onEdit: EventEmitter<any> = new EventEmitter();
+  @Output() onHeaderCheckboxClicked: EventEmitter<any> = new EventEmitter();
+  @Output() selectedDataChange: EventEmitter<any> = new EventEmitter();
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
 
-  public paginatedDataSource: MatTableDataSource<any[]>;
+  @Input() public selectedData: SelectionModel<any> = new SelectionModel<any>(true, []);
+  public paginatedDataSource: MatTableDataSource<any>;
   public displayedColumns: string[];
   public length: number = 0;
 
@@ -32,6 +37,7 @@ export class CommonTableComponent implements OnInit, AfterViewInit, OnChanges {
   ngOnInit(): void {
     this.displayedColumns = this.columns.map(c => c.name);
     this.displayedColumns.push('actions');
+    this.displayedColumns.unshift('select');
   }
 
   ngAfterViewInit(): void {
@@ -74,6 +80,15 @@ export class CommonTableComponent implements OnInit, AfterViewInit, OnChanges {
   private loadOnChanges(changes: SimpleChanges): void {
     if((changes as Object).hasOwnProperty('dataSource')) this.onUpdateDataSource();
     if((changes as Object).hasOwnProperty('filterBy')) this.onFilter();
+  }
+
+  onSelectHeaderChange(event: any): void {
+    if(event) {
+      this.selectedData.selected.length == this.paginatedDataSource.data.length ? 
+        this.selectedData.clear() : 
+        this.selectedData.select(...this.paginatedDataSource.data)
+    }
+    this.onHeaderCheckboxClicked.emit(this.selectedData);
   }
 
 }

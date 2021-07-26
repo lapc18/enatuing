@@ -44,6 +44,7 @@ export class DynamicDetailContactComponent extends CommonGridAbstractDetails<Con
             this.store.dispatch(actions.createContacts({ payload: this.getFormValue() }));
         }
         this.store.dispatch(actions.onSuccess());
+        this.data && this.data.callback ? this.data.callback() : void 0;
         this.dialogRef.close();
     }
 

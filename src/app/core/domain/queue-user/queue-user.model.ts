@@ -1,13 +1,14 @@
 
 
 export interface QueueAction {
-    id?: string,
+    id?: string | number,
     name?: string,
     description?: string
 }
 
 export interface QueueUserAction {
     queueId?: string,
-    queueActionID?: string,
-    userId?: string 
+    queueActionId?: string,
+    user?: any,
+    queueAction?: QueueAction,
 }

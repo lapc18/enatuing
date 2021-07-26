@@ -20,6 +20,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { MatSortModule } from '@angular/material/sort';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 
 
@@ -48,7 +49,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
         MatProgressSpinnerModule,
         MatSortModule,
         MatMenuModule,
-        MatAutocompleteModule
+        MatAutocompleteModule,
+        MatDatepickerModule
     ],
     exports: [
         MatSliderModule,
@@ -70,7 +72,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
         MatProgressSpinnerModule,
         MatSortModule,
         MatMenuModule,
-        MatAutocompleteModule
+        MatAutocompleteModule,
+        MatDatepickerModule
     ]
 })
 export class MaterialModule { }

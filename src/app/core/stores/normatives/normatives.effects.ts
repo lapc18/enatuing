@@ -29,7 +29,9 @@ export class NormativesEffects {
                             description: x.description,
                             publishetAt: x.publishetAt,
                             status: (x.status as GenericTypeValue).description,
-                            statusId: x.statusId
+                            statusId: x.statusId,
+                            order: x.order,
+                            category: x.category
                         }
                     });
                     return actions.loadNormativesSuccess({ payload: data })

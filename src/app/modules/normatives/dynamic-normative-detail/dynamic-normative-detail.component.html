@@ -24,6 +24,16 @@
                         <mat-option *ngFor="let item of normativeStatuses" [value]="item.id">{{item.description}}</mat-option>
                     </mat-select>
                 </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Categoría</mat-label>
+                    <input matInput placeholder="Ej: A" formControlName="category" type="text">
+                </mat-form-field>
+
+                <mat-form-field>
+                    <mat-label>Orden</mat-label>
+                    <input matInput placeholder="Ej: 1" formControlName="order" type="number">
+                </mat-form-field>
     
                 <mat-form-field>
                     <mat-label>Descripción</mat-label>

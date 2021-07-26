@@ -1,5 +1,6 @@
 import { TooltipPosition } from "@angular/material/tooltip";
 import { Observable, Subscription } from "rxjs";
+import { ASSIGNMENT_COLS } from "../domain/assigment/assignment.model";
 import { CERTIFICATIONS_COLS } from "../domain/certifications/certifications.models";
 import { CONTACTS_COLS } from "../domain/contacts/contacts.models";
 import { NORMATIVES_COLS } from "../domain/normatives/normatives.models";
@@ -127,6 +128,7 @@ export interface IColumnSettings {
     normatives: IColumn[],
     queue: IColumn[],
     user: IColumn[],
+    assignment: IColumn[],
 }
 
 export const columnSettings: IColumnSettings = {
@@ -135,7 +137,8 @@ export const columnSettings: IColumnSettings = {
     organizations: ORGANIZATION_COLS,
     normatives: NORMATIVES_COLS,
     queue: QUEUE_COLS,
-    user: USER_COLS
+    user: USER_COLS,
+    assignment: ASSIGNMENT_COLS
 }
 
 export interface FileHandler {

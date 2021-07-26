@@ -17,13 +17,13 @@ export class DialogFactory implements IDialogFactory{
     create(component: ComponentType<unknown>, options?: DialogFactoryOptions): void {
         this.dialog.open(component, {
             data: {
-                message: options.message? options.message : '',
-                data: options.data ? options.data : {},
-                callback: options.callback ? () => options.callback() : void 0,
+                message: options && options.message? options.message : '',
+                data: options && options.data ? options.data : {},
+                callback: options && options.callback ? () => options.callback() : void 0,
             },
-            hasBackdrop: options.hasBackdrop ? options.hasBackdrop : false,
-            height: `${options.height ? options.height : ''}`,
-            width: `${options.width ? options.width : ''}`,
+            hasBackdrop: options.hasBackdrop ? options.hasBackdrop : true,
+            height: `${options.height ? options.height : '300px'}`,
+            width: `${options.width ? options.width : '800px'}`,
         });
     }
 

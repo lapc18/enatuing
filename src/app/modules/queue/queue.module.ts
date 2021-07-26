@@ -6,12 +6,14 @@ import { QueueComponent } from './queue.component';
 import { CoreModule } from 'src/app/core/core.module';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { DynamicQueueDetailComponent } from './dynamic-queue-detail/dynamic-queue-detail.component';
+import { AssignmentComponent } from './assignment/assignment.component';
 
 
 @NgModule({
   declarations: [
     QueueComponent,
-    DynamicQueueDetailComponent
+    DynamicQueueDetailComponent,
+    AssignmentComponent
   ],
   imports: [
     CommonModule,

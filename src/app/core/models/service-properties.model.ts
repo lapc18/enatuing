@@ -14,6 +14,8 @@ export interface BaseServiceOptions {
     queue?: IServiceOptions,
     statistics?: IServiceOptions,
     users?: IServiceOptions,
+    queueAction?: IServiceOptions,
+    queueUserAction?: IServiceOptions,
 }
 
 
@@ -45,6 +47,13 @@ const userServiceOptions:IServiceOptions = {
     endpoint: '/optic/enat/api/User'
 }
 
+const queueActionServiceOptions:IServiceOptions = {
+    endpoint: '/optic/enat/api/QueueAction'
+}
+
+const queueUserActionServiceOptions:IServiceOptions = {
+    endpoint: '/optic/enat/api/QueueUserAction'
+}
 
 export const baseServiceOptions: BaseServiceOptions = {
     certifications: certificationsServiceOptions,
@@ -54,4 +63,6 @@ export const baseServiceOptions: BaseServiceOptions = {
     organization: organizationServiceOptions,
     queue: queueServiceOptions,
     users: userServiceOptions,
+    queueAction: queueActionServiceOptions,
+    queueUserAction: queueUserActionServiceOptions,
 }

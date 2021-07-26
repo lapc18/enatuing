@@ -50,7 +50,12 @@ export class ContactsComponent extends CommonAbstractGrid<Contact> implements On
   }
   public onCreate(): void {
     this.dialog.open(DynamicDetailContactComponent, {
-      data: { isCreating: true },
+      data: { 
+        isCreating: true,
+        callback:() => {
+          this.store.dispatch(actions.loadContacts());
+        } 
+      },
       width: '50%',
       hasBackdrop: true,
       disableClose: true,
