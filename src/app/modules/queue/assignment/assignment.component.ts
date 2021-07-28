@@ -11,6 +11,7 @@ import { columnSettings, IColumn } from 'src/app/core/models/enat.models';
 import { SelectionModel } from '@angular/cdk/collections';
 import { QueueAction, QueueUserAction } from 'src/app/core/domain/queue-user/queue-user.model';
 import { QueueActionState } from 'src/app/core/stores/queue-user-actions/queue-user.reducers';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-assignment',
@@ -33,6 +34,7 @@ export class AssignmentComponent implements OnInit, OnDestroy {
 	public subscriptions:Subscription[] = [];
 
 	constructor(
+		private dialogRef: MatDialogRef<AssignmentComponent>,
 		private store: Store<{
 			queue: QueueState,
 			auth: AuthState,
@@ -105,9 +107,7 @@ export class AssignmentComponent implements OnInit, OnDestroy {
 			return;
 		}
 
-		let queue:Queue[] = this.selectedData.selected;
-
-
+		let queue:Queue[] = this.selectedData.selected || [];
 		queue.forEach(x => {
 			let auditorAction:QueueUserAction = {
 				queueActionId: (this.auditorAction.id as string),
@@ -125,8 +125,7 @@ export class AssignmentComponent implements OnInit, OnDestroy {
 			this.store.dispatch(queueUserActions.createQueueUserAction({payload: consultantAction}));
 
 		});
-
-
+		this.dialogRef.close();
 	}
 
 }

@@ -1,33 +1,40 @@
 <div class="dialog-container">
     <div class="header" mat-dialog-title>
-        <p *ngIf="isCreating" class="display-4">Solicitud de certificación</p>
-        <p *ngIf="isEditing || !isCreating" class="display-4">Detalles de la solicitud: {{ queue.id }}</p>
+        <h1 *ngIf="isCreating" >Solicitud de certificación</h1>
+        <h1 *ngIf="isEditing || !isCreating">Detalles de la solicitud: {{ queue.organization.name || queue.id }}</h1>
     </div>
     <div class="details-container" mat-dialog-content>
         <div class="row">
     
             <form class="details" [formGroup]="formGroup">
-    
+
                 <mat-form-field>
                     <mat-label>Organización</mat-label>
-                    <mat-select placeholder="Seleccione un Estatus" formControlName="organizationId">
-                        <mat-option *ngFor="let item of organizations" [value]="item.id">{{item.name}}-({{item.acronym}})</mat-option>
-                    </mat-select>
+                    <input type="text"
+                        matInput
+                        placeholder="Seleccione una Organización"
+                        aria-label="Organización"
+                        formControlName="organization"
+                        [matAutocomplete]="organizationAuto">
+                    <mat-autocomplete #organizationAuto="matAutocomplete" [displayWith]="mapOrganizationIntoAutoComplete">
+                        <mat-option *ngFor="let item of filteredOrganizations | async" [value]="item">{{item.name}}-({{item.acronym}})</mat-option>
+                    </mat-autocomplete>
                 </mat-form-field>
-                
+
                 <mat-form-field>
                     <mat-label>Contacto</mat-label>
-                    <mat-select placeholder="Seleccione un contacto" formControlName="contactId">
-                        <mat-option *ngFor="let item of contacts" [value]="item.id">{{item.name}}-({{item.email}})</mat-option>
-                    </mat-select>
+                    <input type="text"
+                        matInput
+                        placeholder="Seleccione un contacto"
+                        aria-label="Contacto"
+                        formControlName="contact"
+                        [matAutocomplete]="contactAuto">
+                    <mat-autocomplete #contactAuto="matAutocomplete" [displayWith]="mapContactIntoAutoComplete">
+                        <mat-option *ngFor="let item of filteredContacts | async" [value]="item">{{item.name}}-({{item.email}})</mat-option>
+                    </mat-autocomplete>
                 </mat-form-field>
-                
-                <!-- <mat-form-field>
-                    <mat-label>NORTIC</mat-label>
-                    <mat-select placeholder="Seleccione una NORTIC" formControlName="normativeId">
-                        <mat-option *ngFor="let item of normatives" [value]="item.id">{{item.description}}</mat-option>
-                    </mat-select>
-                </mat-form-field> -->
+
+                <br>
 
                 <mat-form-field>
                     <mat-label>NORTIC</mat-label>
@@ -35,22 +42,11 @@
                         matInput
                         placeholder="Seleccione una NORTIC"
                         aria-label="NORTIC"
-                        formControlName="normativeId"
-                        [matAutocomplete]="auto">
-                    <mat-autocomplete #auto="matAutocomplete">
-                        <mat-option *ngFor="let item of filteredNormatives | async" value="{{item.category}}{{item.order}}-{{item.publishetAt}}">{{item.category}}{{item.order}}-{{item.publishetAt}}</mat-option>
+                        formControlName="normative"
+                        [matAutocomplete]="normativeAuto">
+                    <mat-autocomplete #normativeAuto="matAutocomplete" [displayWith]="mapNorticIntoAutoComplete">
+                        <mat-option *ngFor="let item of filteredNormatives | async" [value]="item">{{item.category}}{{item.order}}-{{item.publishetAt}}</mat-option>
                     </mat-autocomplete>
-                </mat-form-field>
-                
-
-                <mat-form-field>
-                    <mat-label>Fecha de inicio</mat-label>
-                    <input matInput placeholder="DD/MM/YYYY" formControlName="startDate" type="date">
-                </mat-form-field>
-
-                <mat-form-field>
-                    <mat-label>Fecha de finalización</mat-label>
-                    <input matInput placeholder="DD/MM/YYYY" formControlName="endDate" type="date">
                 </mat-form-field>
 
                 <mat-form-field>
@@ -59,6 +55,34 @@
                         <mat-option *ngFor="let item of queueStatuses" [value]="item.id">{{item.description}}</mat-option>
                     </mat-select>
                 </mat-form-field>
+
+                <br>
+                
+                <mat-form-field>
+                    <mat-label>Fecha de inicio</mat-label>
+                    <input matInput [matDatepicker]="startDate" formControlName="startDate">
+                    <mat-datepicker-toggle matSuffix [for]="startDate"></mat-datepicker-toggle>
+                    <mat-datepicker #startDate>
+                      <mat-datepicker-actions>
+                        <button mat-button matDatepickerCancel>Cancelar</button>
+                        <button mat-raised-button color="primary" matDatepickerApply>Aplicar</button>
+                      </mat-datepicker-actions>
+                    </mat-datepicker>
+                  </mat-form-field>
+                
+                <mat-form-field>
+                    <mat-label>Fecha de finalización</mat-label>
+                    <input matInput [matDatepicker]="endDate" formControlName="endDate">
+                    <mat-datepicker-toggle matSuffix [for]="endDate"></mat-datepicker-toggle>
+                    <mat-datepicker #endDate>
+                      <mat-datepicker-actions>
+                        <button mat-button matDatepickerCancel>Cancelar</button>
+                        <button mat-raised-button color="primary" matDatepickerApply>Aplicar</button>
+                      </mat-datepicker-actions>
+                    </mat-datepicker>
+                  </mat-form-field>
+
+                
     
                 <br />
                 <div mat-dialog-actions>

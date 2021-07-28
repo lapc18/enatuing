@@ -28,7 +28,7 @@
             </mat-form-field>
     
             <div class="action-btns">
-                <button mat-button matTooltipPosition="above" matTooltip="Click para cancelar asignación"><mat-icon>clear</mat-icon><b>Cancelar</b></button>
+                <button mat-dialog-close mat-button matTooltipPosition="above" matTooltip="Click para cancelar asignación"><mat-icon>clear</mat-icon><b>Cancelar</b></button>
                 <button (click)="assign()" mat-button matTooltipPosition="above" matTooltip="Click para finalizar asignación"><mat-icon>done</mat-icon><b>Asignar</b></button>
             </div>
         </form>
@@ -38,14 +38,11 @@
 
     
     <common-table #table
-        [showDefaultActions]="false"
-        [showCustomActions]="true"
+        [showActions]="false"
         [filterBy]="filter"
         [(selectedData)]="selectedData"
         [columns]="columns" 
-        [dataSource]="queue"> 
-        <button mat-menu-item matTooltipPosition="above" matTooltip="Asignar consultor"><mat-icon>assignment_ind</mat-icon><b>Asignar consultor</b></button>
-        <button mat-menu-item matTooltipPosition="above" matTooltip="Asignar auditor"><mat-icon>supervisor_account</mat-icon><b>Asignar auditor</b></button>
+        [dataSource]="queue">
     </common-table>
 
 </div>

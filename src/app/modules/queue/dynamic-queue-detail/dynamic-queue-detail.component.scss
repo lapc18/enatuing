@@ -1,0 +1,19 @@
+.dialog-container {
+
+    .header {
+        padding-left: 4rem;
+        padding-right: 4rem;
+    }
+
+    .details-container {
+
+        .details {
+            text-align: center;
+            mat-form-field {
+                width: 45%;
+            }
+        }
+
+    }
+
+}

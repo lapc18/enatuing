@@ -21,6 +21,7 @@ import { MatSortModule } from '@angular/material/sort';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
 
 
 
@@ -50,7 +51,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
         MatSortModule,
         MatMenuModule,
         MatAutocompleteModule,
-        MatDatepickerModule
+        MatDatepickerModule,
+        MatNativeDateModule,
     ],
     exports: [
         MatSliderModule,
@@ -73,7 +75,8 @@ import { MatDatepickerModule } from '@angular/material/datepicker';
         MatSortModule,
         MatMenuModule,
         MatAutocompleteModule,
-        MatDatepickerModule
+        MatDatepickerModule,
+        MatNativeDateModule
     ]
 })
 export class MaterialModule { }

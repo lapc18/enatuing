@@ -37,7 +37,13 @@ export class DynamicQueueDetailComponent extends CommonGridAbstractDetails<Queue
 	public consultants: User[] = [];
 	public auditors: User[] = [];
 
+
+	//Filters section
 	public filteredNormatives: Observable<Normative[]>;
+	public filteredOrganizations: Observable<Organization[]>;
+	public filteredContacts: Observable<Contact[]>;
+	public filteredConsultants: Observable<User[]>;
+	public filteredAuditor: Observable<User[]>;
 	
 	constructor(
 		private store: Store<{ 
@@ -83,43 +89,42 @@ export class DynamicQueueDetailComponent extends CommonGridAbstractDetails<Queue
 		Object.assign(queue, this.getFormValue());
 
 		//{{item.category}}{{item.order}}-{{item.publishetAt}}
-		let normativeLabel: string = this.formGroup.controls['normativeId'].value as string;
-		normative = this.normatives.find(x => (x.category + x.order + '-' + x.publishetAt).includes(normativeLabel)) || {}
-		contact = this.contacts.find(x => (x.id as string).includes(queue.contactId || '')) || {};
-		organization = this.organizations.find(x => (x.id as string).includes(queue.organizationId || '')) || {};
-		consultant = this.consultants.find(x => (x.id as string).includes(queue.consultantId || '')) || {};
-		auditor = this.auditors.find(x => (x.id as string).includes(queue.auditorId || '')) || {};
-		status = this.queueStatuses.find(x => (x.id as string).includes(queue.statusId || '')) || {};
+		// let normativeLabel: string = this.formGroup.controls['normativeId'].value as string;
+		// normative = this.normatives.find(x => (x.category + x.order + '-' + x.publishetAt).includes(normativeLabel)) || {}
+		// contact = this.contacts.find(x => (x.id as string).includes(queue.contactId || '')) || {};
+		// organization = this.organizations.find(x => (x.id as string).includes(queue.organizationId || '')) || {};
+		// consultant = this.consultants.find(x => (x.id as string).includes(queue.consultantId || '')) || {};
+		// auditor = this.auditors.find(x => (x.id as string).includes(queue.auditorId || '')) || {};
+		// status = this.queueStatuses.find(x => (x.id as string).includes(queue.statusId || '')) || {};
 
 		const queueModel:any = {
-			auditorId: auditor.id || '',
-			consultantId: consultant.id || '',
-			normativeId: normative.id || '',
-			contactId: contact.id || '',
-			statusId: status.id || '',
+			normativeId: queue.normative.id || '',
+			contactId: queue.contact.id || '',
+			statusId: queue.statusId || '',
 			organizationId: organization.id || '',
 			endDate: queue.endDate || '',
 			startDate: queue.startDate || '',
 		}		
 
-		console.log(queueModel)
+		console.log('queue', queue);
+		console.log('queueModel', queueModel);
 
-		if(this.isEditing) {
-			this.store.dispatch(actions.editQueue({ payload: queueModel, id: this.queue.id }));
-		} else if(this.isCreating) {
-			this.store.dispatch(actions.createQueue({ payload: queueModel }));
-		}
-		this.store.dispatch(actions.onSuccess());
-		this.data && this.data.callback ? this.data.callback() : void 0;
-		this.dialogRef.close();
+		// if(this.isEditing) {
+		// 	this.store.dispatch(actions.editQueue({ payload: queueModel, id: this.queue.id }));
+		// } else if(this.isCreating) {
+		// 	this.store.dispatch(actions.createQueue({ payload: queueModel }));
+		// }
+		// this.store.dispatch(actions.onSuccess());
+		// this.data && this.data.callback ? this.data.callback() : void 0;
+		// this.dialogRef.close();
 	}
 
 	private buildQueueForm(): void {
 		const form: any = {
 			statusId: ['', [Validators.required]],
-			contactId: ['', [Validators.required]],
-			normativeId: ['', [Validators.required]],
-			organizationId: ['', [Validators.required]],
+			contact: ['', [Validators.required]],
+			normative: ['', [Validators.required]],
+			organization: ['', [Validators.required]],
 			startDate: ['', [Validators.required]],
 			endDate: ['', [Validators.required]],
 		}
@@ -147,15 +152,65 @@ export class DynamicQueueDetailComponent extends CommonGridAbstractDetails<Queue
 	}
 
 	private addFilters(): void {
-		this.formGroup && this.formGroup.controls ? this.filteredNormatives = this.formGroup.controls['normativeId'].valueChanges.pipe(
-			startWith(''),
-			map(value => this.filterByNortic(value))
-		) : void 0;
+		if(this.formGroup && this.formGroup.controls) {
+			this.filteredNormatives = this.formGroup.controls['normative'].valueChanges.pipe(
+				startWith(''),
+				map(value => typeof value === 'string' ? value : `${value.category}${value.order}-${value.publishetAt}`),
+				map(value => this.filterByNortic(value))
+			);
+
+			this.filteredOrganizations = this.formGroup.controls['organization'].valueChanges.pipe(
+				startWith(''),
+				map(value => typeof value === 'string' ? value : value.name),
+				map(value => this.filterByOrganization(value))
+			);
+
+			this.filteredContacts = this.formGroup.controls['contact'].valueChanges.pipe(
+				startWith(''),
+				map(value => typeof value === 'string' ? value : value.name),
+				map(value => this.filterByContact(value))
+			);
+
+		}
+	}
+
+	public mapContactIntoAutoComplete(value: Contact): string {
+		return value && value.name ? value.name : '';
+	}
+
+	public mapOrganizationIntoAutoComplete(value: Organization): string {
+		return value && value.name ? `${value.name} (${value.acronym})` : '';
+	}
+
+	public mapNorticIntoAutoComplete(value: Normative): string {
+		return value && value.id ? `${value.category}${value.order}-${value.publishetAt}` : '';
 	}
 
 	private filterByNortic(value: string): Normative[] {
 		const filterValue = value.toLowerCase();	
 		return this.normatives.filter(option => option.description.toLowerCase().includes(filterValue) || option.publishetAt.toString().toLowerCase().includes(filterValue));
-	  }
+	}
+
+	private filterByOrganization(value: string): Organization[] {
+		const filterValue = value.toLowerCase();	
+		return this.organizations.filter(option => 
+			option.name.toLowerCase().includes(filterValue) || 
+			option.acronym.toString().toLowerCase().includes(filterValue) ||
+			option.city.toString().toLowerCase().includes(filterValue)
+		);
+	}
+
+	private filterByContact(value: string): Organization[] {
+		const filterValue = value.toLowerCase();	
+		return this.contacts.filter(option => 
+			option.name.toLowerCase().includes(filterValue) || 
+			option.email.toString().toLowerCase().includes(filterValue) ||
+			option.ext.toString().toLowerCase().includes(filterValue) ||
+			option.telephoneNumber.toString().toLowerCase().includes(filterValue) ||
+			option.phoneNumber.toString().toLowerCase().includes(filterValue) ||
+			option.id.toString().toLowerCase().includes(filterValue) ||
+			option.position.toString().toLowerCase().includes(filterValue) 
+		);
+	}
 
 }

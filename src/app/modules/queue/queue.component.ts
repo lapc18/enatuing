@@ -70,16 +70,16 @@ export class QueueComponent extends CommonAbstractGrid<QueueModel, Queue> implem
 
 	public onCreate(): void {
 		this.dialog.open(DynamicQueueDetailComponent, {
-		data: { 
-			isCreating: true, 
-			callback:() => {
-				this.store.dispatch(actions.loadQueue());
-			} 
-		},
-		minWidth: '50%',
-		minHeight: '60vh',
-		hasBackdrop: true,
-		disableClose: true,
+			data: { 
+				isCreating: true, 
+				callback:() => {
+					this.store.dispatch(actions.loadQueue());
+				} 
+			},
+			minWidth: '50%',
+			minHeight: '60vh',
+			hasBackdrop: true,
+			disableClose: true,
 		});
 	}
 
