@@ -1,5 +1,5 @@
 import { MatTableDataSource } from '@angular/material/table';
-import { AfterViewInit, Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, ViewChild } from '@angular/core';
+import { AfterViewInit, Component, ContentChild, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges, TemplateRef, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { IColumn } from '../../../core/models/enat.models';
 import { MatSort } from '@angular/material/sort';
@@ -27,6 +27,8 @@ export class CommonTableComponent implements OnInit, AfterViewInit, OnChanges {
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
   @ViewChild(MatSort) sort: MatSort;
+  @ContentChild(TemplateRef)
+  templateRef : TemplateRef<any>;
 
   @Input() public selectedData: SelectionModel<any> = new SelectionModel<any>(true, []);
   public paginatedDataSource: MatTableDataSource<any>;

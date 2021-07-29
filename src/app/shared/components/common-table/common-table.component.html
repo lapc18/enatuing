@@ -46,7 +46,7 @@
 				<mat-menu #menu="matMenu">
 
 					<ng-container *ngIf="showCustomActions">
-						<ng-content></ng-content>
+						<ng-content *ngTemplateOutlet="templateRef; context:{data: element};"></ng-content>
 						<mat-divider></mat-divider>
 					</ng-container>
 
