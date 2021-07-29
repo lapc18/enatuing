@@ -1,4 +1,4 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, Inject, OnDestroy, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable, Subscription } from 'rxjs';
 import { Queue, QueueModel } from 'src/app/core/domain/queue/queue.models';
@@ -11,7 +11,8 @@ import { columnSettings, IColumn } from 'src/app/core/models/enat.models';
 import { SelectionModel } from '@angular/cdk/collections';
 import { QueueAction, QueueUserAction } from 'src/app/core/domain/queue-user/queue-user.model';
 import { QueueActionState } from 'src/app/core/stores/queue-user-actions/queue-user.reducers';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { AlertFactory } from 'src/app/core/factory/alerts/alerts.factory';
 
 @Component({
   selector: 'app-assignment',
@@ -30,11 +31,15 @@ export class AssignmentComponent implements OnInit, OnDestroy {
 	public selectedData: SelectionModel<Queue> = new SelectionModel<Queue>(true, []);
 	public columns:IColumn[] = columnSettings.assignment;
 	public filter: string = '';
-
 	public subscriptions:Subscription[] = [];
+	public isFullAssignmentMode: boolean = false;
+	public isConsultantAssignmentMode: boolean = false;
+	public isAuditorAssignmentMode: boolean = false;
 
 	constructor(
 		private dialogRef: MatDialogRef<AssignmentComponent>,
+		private alertFactory: AlertFactory,
+		@Inject(MAT_DIALOG_DATA) public data: any,
 		private store: Store<{
 			queue: QueueState,
 			auth: AuthState,
@@ -45,11 +50,24 @@ export class AssignmentComponent implements OnInit, OnDestroy {
 	ngOnInit(): void {
 		this.loadQueueUserActions();
 		this.loadUsers();
-		this.loadQueue();
+		this.validateInputData();
 	}
 
 	ngOnDestroy(): void {
 		this.subscriptions.forEach(x => x.unsubscribe());
+	}
+
+	private validateInputData(): void {
+		this.isFullAssignmentMode = this.data.data && this.data.data['isFullAssignmentMode'] ? this.data.data['isFullAssignmentMode'] : false;
+		this.isConsultantAssignmentMode = this.data.data && this.data.data['isConsultantAssignmentMode']? this.data.data['isConsultantAssignmentMode'] : false;
+		this.isAuditorAssignmentMode = this.data.data && this.data.data['isAuditorAssignmentMode'] ? this.data.data['isAuditorAssignmentMode'] : false;
+		const item:QueueModel = this.data.data && this.data.data['item'] ? this.data.data['item'] : {};
+		if(this.isFullAssignmentMode) {
+			this.loadQueue();
+		} else {
+			this.mapQueue([item]);
+			this.selectedData.select(...this.queue);
+		}
 	}
 
 	private loadUsers(): void {
@@ -77,7 +95,6 @@ export class AssignmentComponent implements OnInit, OnDestroy {
 		this.queue = queue.map(item => {
 				let itemMapped:Queue = {};
 				if(item) {
-					//{{item.category}}{{item.order}}-{{item.publishetAt}}
 					itemMapped.nortic = `${item.normative.category || ''}${item.normative.order || ''}-${item.normative.publishetAt || ''}`;
 					itemMapped.organization = `${item.organization.name || ''}-(${item.organization.acronym || ''})`;
 					itemMapped.status = `${item.status && item.status.description? item.status.description : ''}`;
@@ -91,19 +108,29 @@ export class AssignmentComponent implements OnInit, OnDestroy {
 	}
 
 	public assign(): void {
-
 		if(
-			this.auditorAction === undefined || 
-			this.auditorAction === null ||
-			this.consultantAction === undefined ||
-			this.consultantAction === null ||
-			this.auditor === undefined ||
-			this.auditor === null ||
-			this.consultant === undefined ||
-			this.consultant === null 
+			(this.auditorAction === undefined || 
+			this.auditorAction === null) &&
+			this.isAuditorAssignmentMode
 		) {
-			//TODO: show message
-			console.log('there are something null here...')
+			this.alertFactory.error('Ha ocurrido un error, por favor contactar con el administrador del sistema.', {autoClose: true});
+			return;
+			
+		} else if(
+			(this.consultantAction === undefined ||
+			this.consultantAction === null) &&
+			this.isConsultantAssignmentMode
+		) {
+			this.alertFactory.error('Ha ocurrido un error, por favor contactar con el administrador del sistema.', {autoClose: true});
+			return;
+		} else if(
+			(this.consultantAction === undefined ||
+			this.consultantAction === null) &&
+			(this.auditorAction === undefined || 
+				this.auditorAction === null) &&
+			this.isFullAssignmentMode
+		) {
+			this.alertFactory.error('Ha ocurrido un error, por favor contactar con el administrador del sistema.', {autoClose: true});
 			return;
 		}
 
