@@ -6,7 +6,7 @@ import { Observable, Subscription } from 'rxjs';
 import { Contact } from 'src/app/core/domain/contacts/contacts.models';
 import { Normative } from 'src/app/core/domain/normatives/normatives.models';
 import { Organization } from 'src/app/core/domain/organizations/organizations.models';
-import { Queue, QueueModel, QueueStatus } from 'src/app/core/domain/queue/queue.models';
+import { QueueModel, QueueStatus } from 'src/app/core/domain/queue/queue.models';
 import { User } from 'src/app/core/domain/users/users.models';
 import { CommonGridAbstractDetails } from 'src/app/core/models/common-details.abstract';
 import { ContactState } from 'src/app/core/stores/contacts/contacts.reducers';
@@ -20,6 +20,7 @@ import * as normativesActions from 'src/app/core/stores/normatives/normatives.ac
 import * as organizationsActions from 'src/app/core/stores/organizations/organizations.actions';
 import * as authActions from 'src/app/core/stores/auth/auth.actions';
 import { map, startWith } from 'rxjs/operators';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-dynamic-queue-detail',
@@ -77,46 +78,25 @@ export class DynamicQueueDetailComponent extends CommonGridAbstractDetails<Queue
 	}
 
 	public onSaveChanges(): void {
-
 		let queue:any = {};
-		let normative:Normative = {};
-		let contact:Contact = {};
-		let organization:Organization = {};
-		let consultant:User = {};
-		let auditor:User = {};
-		let status:QueueStatus = {};
-		
 		Object.assign(queue, this.getFormValue());
-
-		//{{item.category}}{{item.order}}-{{item.publishetAt}}
-		// let normativeLabel: string = this.formGroup.controls['normativeId'].value as string;
-		// normative = this.normatives.find(x => (x.category + x.order + '-' + x.publishetAt).includes(normativeLabel)) || {}
-		// contact = this.contacts.find(x => (x.id as string).includes(queue.contactId || '')) || {};
-		// organization = this.organizations.find(x => (x.id as string).includes(queue.organizationId || '')) || {};
-		// consultant = this.consultants.find(x => (x.id as string).includes(queue.consultantId || '')) || {};
-		// auditor = this.auditors.find(x => (x.id as string).includes(queue.auditorId || '')) || {};
-		// status = this.queueStatuses.find(x => (x.id as string).includes(queue.statusId || '')) || {};
-
 		const queueModel:any = {
 			normativeId: queue.normative.id || '',
 			contactId: queue.contact.id || '',
 			statusId: queue.statusId || '',
-			organizationId: organization.id || '',
-			endDate: queue.endDate || '',
-			startDate: queue.startDate || '',
-		}		
+			organizationId: queue.organization.id || '',
+			endDate: moment(queue.endDate).format('MM-DD-YYYY') || '',
+			startDate: moment(queue.startDate).format('MM-DD-YYYY') || '',
+		}
 
-		console.log('queue', queue);
-		console.log('queueModel', queueModel);
-
-		// if(this.isEditing) {
-		// 	this.store.dispatch(actions.editQueue({ payload: queueModel, id: this.queue.id }));
-		// } else if(this.isCreating) {
-		// 	this.store.dispatch(actions.createQueue({ payload: queueModel }));
-		// }
-		// this.store.dispatch(actions.onSuccess());
-		// this.data && this.data.callback ? this.data.callback() : void 0;
-		// this.dialogRef.close();
+		if(this.isEditing) {
+			this.store.dispatch(actions.editQueue({ payload: queueModel, id: this.queue.id }));
+		} else if(this.isCreating) {
+			this.store.dispatch(actions.createQueue({ payload: queueModel }));
+		}
+		this.store.dispatch(actions.onSuccess());
+		this.data && this.data.callback ? this.data.callback() : void 0;
+		this.dialogRef.close();
 	}
 
 	private buildQueueForm(): void {

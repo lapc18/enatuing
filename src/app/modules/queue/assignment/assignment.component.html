@@ -4,6 +4,8 @@
         <h1>Asignación de solicitud de certificaciones</h1>
     </div>
 
+    <alert> </alert>
+
     <div class="controls">
         <div class="search-form">
             <mat-form-field>
@@ -13,14 +15,14 @@
         </div>
         
         <form>
-            <mat-form-field>
+            <mat-form-field *ngIf="isConsultantAssignmentMode || isFullAssignmentMode">
                 <mat-label>Consultor</mat-label>
                 <mat-select placeholder="Consultor" [(ngModel)]="consultant" [ngModelOptions]="{standalone: true}">
                     <mat-option *ngFor="let item of consultants" [value]="item">{{item.name}} {{item.lastName}}</mat-option>
                 </mat-select>
             </mat-form-field>
     
-            <mat-form-field>
+            <mat-form-field *ngIf="isAuditorAssignmentMode || isFullAssignmentMode">
                 <mat-label>Auditor</mat-label>
                 <mat-select placeholder="Auditor" [(ngModel)]="auditor" [ngModelOptions]="{standalone: true}">
                     <mat-option *ngFor="let item of auditors" [value]="item">{{item.name}} {{item.lastName}}</mat-option>
@@ -29,13 +31,12 @@
     
             <div class="action-btns">
                 <button mat-dialog-close mat-button matTooltipPosition="above" matTooltip="Click para cancelar asignación"><mat-icon>clear</mat-icon><b>Cancelar</b></button>
-                <button (click)="assign()" mat-button matTooltipPosition="above" matTooltip="Click para finalizar asignación"><mat-icon>done</mat-icon><b>Asignar</b></button>
+                <button *ngIf="isConsultantAssignmentMode" [disabled]="!consultant || !consultant.id || selectedData.selected.length <= 0" (click)="assign()" mat-button matTooltipPosition="above" matTooltip="Click para finalizar asignación"><mat-icon>done</mat-icon><b>Asignar</b></button>
+                <button *ngIf="isAuditorAssignmentMode" [disabled]="!auditor || !auditor.id || selectedData.selected.length <= 0" (click)="assign()" mat-button matTooltipPosition="above" matTooltip="Click para finalizar asignación"><mat-icon>done</mat-icon><b>Asignar</b></button>
+                <button *ngIf="isFullAssignmentMode" [disabled]="!auditor || !consultant || !consultant.id || !auditor.id || selectedData.selected.length <= 0" (click)="assign()" mat-button matTooltipPosition="above" matTooltip="Click para finalizar asignación"><mat-icon>done</mat-icon><b>Asignar</b></button>
             </div>
         </form>
     </div>
-
-
-
     
     <common-table #table
         [showActions]="false"

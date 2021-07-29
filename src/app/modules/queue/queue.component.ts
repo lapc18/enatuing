@@ -127,9 +127,37 @@ export class QueueComponent extends CommonAbstractGrid<QueueModel, Queue> implem
 
 	public showAssignmentDialog(): void {
 		this.dialogFactory.create(AssignmentComponent, {
-			data: {},
-			width: 50,
-			height: 60,
+			data: {
+				isFullAssignmentMode: true
+			},
+			width: '60vw',
+			height: '80vh',
+			hasBackdrop: true,
+		});
+	}
+
+	public showAssignmentConsultanDialog(item: QueueModel | Queue): void {
+		let queueItem:QueueModel = {...this.data.find(x => x.id == item.id)};
+		this.dialogFactory.create(AssignmentComponent, {
+			data: {
+				isConsultantAssignmentMode: true,
+				item: queueItem
+			},
+			width: '60vw',
+			height: '80vh',
+			hasBackdrop: true,
+		});
+	}
+
+	public showAssignmentAuditorDialog(item: QueueModel | Queue): void {
+		let queueItem:QueueModel = {...this.data.find(x => x.id == item.id)};
+		this.dialogFactory.create(AssignmentComponent, {
+			data: {
+				isAuditorAssignmentMode: true,
+				item: queueItem
+			},
+			width: '60vw',
+			height: '80vh',
 			hasBackdrop: true,
 		});
 	}
