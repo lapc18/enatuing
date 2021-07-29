@@ -80,6 +80,7 @@ export class CommonTableComponent implements OnInit, AfterViewInit, OnChanges {
   private onUpdateDataSource(): void {
     this.paginatedDataSource = new MatTableDataSource<any[]>(this.dataSource);
     this.paginatedDataSource.paginator = this.paginator;
+    this.paginatedDataSource.sort = this.sort;
   }
 
   private loadOnChanges(changes: SimpleChanges): void {
