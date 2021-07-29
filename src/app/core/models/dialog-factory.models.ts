@@ -5,8 +5,8 @@ export interface DialogFactoryOptions {
     data?: Object;
     callback?: Function;
     hasBackdrop?: boolean;
-    height?: number,
-    width?: number,
+    height?: number | string,
+    width?: number | string,
 }
 
 export interface IDialogFactory {
