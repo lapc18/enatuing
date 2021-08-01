@@ -39,7 +39,6 @@ export class RoleHandlerDirective implements OnInit, AfterViewInit, OnDestroy {
 	}
 
 	private validatePermissions(): void {
-		console.log('on init:', this.allowedRoles);
 		if(this.currentUser) {
 			!this.hasAllowedRoles() ? this.elementRef.nativeElement.style = 'display:none;' : void 0;
 			
