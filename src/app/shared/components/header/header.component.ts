@@ -14,7 +14,6 @@ export class HeaderComponent implements OnInit {
 
   @Output() onExport: EventEmitter<FileType> = new EventEmitter();
   @Output() onFilter: EventEmitter<string> = new EventEmitter();
-  @Output() onAddItem: EventEmitter<any> = new EventEmitter();
 
 
   constructor() { }

@@ -7,15 +7,6 @@
     </div>
 
     <button 
-        mat-icon-button 
-        matTooltip="Click para agregar un nuevo item en la vista actual." 
-        matTooltipPosition="above"
-        (click)="onAddItem.emit();"
-    >
-        <mat-icon>add_circle</mat-icon>
-    </button>
-
-    <button 
         mat-icon-button matTooltip="Click para exportar los items de la vista actual a Excel." 
         matTooltipPosition="above"
         (click)="exportToExcel($event)"
