@@ -8,10 +8,14 @@
         <common-table #table
             [filterBy]="filter"
             [columns]="columns" 
-            [dataSource]="dataMapped" 
-            (onDelete)="onDelete($event)" 
-            (onEdit)="onEdit($event)" 
-            (onDetails)="onSeeDetails($event)"> 
+            [dataSource]="dataMapped"
+            [showDefaultActions]="false"
+            [showCustomActions]="true"
+        > 
+            <ng-template let-data="data">
+                <button mat-menu-item matTooltipPosition="above" matTooltip="Ver detalles" (click)="onSeeDetails(data)"><mat-icon>preview</mat-icon><b>Ver detalles</b></button>
+				<button mat-menu-item matTooltipPosition="above" matTooltip="Eliminar" (click)="onDelete(data)"><mat-icon>delete</mat-icon><b>Eliminar</b></button>
+            </ng-template>
         </common-table>
     </ng-container>
 </div>
