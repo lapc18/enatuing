@@ -17,6 +17,8 @@ export class DrawerItem {
         public route: string = 'javascript:void(0)',
         public isLink: boolean = false,
         public isEnabled: boolean = true,
+        public allowedRoles: string[] = [],
+        public nodes:DrawerItem[] = []
     ) { }
 
 }
@@ -29,7 +31,8 @@ export const DRAWER_OPTIONS: DrawerItem[] = [
         'left',
         '/dashboard/home',
         false,
-        true
+        true,
+        ['admin', 'audit', 'consult']
     ),
     new DrawerItem(
         'receipt_long',
@@ -38,7 +41,20 @@ export const DRAWER_OPTIONS: DrawerItem[] = [
         'left',
         '/dashboard/queue',
         false,
-        true
+        true,
+        ['admin', 'audit', 'consult'],
+        [
+            new DrawerItem(
+                'receipt_long',
+                'Matríz de usuario',
+                'Matríz exclusiva del usuario actual',
+                'left',
+                '/dashboard/queue',
+                false,
+                true,
+                ['admin', 'audit', 'consult']
+            ),
+        ]
     ),
     new DrawerItem(
         'card_membership',
@@ -47,7 +63,8 @@ export const DRAWER_OPTIONS: DrawerItem[] = [
         'left',
         '/dashboard/normatives',
         false,
-        true
+        true,
+        ['admin', 'audit', 'consult']
     ),
     new DrawerItem(
         'verified_user',
@@ -56,7 +73,8 @@ export const DRAWER_OPTIONS: DrawerItem[] = [
         'left',
         '/dashboard/certifications',
         false,
-        true
+        true,
+        ['admin', 'audit', 'consult']
     ),
     new DrawerItem(
         'corporate_fare',
@@ -65,7 +83,8 @@ export const DRAWER_OPTIONS: DrawerItem[] = [
         'left',
         '/dashboard/organizations',
         false,
-        true
+        true,
+        ['admin', 'audit', 'consult']
     ),
     new DrawerItem(
         'contacts',
@@ -74,7 +93,8 @@ export const DRAWER_OPTIONS: DrawerItem[] = [
         'left',
         '/dashboard/contacts',
         false,
-        true
+        true,
+        ['admin', 'audit', 'consult']
     ),
     new DrawerItem(
         'insights',
@@ -83,7 +103,8 @@ export const DRAWER_OPTIONS: DrawerItem[] = [
         'left',
         '/dashboard/metrics',
         false,
-        true
+        true,
+        ['admin']
     ),
     new DrawerItem(
         'people',
@@ -92,7 +113,8 @@ export const DRAWER_OPTIONS: DrawerItem[] = [
         'left',
         '/dashboard/users',
         false,
-        true
+        true,
+        ['admin']
     ),
     new DrawerItem(
         'analytics',
@@ -101,7 +123,8 @@ export const DRAWER_OPTIONS: DrawerItem[] = [
         'left',
         '/dashboard/statistics',
         false,
-        false
+        false,
+        ['admin', 'audit', 'consult']
     )
 ];
 

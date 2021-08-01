@@ -21,6 +21,7 @@ import { DragableStatisticCarouselComponent } from './components/dragable-statis
 import { MultipleCardSliderComponent } from './components/multiple-card-slider/multiple-card-slider.component';
 import { NorticStampComponent } from './components/nortic-stamp/nortic-stamp.component';
 import { ColorPickerComponent } from './components/color-picker/color-picker.component';
+import { RoleHandlerDirective } from './directives/role-handler.directive';
 
 @NgModule({
   declarations: [
@@ -40,6 +41,7 @@ import { ColorPickerComponent } from './components/color-picker/color-picker.com
     MultipleCardSliderComponent,
     NorticStampComponent,
     ColorPickerComponent,
+    RoleHandlerDirective,
   ],
   imports: [
     CommonModule,
@@ -70,6 +72,7 @@ import { ColorPickerComponent } from './components/color-picker/color-picker.com
     MultipleCardSliderComponent,
     NorticStampComponent,
     ColorPickerComponent,
+    RoleHandlerDirective,
   ]
 })
 export class SharedModule { }

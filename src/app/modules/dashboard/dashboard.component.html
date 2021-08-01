@@ -15,13 +15,48 @@
   </mat-toolbar>
  <mat-drawer-container  color="primary">
     <mat-drawer #drawer mode="side" [opened]="true">
-        <mat-nav-list routerLinkActive="user-management" [routerLinkActiveOptions]="{exact: true}">
-          <mat-list-item *ngFor="let item of drawerOptions" [matTooltip]="item.toolTip" [matTooltipPosition]="item.toolTipPosition" [routerLink]="item.route">
+      <mat-nav-list routerLinkActive="user-management" [routerLinkActiveOptions]="{exact: true}">
+        <mat-accordion [displayMode]="'default'" multi>
+          <div *ngFor="let item of drawerOptions" >
+    
+            <mat-list-item 
+              *ngIf="item.nodes.length == 0"
+              [matTooltip]="item.toolTip" 
+              [matTooltipPosition]="item.toolTipPosition" 
+              [routerLink]="item.route" 
+              role-handler [allowedRoles]="item.allowedRoles"
+            >
               <mat-icon mat-list-icon>{{item.icon}}</mat-icon>
               <div mat-line>{{item.label}}</div>
               <mat-divider></mat-divider>
             </mat-list-item>
-          </mat-nav-list>
+
+            <div *ngIf="item.nodes.length > 0">
+              <mat-expansion-panel  class="mat-elevation-z0">
+                <mat-expansion-panel-header>
+                  <mat-list-item>
+                    <mat-icon mat-list-icon>{{item.icon}}</mat-icon>
+                    <div mat-line>{{item.label}}</div>
+                  </mat-list-item>
+                  <mat-divider></mat-divider>
+                </mat-expansion-panel-header>
+                <mat-list-item 
+                  *ngFor="let subItem of item.nodes"
+                  [matTooltip]="subItem.toolTip" 
+                  [matTooltipPosition]="subItem.toolTipPosition" 
+                  [routerLink]="subItem.route" 
+                  role-handler [allowedRoles]="subItem.allowedRoles"
+                >
+                  <mat-icon mat-list-icon>{{subItem.icon}}</mat-icon>
+                  <div mat-line>{{subItem.label}}</div>
+                </mat-list-item>
+
+              </mat-expansion-panel>
+              <mat-divider></mat-divider>
+            </div>
+          </div>
+        </mat-accordion>
+      </mat-nav-list>
     </mat-drawer>
     <mat-drawer-content>
         <router-outlet></router-outlet>
