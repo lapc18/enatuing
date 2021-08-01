@@ -100,7 +100,7 @@ export class NormativesComponent extends CommonAbstractGrid<Normative> implement
   }
 
   public onExport(fileType: FileType): void {
-    const fileName: string = `some-name-here-${Date.now()}`;
+    const fileName: string = `nortics-export-${Date.now()}`;
     this.exportService.saveToFile(fileType, this.data, fileName);
   }
 

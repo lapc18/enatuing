@@ -99,8 +99,8 @@ export class OrganizationComponent extends CommonAbstractGrid<Organization> impl
   }
 
   public onExport(fileType: FileType): void {
-    const fileName: string = `some-name-here-${Date.now()}`;
-    this.exportService.saveToFile(fileType, this.data, fileName);
+    const fileName: string = `organizations-export-${Date.now()}`;
+    this.exportService.saveToFile(fileType, this.selectedData.selected, fileName);
   }
 
 }

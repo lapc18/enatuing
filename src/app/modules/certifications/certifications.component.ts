@@ -117,8 +117,8 @@ export class CertificationsComponent extends CommonAbstractGrid<CertificationMod
 	}
 
 	public onExport(fileType: FileType): void {
-		const fileName: string = `some-name-here-${Date.now()}`;
-		this.exportService.saveToFile(fileType, this.data, fileName);
+		const fileName: string = `certifications-export-${Date.now()}`;
+		this.exportService.saveToFile(fileType, this.selectedData.selected, fileName);
 	}
 
 }

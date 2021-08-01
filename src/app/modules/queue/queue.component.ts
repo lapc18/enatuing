@@ -154,8 +154,8 @@ export class QueueComponent extends CommonAbstractGrid<QueueModel, Queue> implem
 	}
 
 	public onExport(fileType: FileType): void {
-		const fileName: string = `some-name-here-${Date.now()}`;
-		this.exportService.saveToFile(fileType, this.data, fileName);
+		const fileName: string = `queue-export-${Date.now()}`;
+		this.exportService.saveToFile(fileType, this.selectedData.selected, fileName);
 	}
 
 	public showAssignmentDialog(): void {

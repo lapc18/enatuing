@@ -17,6 +17,7 @@
             [filterBy]="filter"
             [columns]="columns" 
             [dataSource]="data"
+            [(selectedData)]="selectedData"
             [editPermissions]="allowedRoles.edit"
             [removePermissions]="allowedRoles.remove" 
             (onDelete)="onDelete($event)" 

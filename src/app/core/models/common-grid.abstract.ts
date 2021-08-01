@@ -1,8 +1,10 @@
+import { SelectionModel } from "@angular/cdk/collections";
 import { Observable, Subscription } from "rxjs";
 import { FileType, IColumn } from "./enat.models";
 
 export abstract class CommonAbstractGrid<T, E = any> {
 
+    public selectedData: SelectionModel<T> = new SelectionModel<T>(true, []);
     public subscriptions: Subscription[] = [];
     public isLoading$: Observable<boolean>;
     public isLoading: boolean;

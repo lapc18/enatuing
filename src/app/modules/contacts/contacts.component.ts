@@ -105,7 +105,7 @@ export class ContactsComponent extends CommonAbstractGrid<Contact> implements On
 
   public onExport(fileType: FileType): void {
     const fileName: string = `contacts-export-${Date.now()}`;
-    this.exportService.saveToFile(fileType, this.data, fileName);
+    this.exportService.saveToFile(fileType, this.selectedData.selected, fileName);
   }
 
 }

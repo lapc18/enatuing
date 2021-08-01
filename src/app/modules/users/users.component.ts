@@ -108,8 +108,8 @@ export class UsersComponent extends CommonAbstractGrid<User> implements OnInit, 
 	}
 
 	public onExport(fileType: FileType): void {
-		const fileName: string = `some-name-here-${Date.now()}`;
-		this.exportService.saveToFile(fileType, this.data, fileName);
+		const fileName: string = `users-export-${Date.now()}`;
+		this.exportService.saveToFile(fileType, this.selectedData.selected, fileName);
 	}
 
 }
