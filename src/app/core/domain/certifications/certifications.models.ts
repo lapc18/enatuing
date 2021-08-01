@@ -1,4 +1,6 @@
 import { IColumn } from "src/app/core/models/enat.models";
+import { Normative } from "../normatives/normatives.models";
+import { Organization } from "../organizations/organizations.models";
 
 
 export interface Certification {
@@ -7,7 +9,23 @@ export interface Certification {
     nortic?: string,
     niu?: string,
     type?: string,
-    status?: string
+    status?: string,
+    startDate?: string,
+    endDate?: string,
+}
+
+export interface CertificationModel {
+    id?: any,
+    organizationId?: string,
+    normativeId?: string,
+    organization?: Organization,
+    normative?: Normative,
+    nortic?: string,
+    niu?: string,
+    type?: string,
+    status?: number,
+    startDate?: string,
+    endDate?: string,
 }
 
 export const CERTIFICATIONS_COLS: IColumn[] = [
@@ -29,6 +47,16 @@ export const CERTIFICATIONS_COLS: IColumn[] = [
     {
         label: "Tipo",
         name: 'type',
+        width: 150
+    },
+    {
+        label: "Fecha de certificación",
+        name: 'startDate',
+        width: 150
+    },
+    {
+        label: "Fecha de caducidad",
+        name: 'endDate',
         width: 150
     },
     {

@@ -1,16 +1,24 @@
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { select, Store } from '@ngrx/store';
+import { Certification, CertificationModel } from 'src/app/core/domain/certifications/certifications.models';
 import { QueueUserAction } from 'src/app/core/domain/queue-user/queue-user.model';
 import { Queue, QueueModel } from 'src/app/core/domain/queue/queue.models';
 import { DialogFactory } from 'src/app/core/factory/dialogs/dialog.factory';
 import { CommonAbstractGrid } from 'src/app/core/models/common-grid.abstract';
 import { columnSettings, FileType } from 'src/app/core/models/enat.models';
 import { ExportService } from 'src/app/core/services/export.service';
+import { Certificationstate } from 'src/app/core/stores/certifications/certifications.reducers';
 import * as actions from 'src/app/core/stores/queue/queue.actions';
+import * as certActions from 'src/app/core/stores/certifications/certifications.actions';
+import * as norticsActions from 'src/app/core/stores/normatives/normatives.actions';
 import { QueueState } from 'src/app/core/stores/queue/queue.reducers';
 import { AssignmentComponent } from './assignment/assignment.component';
 import { DynamicQueueDetailComponent } from './dynamic-queue-detail/dynamic-queue-detail.component';
+import * as moment from 'moment';
+import { NormativesState } from 'src/app/core/stores/normatives/normatives.reducers';
+import { Normative } from 'src/app/core/domain/normatives/normatives.models';
+import { generateNIU } from 'src/app/core/utils/enat.utils';
 
 @Component({
   selector: 'app-queue',
@@ -20,10 +28,16 @@ import { DynamicQueueDetailComponent } from './dynamic-queue-detail/dynamic-queu
 export class QueueComponent extends CommonAbstractGrid<QueueModel, Queue> implements OnInit {
 
 	public dataMapped: Queue[] = [];
+	public certifications: CertificationModel[] = [];
+	public normatives: Normative[] = [];
 
 	constructor(
 		private dialog: MatDialog,
-		private store: Store<{queue: QueueState}>,
+		private store: Store<{
+			queue: QueueState,
+			certifications: Certificationstate,
+			normatives: NormativesState
+		}>,
 		public dialogFactory: DialogFactory,
 		public exportService: ExportService
 	) {
@@ -37,35 +51,38 @@ export class QueueComponent extends CommonAbstractGrid<QueueModel, Queue> implem
 	}
 
 	public loadData(): void {
-		this.store.dispatch(actions.loadQueue());
-		this.isLoading$.subscribe(res => this.isLoading = res);
-		this.data$.subscribe((res: QueueModel[]) => {
-			this.data = res;
-			this.dataMapped = res.map(item => {
-				let itemMapped:Queue = {};
+		this.subscriptions.push(this.isLoading$.subscribe(res => this.isLoading = res));
+		this.subscriptions.push(
+			this.data$.subscribe((res: QueueModel[]) => {
+				this.data = res;
+				this.dataMapped = res.map(item => {
+					let itemMapped:Queue = {};
+					if(item) {
+						//{{item.category}}{{item.order}}-{{item.publishetAt}}
+						itemMapped.nortic = `${item.normative.category || ''}${item.normative.order || ''}-${item.normative.publishetAt || ''}`;
+						itemMapped.organization = `${item.organization.name || ''}-(${item.organization.acronym || ''})`;
+						itemMapped.status = `${item.status && item.status.description? item.status.description : ''}`;
+						itemMapped.contact = `${item.contact && item.contact.name ? item.contact.name : ''}`;
+						itemMapped.id = item.id || '';
+						itemMapped.type = item.type || '';
+						itemMapped.startDate = moment(item.startDate).format('DD-MM-YYYY') || '';
+						itemMapped.endDate = moment(item.endDate).format('DD-MM-YYYY')  || '';
 
-				if(item) {
-					//{{item.category}}{{item.order}}-{{item.publishetAt}}
-					itemMapped.nortic = `${item.normative.category || ''}${item.normative.order || ''}-${item.normative.publishetAt || ''}`;
-					itemMapped.organization = `${item.organization.name || ''}-(${item.organization.acronym || ''})`;
-					itemMapped.status = `${item.status && item.status.description? item.status.description : ''}`;
-					itemMapped.contact = `${item.contact && item.contact.name ? item.contact.name : ''}`;
-					itemMapped.id = item.id || '';
-					itemMapped.type = item.type || '';
-					itemMapped.startDate = item.startDate || '';
-					itemMapped.endDate = item.endDate || '';
+						if(item.queueActions && item.queueActions.length > 0) {
+							const audit:QueueUserAction = item.queueActions.find(x => x.queueAction.name.toLowerCase().includes('audit'));
+							const consult:QueueUserAction = item.queueActions.find(x => x.queueAction.name.toLowerCase().includes('consult'));
+							itemMapped.auditor = audit && audit.user ? `${audit.user.name} ${audit.user.lastName}` : '';
+							itemMapped.consultant = consult && consult.user ? `${consult.user.name} ${consult.user.lastName}` : '';
+						}
 
-					if(item.queueActions && item.queueActions.length > 0) {
-						const audit:QueueUserAction = item.queueActions.find(x => x.queueAction.name.toLowerCase().includes('audit'));
-						const consult:QueueUserAction = item.queueActions.find(x => x.queueAction.name.toLowerCase().includes('consult'));
-						itemMapped.auditor = audit && audit.user ? `${audit.user.name} ${audit.user.lastName}` : '';
-						itemMapped.consultant = consult && consult.user ? `${consult.user.name} ${consult.user.lastName}` : '';
 					}
+					return itemMapped;
+				});
+			})
+		);
+		this.subscriptions.push(this.store.pipe(select(store => store.certifications.certifications)).subscribe(res => this.certifications = res));
+		this.store.dispatch(actions.loadQueue());
 
-				}
-				return itemMapped;
-			});
-		});
 	}
 
 	public onCreate(): void {
@@ -102,7 +119,6 @@ export class QueueComponent extends CommonAbstractGrid<QueueModel, Queue> implem
 			message: '¿Está seguro que desea eliminar esta solicitud de certificación?',
 			callback:() => {
 				this.store.dispatch(actions.removeQueue({ id: item.id}));
-				this.store.dispatch(actions.onSuccess());
 			}
 		});
 
@@ -162,5 +178,61 @@ export class QueueComponent extends CommonAbstractGrid<QueueModel, Queue> implem
 		});
 	}
 
+	public certifyRequest(item: QueueModel | Queue): void {
+		let queueItem:QueueModel = {...this.data.find(x => x.id == item.id)};
+		let canCertify:boolean = true;
+		Object.keys(queueItem).forEach((key) => {
+			if((queueItem[key] as Object).hasOwnProperty('id') && canCertify) {
+				if(
+					!queueItem[key].id || 
+					queueItem[key].id == '' || 
+					!(item as Queue).auditor || 
+					!(item as Queue).consultant || 
+					(item as Queue).auditor == '' || 
+					(item as Queue).consultant == ''
+				) {
+					canCertify = false;
+				}
+			}
+		});
+		canCertify ? 
+		this.dialogFactory.confirmation({
+			hasBackdrop: true,
+			message: '¿Está seguro que desea certificar esta solicitud de certificación?',
+			callback:() => {
+				this.saveCertification({...queueItem});
+				this.store.dispatch(certActions.loadCertifications());
+				this.store.dispatch(actions.loadQueue());
+			}
+		}) : 
+		this.dialogFactory.warning({
+			hasBackdrop: true,
+			message: 'Esta solicitud no puede ser certificada, favor de completar los requerimientos restantes.'
+		});
+	}
+
+
+	private saveCertification(item: QueueModel): void {
+
+		const niu: string = generateNIU(item, this.certifications, this.normatives);
+		const startDate: string = moment().format('MM-DD-YYYY');
+		const endtDate: string = moment().add(2, 'years').format('MM-DD-YYYY');
+		const nortic: string = `${item.normative.category}${item.normative.order}${item.normative.publishetAt}`;
+
+		let payload:CertificationModel = {
+			normativeId: item.normative.id,
+			organizationId: item.organization.id,
+			niu: niu,
+			startDate: startDate,
+			endDate: endtDate,
+			nortic: nortic,
+			normative: item.normative,
+			organization: item.organization,
+			status: 0,
+			type: item.type
+		};
+
+		this.store.dispatch(certActions.createCertifications({payload: payload}));
+	}
   
 }

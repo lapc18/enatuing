@@ -1,11 +1,11 @@
 import { Action, createReducer, on } from "@ngrx/store";
-import { Certification } from "../../domain/certifications/certifications.models";
+import { Certification, CertificationModel } from "../../domain/certifications/certifications.models";
 import { CommonState } from "../../models/common-state.model";
 import * as actions from './certifications.actions';
 
 
 export interface Certificationstate extends CommonState {
-    certifications: Array<Certification>,
+    certifications: Array<CertificationModel>,
 }
 
 const initialCertificationstate: Certificationstate = {
@@ -37,7 +37,7 @@ const reducer = createReducer(
         isLoading: true,
         certifications: [...state.certifications.map((contact) => {
             if(contact.id == id){
-                let object:Certification = {...payload};
+                let object:CertificationModel = {...payload};
                 object.id = id;
                 return object;
             }
@@ -46,10 +46,10 @@ const reducer = createReducer(
     })),
     on(actions.editCertificationsFailed, (state, { payload }) => ({ ...state, isLoading: false, hasError: true, errorMessage: payload })),
 
-    on(actions.removeCertifications, (state, { payload, id }) => ({
+    on(actions.removeCertifications, (state, { payload }) => ({
         ...state,
         isLoading: true,
-        certifications: [...state.certifications.filter(contact => contact.id !== id)],
+        certifications: [...state.certifications.filter(contact => contact.id !== payload)],
     })),
     on(actions.removeCertificationsFailed, (state, { payload }) => ({ ...state, isLoading: false, hasError: true, errorMessage: payload })),
 );

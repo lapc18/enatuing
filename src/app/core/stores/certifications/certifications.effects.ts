@@ -44,7 +44,7 @@ export class CertificationsEffects {
 
     removeUsers$ = createEffect(() => this.actions$.pipe(
         ofType(actions.removeCertifications),
-        switchMap((action) => this.apiService.softDelete(action.payload.id)),
+        switchMap((action) => this.apiService.softDelete(action.payload)),
         switchMap(() => [actions.onSuccess(), actions.loadCertifications()]),
         catchError((err) => of(actions.removeCertificationsFailed({ payload: `${err}` })))
     ));
