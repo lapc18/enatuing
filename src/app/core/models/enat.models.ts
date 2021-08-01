@@ -23,7 +23,7 @@ export class DrawerItem {
 
 }
 
-export const DRAWER_OPTIONS: DrawerItem[] = [
+export const DRAWER_OPTIONS = (userId: string): DrawerItem[] => [
     new DrawerItem(
         'dashboard',
         'Dashboard',
@@ -45,11 +45,21 @@ export const DRAWER_OPTIONS: DrawerItem[] = [
         ['admin', 'audit', 'consult'],
         [
             new DrawerItem(
-                'receipt_long',
+                'list',
+                'Matríz general',
+                'Matríz general con todas las solicitudes en proceso de certificación',
+                'left',
+                '/dashboard/queue/current',
+                false,
+                true,
+                ['admin', 'audit', 'consult']
+            ),
+            new DrawerItem(
+                'assignment_ind',
                 'Matríz de usuario',
                 'Matríz exclusiva del usuario actual',
                 'left',
-                '/dashboard/queue',
+                '/dashboard/queue/user/' + userId,
                 false,
                 true,
                 ['admin', 'audit', 'consult']

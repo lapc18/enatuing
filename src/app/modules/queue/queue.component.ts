@@ -19,6 +19,7 @@ import * as moment from 'moment';
 import { NormativesState } from 'src/app/core/stores/normatives/normatives.reducers';
 import { Normative } from 'src/app/core/domain/normatives/normatives.models';
 import { generateNIU } from 'src/app/core/utils/enat.utils';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-queue',
@@ -32,6 +33,7 @@ export class QueueComponent extends CommonAbstractGrid<QueueModel, Queue> implem
 	public normatives: Normative[] = [];
 
 	constructor(
+		private route: ActivatedRoute,
 		private dialog: MatDialog,
 		private store: Store<{
 			queue: QueueState,
@@ -47,12 +49,14 @@ export class QueueComponent extends CommonAbstractGrid<QueueModel, Queue> implem
 	}
 
 	ngOnInit(): void {
-		this.loadData();
+		const routeParams = this.route.snapshot.paramMap;
+		const userId = String(routeParams.get('userId'));
+		userId && !userId.includes('null') ? this.loadData(userId) : this.loadData();
 	}
 
-	public loadData(): void {
-		this.subscriptions.push(this.isLoading$.subscribe(res => this.isLoading = res));
+	public loadData(userId?:string): void {
 		this.subscriptions.push(
+			this.isLoading$.subscribe(res => this.isLoading = res),
 			this.data$.subscribe((res: QueueModel[]) => {
 				this.data = res;
 				this.dataMapped = res.map(item => {
@@ -73,16 +77,22 @@ export class QueueComponent extends CommonAbstractGrid<QueueModel, Queue> implem
 							const consult:QueueUserAction = item.queueActions.find(x => x.queueAction.name.toLowerCase().includes('consult'));
 							itemMapped.auditor = audit && audit.user ? `${audit.user.name} ${audit.user.lastName}` : '';
 							itemMapped.consultant = consult && consult.user ? `${consult.user.name} ${consult.user.lastName}` : '';
+							itemMapped.consultantId = consult && consult.user ? consult.user.id : '';
+							itemMapped.auditorId = audit && audit.user ? audit.user.id: '';
 						}
 
 					}
 					return itemMapped;
 				});
-			})
+				userId ? 
+					this.dataMapped = this.dataMapped.filter(x => 
+						(x.auditorId && x.auditorId.includes(userId)) ||
+						(x.consultantId && x.consultantId.includes(userId))
+					) : void 0;
+			}),
+			this.store.pipe(select(store => store.certifications.certifications)).subscribe(res => this.certifications = res)
 		);
-		this.subscriptions.push(this.store.pipe(select(store => store.certifications.certifications)).subscribe(res => this.certifications = res));
 		this.store.dispatch(actions.loadQueue());
-
 	}
 
 	public onCreate(): void {

@@ -11,7 +11,7 @@ import { AuthState } from 'src/app/core/stores/auth/auth.reducer';
 })
 export class DashboardComponent implements OnInit {
 
-  public drawerOptions: DrawerItem[] = DRAWER_OPTIONS;
+  public drawerOptions: DrawerItem[] = [];
 
   public user: User = null;
   
@@ -22,6 +22,7 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.drawerOptions = DRAWER_OPTIONS(this.user ? this.user.id : '');
   }
 
 }
