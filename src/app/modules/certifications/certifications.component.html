@@ -3,7 +3,6 @@
         <common-header 
             (onExport)="onExport($event)"
             (onFilter)="filter = $event"
-            (onAddItem)="onCreate()"
         ></common-header>
         <common-table #table
             [filterBy]="filter"
@@ -14,7 +13,7 @@
         > 
             <ng-template let-data="data">
                 <button mat-menu-item matTooltipPosition="above" matTooltip="Ver detalles" (click)="onSeeDetails(data)"><mat-icon>preview</mat-icon><b>Ver detalles</b></button>
-				<button mat-menu-item matTooltipPosition="above" matTooltip="Eliminar" (click)="onDelete(data)"><mat-icon>delete</mat-icon><b>Eliminar</b></button>
+				<button role-handler [allowedRoles]="allowedRoles.remove" mat-menu-item matTooltipPosition="above" matTooltip="Eliminar" (click)="onDelete(data)"><mat-icon>delete</mat-icon><b>Eliminar</b></button>
             </ng-template>
         </common-table>
     </ng-container>

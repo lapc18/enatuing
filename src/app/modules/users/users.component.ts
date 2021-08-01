@@ -18,6 +18,12 @@ import { Subscription } from 'rxjs';
 })
 export class UsersComponent extends CommonAbstractGrid<User> implements OnInit, OnDestroy {
 
+	public allowedRoles: { create?: string[], edit?: string[], remove?: string[] } = {
+		create: ['admin', 'gerent', 'audit', 'supervisor'],
+		edit: ['admin', 'gerent', 'audit', 'supervisor'],
+		remove: ['admin', 'gerent'],
+	};
+
 	constructor(
 		private dialog: MatDialog,
 		private store: Store<{ users: UserState }>,

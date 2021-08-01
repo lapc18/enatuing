@@ -52,8 +52,8 @@
 
 					<ng-container *ngIf="showDefaultActions">
 						<button mat-menu-item matTooltipPosition="above" matTooltip="Ver detalles" (click)="details(element)"><mat-icon>preview</mat-icon><b>Ver detalles</b></button>
-						<button mat-menu-item matTooltipPosition="above" matTooltip="Editar" (click)="edit(element)"><mat-icon>create</mat-icon><b>Editar</b></button>
-						<button mat-menu-item matTooltipPosition="above" matTooltip="Eliminar" (click)="delete(element)"><mat-icon>delete</mat-icon><b>Eliminar</b></button>
+						<button role-handler [allowedRoles]="editPermissions" mat-menu-item matTooltipPosition="above" matTooltip="Editar" (click)="edit(element)"><mat-icon>create</mat-icon><b>Editar</b></button>
+						<button role-handler [allowedRoles]="removePermissions" mat-menu-item matTooltipPosition="above" matTooltip="Eliminar" (click)="delete(element)"><mat-icon>delete</mat-icon><b>Eliminar</b></button>
 					</ng-container>
 
 				</mat-menu>

@@ -12,6 +12,8 @@ import { SelectionModel } from '@angular/cdk/collections';
 })
 export class CommonTableComponent implements OnInit, AfterViewInit, OnChanges {
  
+  @Input() editPermissions: string[] = ['admin'];
+  @Input() removePermissions: string[] = ['admin'];;
   @Input() dataSource: any[] = [];
   @Input() columns: IColumn[] = [];
   @Input() filterBy: string = '';

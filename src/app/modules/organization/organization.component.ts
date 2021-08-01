@@ -18,6 +18,12 @@ import { DynamicOrganizationDetailComponent } from './dynamic-organization-detai
 })
 export class OrganizationComponent extends CommonAbstractGrid<Organization> implements OnInit, OnDestroy {
 
+  public allowedRoles: { create?: string[], edit?: string[], remove?: string[] } = {
+		create: ['admin', 'gerent', 'audit', 'supervisor', 'consultant'],
+		edit: ['admin', 'gerent', 'audit', 'supervisor', 'consultant'],
+		remove: ['admin', 'gerent']
+	};
+
   constructor(
     private dialog: MatDialog,
     private store: Store<{ organization: OrganizationState }>,

@@ -19,6 +19,9 @@ styleUrls: ['./certifications.component.scss']
 })
 export class CertificationsComponent extends CommonAbstractGrid<CertificationModel, any> implements OnInit, OnDestroy {
 
+	public allowedRoles: { remove?: string[] } = {
+		remove: ['admin', 'gerent']
+	};
 	public dataMapped:Certification[] = [];
 
 	constructor(

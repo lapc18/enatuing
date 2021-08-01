@@ -6,12 +6,23 @@
         <common-header 
             (onExport)="onExport($event)"
             (onFilter)="filter = $event"
-            (onAddItem)="onCreate()"
-        ></common-header>
+        >
+            <button role-handler [allowedRoles]="allowedRoles.create"
+                mat-icon-button 
+                matTooltip="Click para agregar un nuevo item en la vista actual." 
+                matTooltipPosition="above"
+                (click)="onCreate()"
+            >
+                <mat-icon>add_circle</mat-icon>
+            </button>
+    
+        </common-header>
         <common-table #table
             [filterBy]="filter"
             [columns]="columns" 
             [dataSource]="data" 
+            [editPermissions]="allowedRoles.edit"
+            [removePermissions]="allowedRoles.remove"
             (onDelete)="onDelete($event)" 
             (onEdit)="onEdit($event)" 
             (onDetails)="onSeeDetails($event)"> 
