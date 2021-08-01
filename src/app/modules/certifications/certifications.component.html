@@ -8,7 +8,7 @@
         <common-table #table
             [filterBy]="filter"
             [columns]="columns" 
-            [dataSource]="data" 
+            [dataSource]="dataMapped" 
             (onDelete)="onDelete($event)" 
             (onEdit)="onEdit($event)" 
             (onDetails)="onSeeDetails($event)"> 

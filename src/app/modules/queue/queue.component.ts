@@ -228,7 +228,7 @@ export class QueueComponent extends CommonAbstractGrid<QueueModel, Queue> implem
 			nortic: nortic,
 			normative: item.normative,
 			organization: item.organization,
-			status: 0,
+			status: '0',
 			type: item.type
 		};
 

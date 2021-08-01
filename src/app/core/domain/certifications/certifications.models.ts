@@ -23,7 +23,7 @@ export interface CertificationModel {
     nortic?: string,
     niu?: string,
     type?: string,
-    status?: number,
+    status?: string,
     startDate?: string,
     endDate?: string,
 }
