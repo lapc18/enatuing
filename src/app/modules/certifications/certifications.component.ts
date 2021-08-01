@@ -7,7 +7,7 @@ import * as actions from 'src/app/core/stores/certifications/certifications.acti
 import { DialogFactory } from 'src/app/core/factory/dialogs/dialog.factory';
 import { select, Store } from '@ngrx/store';
 import { ExportService } from 'src/app/core/services/export.service';
-import { Certification } from 'src/app/core/domain/certifications/certifications.models';
+import { Certification, CertificationModel } from 'src/app/core/domain/certifications/certifications.models';
 import { Certificationstate } from 'src/app/core/stores/certifications/certifications.reducers';
 import { DynamicCertificationsDetailComponent } from './dynamic-certifications-detail/dynamic-certifications-detail.component';
 
@@ -16,7 +16,7 @@ import { DynamicCertificationsDetailComponent } from './dynamic-certifications-d
   templateUrl: './certifications.component.html',
   styleUrls: ['./certifications.component.scss']
 })
-export class CertificationsComponent extends CommonAbstractGrid<Certification> implements OnInit {
+export class CertificationsComponent extends CommonAbstractGrid<CertificationModel, any> implements OnInit {
 
   constructor(
     private dialog: MatDialog,
@@ -36,7 +36,7 @@ export class CertificationsComponent extends CommonAbstractGrid<Certification> i
   public loadData(): void {
     this.store.dispatch(actions.loadCertifications());
     this.isLoading$.subscribe(res => this.isLoading = res);
-    this.data$.subscribe((res: Certification[]) => this.data = res);
+    this.data$.subscribe((res: CertificationModel[]) => this.data = res);
   }
 
   public onCreate(): void {
@@ -66,7 +66,7 @@ export class CertificationsComponent extends CommonAbstractGrid<Certification> i
     this.dialogFactory.confirmation({
       message: '¿Está seguro que desea eliminar este Certificacion?',
       callback:() => {
-        this.store.dispatch(actions.removeCertifications({ payload: item, id: item.id}));
+        this.store.dispatch(actions.removeCertifications({ payload: item.id}));
         this.store.dispatch(actions.onSuccess());
       }
     });

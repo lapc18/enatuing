@@ -2,7 +2,7 @@ import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
-import { Certification } from 'src/app/core/domain/certifications/certifications.models';
+import { Certification, CertificationModel } from 'src/app/core/domain/certifications/certifications.models';
 import { CommonGridAbstractDetails } from 'src/app/core/models/common-details.abstract';
 import { Certificationstate } from 'src/app/core/stores/certifications/certifications.reducers';
 import * as actions from 'src/app/core/stores/certifications/certifications.actions';
@@ -13,7 +13,7 @@ import { GLOBAL_STATUS, GenericTypeValue } from 'src/app/core/models/enat.models
   templateUrl: './dynamic-certifications-detail.component.html',
   styleUrls: ['./dynamic-certifications-detail.component.scss']
 })
-export class DynamicCertificationsDetailComponent extends CommonGridAbstractDetails<Certification> implements OnInit {
+export class DynamicCertificationsDetailComponent extends CommonGridAbstractDetails<CertificationModel> implements OnInit {
 
   public certification: Certification = null;
   public certificationStatuses: GenericTypeValue[] = GLOBAL_STATUS;
