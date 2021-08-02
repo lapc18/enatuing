@@ -2,14 +2,19 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { select, Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
+import { Normative } from 'src/app/core/domain/normatives/normatives.models';
 import { Organization } from 'src/app/core/domain/organizations/organizations.models';
 import { DialogFactory } from 'src/app/core/factory/dialogs/dialog.factory';
 import { CommonAbstractGrid } from 'src/app/core/models/common-grid.abstract';
 import { columnSettings, FileType } from 'src/app/core/models/enat.models';
 import { ExportService } from 'src/app/core/services/export.service';
+import { Certificationstate } from 'src/app/core/stores/certifications/certifications.reducers';
 import * as actions from 'src/app/core/stores/organizations/organizations.actions';
+import * as certActions from 'src/app/core/stores/certifications/certifications.actions';
 import { OrganizationState } from 'src/app/core/stores/organizations/organizations.reducers';
+import { DetailsComponent } from './details/details.component';
 import { DynamicOrganizationDetailComponent } from './dynamic-organization-detail/dynamic-organization-detail.component';
+import { CertificationModel } from 'src/app/core/domain/certifications/certifications.models';
 
 @Component({
   selector: 'app-organization',
@@ -26,7 +31,7 @@ export class OrganizationComponent extends CommonAbstractGrid<Organization> impl
 
   constructor(
     private dialog: MatDialog,
-    private store: Store<{ organization: OrganizationState }>,
+    private store: Store<{ organization: OrganizationState, certifications:Certificationstate }>,
     public dialogFactory: DialogFactory,
     public exportService: ExportService
   ) {
@@ -45,6 +50,7 @@ export class OrganizationComponent extends CommonAbstractGrid<Organization> impl
 
   public loadData(): void {
     this.store.dispatch(actions.loadOrganizations());
+    this.store.dispatch(certActions.loadCertifications());
     this.subscriptions.push(this.isLoading$.subscribe(res => this.isLoading = res));
     this.subscriptions.push(this.data$.subscribe((res: Organization[]) => this.data = res));
   }
@@ -86,16 +92,23 @@ export class OrganizationComponent extends CommonAbstractGrid<Organization> impl
 
   }
 
-  public onSeeDetails(item: any): void {
-    this.dialog.open(DynamicOrganizationDetailComponent, {
-      data: {
-        isEditing: false,
-        organization: item
-      },
-      minWidth: '50%',
-      minHeight: '60vh',
-      hasBackdrop: true
+  public onSeeDetails(item: Organization): void {
+    console.log('details:', item)
+    this.store.pipe(select(x => x.certifications.certifications)).subscribe(res => {
+      console.log('into promise')
+      const certifications:CertificationModel[] = res.filter(x => x.organizationId == item.id);
+  
+      this.dialog.open(DetailsComponent, {
+        data: {
+          item: item,
+          certifications: certifications
+        },
+        width: '70vw',
+        height: '90vh',
+        hasBackdrop: true
+      });
     });
+
   }
 
   public onExport(fileType: FileType): void {

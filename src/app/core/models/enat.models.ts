@@ -255,5 +255,7 @@ export interface NorticStamp {
     niu: string,
     color: string,
     year: string,
-    nortic: string
+    nortic: string,
+    startDate?: string,
+    endDate?: string,
 }

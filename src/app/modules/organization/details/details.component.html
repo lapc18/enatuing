@@ -1,0 +1,27 @@
+<div class="container">
+
+    <div class="header text-center">
+        <h1>Detalles de Certificación</h1>
+        <br>
+        <p class="lead">{{ organization.name }}</p>
+        <p class="lead">({{ organization.acronym }})</p>
+    </div>
+
+    <div class="text-center">
+        <div class="row justify-content-around">
+            <div *ngFor="let nortic of nortics" style="width: 400px; padding: 5px;">
+                <nortic-stamp 
+                    [stampCode]="nortic.niu"
+                    [color]="nortic.color"
+                    [backgroundColor]="'#FFF'"
+                    [year]="nortic.year"
+                    [nortic]="nortic.nortic"
+                ></nortic-stamp>
+
+                <br>
+                <br>
+                <p class="lead">Desde: <b>{{nortic.startDate}}</b> | Hasta: <b>{{nortic.endDate}}</b> </p>
+            </div>
+        </div>
+    </div>
+</div>
