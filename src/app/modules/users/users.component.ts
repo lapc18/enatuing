@@ -19,9 +19,9 @@ import { Subscription } from 'rxjs';
 export class UsersComponent extends CommonAbstractGrid<User> implements OnInit, OnDestroy {
 
 	public allowedRoles: { create?: string[], edit?: string[], remove?: string[] } = {
-		create: ['admin', 'gerent', 'audit', 'supervisor'],
-		edit: ['admin', 'gerent', 'audit', 'supervisor'],
-		remove: ['admin', 'gerent'],
+		create: ['admin', 'manager', 'audit', 'supervisor'],
+		edit: ['admin', 'manager', 'audit', 'supervisor'],
+		remove: ['admin', 'manager'],
 	};
 
 	constructor(

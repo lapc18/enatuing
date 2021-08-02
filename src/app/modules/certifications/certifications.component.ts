@@ -11,6 +11,7 @@ import { Certification, CertificationModel } from 'src/app/core/domain/certifica
 import { Certificationstate } from 'src/app/core/stores/certifications/certifications.reducers';
 import { DynamicCertificationsDetailComponent } from './dynamic-certifications-detail/dynamic-certifications-detail.component';
 import * as moment from 'moment';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
 selector: 'app-certifications',
@@ -20,11 +21,12 @@ styleUrls: ['./certifications.component.scss']
 export class CertificationsComponent extends CommonAbstractGrid<CertificationModel, any> implements OnInit, OnDestroy {
 
 	public allowedRoles: { remove?: string[] } = {
-		remove: ['admin', 'gerent']
+		remove: ['admin', 'manager']
 	};
 	public dataMapped:Certification[] = [];
 
 	constructor(
+		private route: ActivatedRoute,
 		private dialog: MatDialog,
 		private store: Store<{certifications: Certificationstate}>,
 		public dialogFactory: DialogFactory,
@@ -36,14 +38,16 @@ export class CertificationsComponent extends CommonAbstractGrid<CertificationMod
 	}
 
 	ngOnInit(): void {
-		this.loadData();
+		this.route.params.subscribe(res => {
+			res && res.type && !res.type.includes('null') ? this.loadData(res.type) : this.loadData();
+		});
 	}
 
 	ngOnDestroy(): void {
 		this.subscriptions.forEach(subscription => subscription.unsubscribe());
 	}
 
-	public loadData(): void {
+	public loadData(type?:string): void {
 		this.store.dispatch(actions.loadCertifications());
 		this.subscriptions.push(
 			this.isLoading$.subscribe(res => this.isLoading = res),
@@ -66,6 +70,19 @@ export class CertificationsComponent extends CommonAbstractGrid<CertificationMod
 
 					return item;
 				});
+				switch(type) {
+					case '0': this.dataMapped = this.dataMapped.filter(x => x.status.toLowerCase().includes('inactiva')); break;
+					case '1': this.dataMapped = this.dataMapped.filter(x => x.status.toLowerCase().includes('activa')); break;
+					case 'week': 
+						this.dataMapped = this.dataMapped.filter(x => 
+							(moment().weekday(0).format('MM/DD/YYYY') >= moment(x.startDate).format('MM/DD/YYYY')) || (moment().weekday(6).format('MM/DD/YYYY') == moment(x.startDate).format('MM/DD/YYYY'))
+						); 
+					break;
+					case 'month': this.dataMapped = this.dataMapped.filter(x => 
+						moment(x.startDate, 'DD/MM/YYYY').format('M') == moment().format('M') &&
+						moment(x.startDate, 'DD/MM/YYYY').format('Y') == moment().format('Y') 
+					); break;
+				}
 			})
 		);
 	}

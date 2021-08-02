@@ -42,7 +42,7 @@ export const DRAWER_OPTIONS = (userId: string): DrawerItem[] => [
         '/dashboard/queue',
         false,
         true,
-        ['admin', 'audit', 'consult'],
+        ['admin', 'audit', 'consult', 'manager', 'supervisor'],
         [
             new DrawerItem(
                 'list',
@@ -52,7 +52,7 @@ export const DRAWER_OPTIONS = (userId: string): DrawerItem[] => [
                 '/dashboard/queue/current',
                 false,
                 true,
-                ['admin', 'audit', 'consult']
+                ['admin', 'audit', 'consult', 'manager', 'supervisor'],
             ),
             new DrawerItem(
                 'assignment_ind',
@@ -74,7 +74,7 @@ export const DRAWER_OPTIONS = (userId: string): DrawerItem[] => [
         '/dashboard/normatives',
         false,
         true,
-        ['admin', 'audit', 'consult']
+        ['admin', 'audit', 'consult', 'manager', 'supervisor'],
     ),
     new DrawerItem(
         'verified_user',
@@ -84,7 +84,49 @@ export const DRAWER_OPTIONS = (userId: string): DrawerItem[] => [
         '/dashboard/certifications',
         false,
         true,
-        ['admin', 'audit', 'consult']
+        ['admin', 'audit', 'consult', 'manager', 'supervisor'],
+        [
+            new DrawerItem(
+                'check_circle',
+                'Activas',
+                'Certificaciones activas',
+                'left',
+                '/dashboard/certifications/1',
+                false,
+                true,
+                ['admin', 'audit', 'consult', 'manager', 'supervisor', 'visitor'],
+            ),
+            new DrawerItem(
+                'unpublished',
+                'Inactivas',
+                'Certificaciones activas',
+                'left',
+                '/dashboard/certifications/0',
+                false,
+                true,
+                ['admin', 'audit', 'consult', 'manager', 'supervisor', 'visitor'],
+            ),
+            new DrawerItem(
+                'today',
+                'Emitidas esta semana',
+                'Certificaciones emitidas durante el transcurso de la semana en curso',
+                'left',
+                '/dashboard/certifications/week',
+                false,
+                true,
+                ['admin', 'audit', 'consult', 'manager', 'supervisor', 'visitor'],
+            ),
+            new DrawerItem(
+                'date_range',
+                'Emitidas este mes',
+                'Certificaciones emitidas durante el transcurso del mes en curso',
+                'left',
+                '/dashboard/certifications/month',
+                false,
+                true,
+                ['admin', 'audit', 'consult', 'manager', 'supervisor', 'visitor'],
+            ),
+        ]
     ),
     new DrawerItem(
         'corporate_fare',
@@ -94,7 +136,7 @@ export const DRAWER_OPTIONS = (userId: string): DrawerItem[] => [
         '/dashboard/organizations',
         false,
         true,
-        ['admin', 'audit', 'consult']
+        ['admin', 'audit', 'consult', 'manager', 'supervisor'],
     ),
     new DrawerItem(
         'contacts',
@@ -104,7 +146,7 @@ export const DRAWER_OPTIONS = (userId: string): DrawerItem[] => [
         '/dashboard/contacts',
         false,
         true,
-        ['admin', 'audit', 'consult']
+        ['admin', 'audit', 'consult', 'manager', 'supervisor'],
     ),
     new DrawerItem(
         'insights',
@@ -114,7 +156,7 @@ export const DRAWER_OPTIONS = (userId: string): DrawerItem[] => [
         '/dashboard/metrics',
         false,
         true,
-        ['admin']
+        ['admin', 'manager'],
     ),
     new DrawerItem(
         'people',
@@ -124,17 +166,17 @@ export const DRAWER_OPTIONS = (userId: string): DrawerItem[] => [
         '/dashboard/users',
         false,
         true,
-        ['admin']
+        ['admin', 'audit', 'manager', 'supervisor'],
     ),
     new DrawerItem(
         'analytics',
-        'Statistics',
-        'Statistics',
+        'Estadísticas',
+        'Estadísticas generales del sistema',
         'left',
         '/dashboard/statistics',
         false,
         false,
-        ['admin', 'audit', 'consult']
+        ['admin', 'audit', 'consult', 'manager', 'supervisor', 'visitor'],
     )
 ];
 

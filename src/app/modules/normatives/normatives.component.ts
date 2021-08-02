@@ -18,9 +18,9 @@ import { DynamicNormativeDetailComponent } from './dynamic-normative-detail/dyna
 export class NormativesComponent extends CommonAbstractGrid<Normative> implements OnInit {
 
   public allowedRoles: { create?: string[], edit?: string[], remove?: string[] } = {
-		create: ['admin', 'gerent'],
-		edit: ['admin', 'gerent'],
-		remove: ['admin', 'gerent'],
+		create: ['admin', 'manager'],
+		edit: ['admin', 'manager'],
+		remove: ['admin', 'manager'],
 	};
 
   constructor(

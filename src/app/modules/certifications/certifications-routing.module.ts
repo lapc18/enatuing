@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CertificationsComponent } from './certifications.component';
 
-const routes: Routes = [{ path: '', component: CertificationsComponent }];
+const routes: Routes = [
+  { path: ':type', component: CertificationsComponent },
+];
 
 @NgModule({
   imports: [RouterModule.forChild(routes)],

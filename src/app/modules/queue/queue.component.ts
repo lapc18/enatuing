@@ -29,11 +29,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class QueueComponent extends CommonAbstractGrid<QueueModel, Queue> implements OnInit {
 
 	public allowedRoles: { assignment?: string[], create?: string[], edit?: string[], remove?: string[], certify:string[] } = {
-		assignment: ['admin', 'gerent', 'audit', 'supervisor'],
-		create: ['admin', 'gerent', 'audit', 'supervisor'],
-		edit: ['admin', 'gerent', 'audit', 'supervisor'],
-		remove: ['admin', 'gerent'],
-		certify: ['admin', 'gerent', 'supervisor', 'audit'],
+		assignment: ['admin', 'manager', 'audit', 'supervisor'],
+		create: ['admin', 'manager', 'audit', 'supervisor'],
+		edit: ['admin', 'manager', 'audit', 'supervisor'],
+		remove: ['admin', 'manager'],
+		certify: ['admin', 'manager', 'supervisor', 'audit'],
 	};
 	public dataMapped: Queue[] = [];
 	public certifications: CertificationModel[] = [];

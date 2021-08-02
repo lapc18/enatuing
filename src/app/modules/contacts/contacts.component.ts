@@ -20,9 +20,9 @@ import { ContactService } from 'src/app/core/services/contacts.service';
 export class ContactsComponent extends CommonAbstractGrid<Contact> implements OnInit, OnDestroy {
 
   public allowedRoles: { create?: string[], edit?: string[], remove?: string[]} = {
-		create: ['admin', 'gerent', 'audit', 'supervisor', 'consultant'],
-		edit: ['admin', 'gerent', 'audit', 'supervisor', 'consultant'],
-		remove: ['admin', 'gerent'],
+		create: ['admin', 'manager', 'audit', 'supervisor', 'consultant'],
+		edit: ['admin', 'manager', 'audit', 'supervisor', 'consultant'],
+		remove: ['admin', 'manager'],
 	};
 
   constructor(
