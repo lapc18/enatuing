@@ -48,7 +48,7 @@ export class NorticStampComponent implements OnInit {
   }
 
   saveAsPng(blob: Blob): void {
-    const fileName: string = `nortic-${this.nortic}-${this.year}`;
+    const fileName: string = `nortic-${this.nortic}-${this.year}-${this.stampCode}`;
     this.exportService.saveToFile(FileType.htmlPng, blob, fileName);
   }
 }

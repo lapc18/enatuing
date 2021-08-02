@@ -1,0 +1,22 @@
+<div class="container justify-content">
+
+    <div class="header text-center">
+        <h1>Detalles de Certificación</h1>
+    </div>
+
+    <div class="text-center">
+        <nortic-stamp
+            [stampCode]="nortic.niu"
+            [color]="nortic.color"
+            [backgroundColor]="'#FFF'"
+            [year]="nortic.year"
+            [nortic]="nortic.nortic"
+        ></nortic-stamp>
+
+        <br/>
+        <br/>
+        <p class="lead">{{ data.item.organization.name }} ({{ data.item.organization.acronym }})</p>
+        <p class="lead">{{ data.item.normative.description }}</p>
+
+    </div>
+</div>

@@ -12,6 +12,7 @@ import { Certificationstate } from 'src/app/core/stores/certifications/certifica
 import { DynamicCertificationsDetailComponent } from './dynamic-certifications-detail/dynamic-certifications-detail.component';
 import * as moment from 'moment';
 import { ActivatedRoute } from '@angular/router';
+import { DetailsComponent } from './details/details.component';
 
 @Component({
 selector: 'app-certifications',
@@ -58,7 +59,7 @@ export class CertificationsComponent extends CommonAbstractGrid<CertificationMod
 					if(c) {
 						item = {
 							id: c.id,
-							nortic: c.nortic,
+							nortic: `${c.normative.category}${c.normative.order} - ${c.normative.publishetAt}`,
 							organization: `${c.organization.name} (${c.organization.acronym})`,
 							niu: c.niu,
 							status: c.status && c.status.includes('0') ? 'Inactiva' : 'Activa',
@@ -122,10 +123,10 @@ export class CertificationsComponent extends CommonAbstractGrid<CertificationMod
 	}
 
 	public onSeeDetails(item: Certification): void {
-		this.dialog.open(DynamicCertificationsDetailComponent, {
+		const certification:CertificationModel = this.data.find(x => x.id == item.id);
+		this.dialog.open(DetailsComponent, {
 		data: {
-			isEditing: false,
-			certification: item
+			item: certification
 		},
 		minWidth: '50%',
 		minHeight: '60vh',

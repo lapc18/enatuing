@@ -242,11 +242,18 @@ export interface IBaseService<T> {
 
 export const GLOBAL_STATUS: GenericTypeValue[] = [
     {
-        id: 0,
+        id: 1,
         description: 'Activo'
     },
     {
-        id: 1,
+        id: 0,
         description: 'Inactivo'
     },
-]
+];
+
+export interface NorticStamp {
+    niu: string,
+    color: string,
+    year: string,
+    nortic: string
+}
