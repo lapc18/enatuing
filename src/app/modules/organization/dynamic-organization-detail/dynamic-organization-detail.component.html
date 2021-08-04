@@ -16,12 +16,15 @@
                 <mat-form-field>
                     <mat-label>Siglas</mat-label>
                     <input matInput placeholder="Seleccione una NORTIC" formControlName="acronym" type="text" (focus)="setAcronymOnValueChange()">
-                </mat-form-field>            
-    
+                </mat-form-field>
+                
                 <mat-form-field>
                     <mat-label>Ciudad</mat-label>
-                    <input matInput placeholder="Ingrese un NIU" formControlName="city" type="text">
+                    <mat-select placeholder="Ej: Distrito Nacional" formControlName="city">
+                        <mat-option *ngFor="let item of cities" [value]="item.name">{{item.name}}</mat-option>
+                    </mat-select>
                 </mat-form-field>
+
                 <br />
                 <div mat-dialog-actions>
                     <button class="btn btn-danger" mat-dialog-close>

@@ -5,7 +5,7 @@ import { select, Store } from '@ngrx/store';
 import { Subscription } from 'rxjs';
 import { Normative } from 'src/app/core/domain/normatives/normatives.models';
 import { CommonGridAbstractDetails } from 'src/app/core/models/common-details.abstract';
-import { GenericTypeValue, GLOBAL_NORTIC_CATEGORIES } from 'src/app/core/models/enat.models';
+import { City, GenericTypeValue, GLOBAL_NORTIC_CATEGORIES } from 'src/app/core/models/enat.models';
 import * as actions from 'src/app/core/stores/normatives/normatives.actions';
 import { NormativesState } from 'src/app/core/stores/normatives/normatives.reducers';
 
@@ -21,6 +21,7 @@ export class DynamicNormativeDetailComponent extends CommonGridAbstractDetails<N
   public normativeStatuses: GenericTypeValue[] = [];
   public isLoadingnormativeStatuses: boolean = false;
   public categories:GenericTypeValue[] = GLOBAL_NORTIC_CATEGORIES;
+  public city:City[] = [];
   
   constructor(
       private store: Store<{normatives: NormativesState}>,
@@ -42,10 +43,9 @@ export class DynamicNormativeDetailComponent extends CommonGridAbstractDetails<N
 
   public loadComponent(): void {
     this.subscriptions.push(
-      this.store.pipe(select(item => item.normatives.normativeStatuses)).subscribe(res => this.normativeStatuses = res)
-    );
-    this.subscriptions.push(
-      this.store.pipe(select(item => item.normatives.isLoadingNormativeStatuses)).subscribe(res => this.isLoadingnormativeStatuses = res)
+      this.store.pipe(select(item => item.normatives.normativeStatuses)).subscribe(res => this.normativeStatuses = res),
+      this.store.pipe(select(item => item.normatives.isLoadingNormativeStatuses)).subscribe(res => this.isLoadingnormativeStatuses = res),
+      
     );
     this.store.dispatch(actions.loadNormativeStatuses());
     this.normative = this.data ? { ...this.data['normative'] } : null;

@@ -1,15 +1,18 @@
 import { Action, createReducer, on } from "@ngrx/store";
 import { Organization } from "../../domain/organizations/organizations.models";
 import { CommonState } from "../../models/common-state.model";
+import { City } from "../../models/enat.models";
 import * as actions from './organizations.actions';
 
 
 export interface OrganizationState extends CommonState {
     organizations: Array<Organization>,
+    cities: City[]
 }
 
 const initialOrganizationState: OrganizationState = {
     organizations: [],
+    cities:[],
     isLoading: false,
     hasError: false,
     errorMessage: '',
@@ -52,6 +55,9 @@ const reducer = createReducer(
         organizations: [...state.organizations.filter(contact => contact.id !== id)],
     })),
     on(actions.removeOrganizationsFailed, (state, { payload }) => ({ ...state, isLoading: false, hasError: true, errorMessage: payload })),
+
+    on(actions.loadCities, (state) => ({ ...state, isLoading: true })),
+    on(actions.loadCitiesSuccess, (state, { payload }) => ({ ...state, isLoading: false, cities: [...payload] })),
 );
 
 

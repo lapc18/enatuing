@@ -1,7 +1,11 @@
 import { createAction, props } from '@ngrx/store';
 import { Organization } from '../../domain/Organizations/Organizations.models';
+import { City } from '../../models/enat.models';
 
 //Organizations actions
+export const loadCities = createAction('[Organization Module] Loading Cities...');
+export const loadCitiesSuccess = createAction('[Organization Module] Cities Loaded Successfully', props<{ payload: City[] }>());
+export const loadCitiesFailed = createAction('[Organization Module] Cities Loaded Failed', props<{ payload: string }>());
 export const loadOrganizations = createAction('[Organization Module] Loading Organizations');
 export const loadOrganizationsSuccess = createAction('[Organization Module] Organizations Loaded Successfully', props<{ payload: Organization[] }>());
 export const loadOrganizationsFailed = createAction('[Organization Module] Organizations Loaded Failed', props<{ payload: string }>());

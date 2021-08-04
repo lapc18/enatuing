@@ -17,6 +17,9 @@ import { User } from '../domain/users/users.models';
 export class ApiInterceptor implements HttpInterceptor {
   public user: User = null;
   public tkn: string = '';
+  private avoidApiCallForUrls: string[] = [
+    '/assets/mocks/dom-cities.json'
+  ]
   
   constructor(
     private router: Router,
@@ -27,7 +30,7 @@ export class ApiInterceptor implements HttpInterceptor {
   }
 
   intercept(request: HttpRequest<unknown>, next: HttpHandler): Observable<HttpEvent<unknown>> {
-    const url:string = `${environment.api}${request.url}`.toString();
+    let url:string = `${environment.api}${request.url}`.toString();
     console.log(`requesting to::: `, url);
     console.log(`requesting tkn::: `, this.tkn);
     console.log(`requesting user::: `, this.user.email);
@@ -35,6 +38,10 @@ export class ApiInterceptor implements HttpInterceptor {
     if (!this.user || !this.tkn) {
 			this.router.navigate(['auth/enat/signin']);
 		}
+
+    if(this.avoidApiCallForUrls.find(x => x.includes(request.url))) {
+      url = `${window.location.origin}${request.url}`.toString();
+    }
 
     let req = request.clone({
       url: url,

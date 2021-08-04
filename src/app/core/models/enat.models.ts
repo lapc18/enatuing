@@ -284,3 +284,8 @@ export const GLOBAL_NORTIC_CATEGORIES: GenericTypeValue[] = [
         description: 'E'
     },
 ];
+
+export interface City {
+    capital: string,
+    name: string
+}

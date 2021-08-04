@@ -1,11 +1,12 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
-import { Store } from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
 import { Organization } from 'src/app/core/domain/organizations/organizations.models';
 import { CommonGridAbstractDetails } from 'src/app/core/models/common-details.abstract';
 import { OrganizationState } from 'src/app/core/stores/organizations/organizations.reducers';
 import * as actions from 'src/app/core/stores/organizations/organizations.actions';
+import { City } from 'src/app/core/models/enat.models';
 
 @Component({
   selector: 'app-dynamic-organization-detail',
@@ -15,6 +16,7 @@ import * as actions from 'src/app/core/stores/organizations/organizations.action
 export class DynamicOrganizationDetailComponent extends CommonGridAbstractDetails<Organization> implements OnInit {
 
     public organization: Organization = null;
+    public cities: City[] = [];
     
     constructor(
       private store: Store<{organization: OrganizationState}>,
@@ -26,8 +28,14 @@ export class DynamicOrganizationDetailComponent extends CommonGridAbstractDetail
     }
 
     ngOnInit(): void {
+      this.loadCities();
       this.loadComponent();
       this.buildOrganizationForm();
+    }
+
+    private loadCities(): void {
+      this.store.pipe(select(x => x.organization.cities)).subscribe(res => this.cities = res);
+      this.store.dispatch(actions.loadCities())
     }
 
     public loadComponent(): void {

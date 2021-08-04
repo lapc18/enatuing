@@ -23,6 +23,16 @@ export class OrganizationEffects {
             )
         )
     ));
+
+    loadCities$ = createEffect(() => this.actions$.pipe(
+        ofType(actions.loadCities),
+        mergeMap(() => this.apiService.getCities()
+            .pipe(
+                map(data => (actions.loadCitiesSuccess({ payload: data }))),
+                catchError((err) => of(actions.loadCitiesFailed({ payload: `${err}` })))            
+            )
+        )
+    ));
     
     save$ = createEffect(() => this.actions$.pipe(
         ofType(actions.createOrganizations),

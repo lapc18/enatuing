@@ -1,0 +1,133 @@
+{
+    "country": "Republica Dominicana",
+    "cities": [
+      {
+        "name": "Distrito Nacional",
+        "capital": "Santo Domingo de Guzmán"
+      },
+      {
+        "name": "Azua",
+        "capital": "Azua de Compostela"
+      },
+      {
+        "name": "Baoruco",
+        "capital": "Neiba"
+      },
+      {
+        "name": "Barahona",
+        "capital": "Barahona"
+      },
+      {
+        "name": "Dajabón",
+        "capital": "Dajabón"
+      },
+      {
+        "name": "Duarte",
+        "capital": "San Francisco de Macorís"
+      },
+      {
+        "name": "El Seibo",
+        "capital": "El Seibo"
+      },
+      {
+        "name": "Elías Piña",
+        "capital": "Comendador"
+      },
+      {
+        "name": "Espaillat",
+        "capital": "Moca"
+      },
+      {
+        "name": "Hato Mayor",
+        "capital": "Hato Mayor del Rey"
+      },
+      {
+        "name": "Hermanas Mirabal",
+        "capital": "Salcedo"
+      },
+      {
+        "name": "Independencia",
+        "capital": "Jimaní"
+      },
+      {
+        "name": "La Altagracia",
+        "capital": "Higüey"
+      },
+      {
+        "name": "La Romana",
+        "capital": "La Romana"
+      },
+      {
+        "name": "La Vega",
+        "capital": "Concepción de La Vega"
+      },
+      {
+        "name": "María Trinidad Sánchez",
+        "capital": "Nagua"
+      },
+      {
+        "name": "Monseñor Nouel",
+        "capital": "Bonao"
+      },
+      {
+        "name": "Monte Plata",
+        "capital": "San Fernando de Montecristi"
+      },
+      {
+        "name": "Montecristi",
+        "capital": "Monte Plata"
+      },
+      {
+        "name": "Pedernales",
+        "capital": "Pedernales"
+      },
+      {
+        "name": "Peravia",
+        "capital": "Baní"
+      },
+      {
+        "name": "Puerto Plata",
+        "capital": "San Felipe de Puerto Plata"
+      },
+      {
+        "name": "Samaná",
+        "capital": "Santa Bárbara de Samaná"
+      },
+      {
+        "name": "San Cristóbal",
+        "capital": "San Cristóbal"
+      },
+      {
+        "name": "San José de Ocoa",
+        "capital": "San José de Ocoa"
+      },
+      {
+        "name": "San Juan",
+        "capital": "San Juan de la Maguana"
+      },
+      {
+        "name": "San Pedro de Macorís",
+        "capital": "San Pedro de Macorís"
+      },
+      {
+        "name": "Sánchez Ramírez",
+        "capital": "Cotuí"
+      },
+      {
+        "name": "Santiago",
+        "capital": "Santiago de los Caballeros"
+      },
+      {
+        "name": "Santiago Rodríguez",
+        "capital": "San Ignacio de Sabaneta"
+      },
+      {
+        "name": "Santo Domingo",
+        "capital": "Santo Domingo Este"
+      },
+      {
+        "name": "Valverde",
+        "capital": "Mao"
+      }
+    ]
+}
