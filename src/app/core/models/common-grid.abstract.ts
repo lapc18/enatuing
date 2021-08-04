@@ -19,7 +19,6 @@ export abstract class CommonAbstractGrid<T, E = any> {
         this.columns = this.columnSettings;
     }
 
-    public abstract loadData(): void;
     public abstract onCreate(): void;
     public abstract onEdit(item: T | E): void;
     public abstract onDelete(item: T | E): void;

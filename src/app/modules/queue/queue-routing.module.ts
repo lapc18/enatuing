@@ -6,6 +6,7 @@ const routes: Routes = [
   { path: 'all', component: QueueComponent },
   { path: 'user/:userId', component: QueueComponent },
   { path: 'current', component: QueueComponent },
+  { path: 'current/:type', component: QueueComponent },
 ];
 
 @NgModule({

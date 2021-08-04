@@ -56,46 +56,74 @@ export class QueueComponent extends CommonAbstractGrid<QueueModel, Queue> implem
 	}
 
 	ngOnInit(): void {
-		const routeParams = this.route.snapshot.paramMap;
-		const userId = String(routeParams.get('userId'));
-		userId && !userId.includes('null') ? this.loadData(userId) : this.loadData();
+		console.log(this.route);
+		this.route.url.subscribe(segments => {
+			segments.forEach(x => {
+				if(x.path.includes('current')) {
+					const routeParams = this.route.snapshot.paramMap;
+					const type = String(routeParams.get('type'));
+					this.loadDataByType(type);
+				} else if(x.path.includes('user')) {
+					const routeParams = this.route.snapshot.paramMap;
+					const userId = String(routeParams.get('userId'));
+					this.loadDataByUser(userId);
+				}
+			});
+		});
 	}
 
-	public loadData(userId?:string): void {
+	private mapToTable(queue: QueueModel[]): void {
+		this.dataMapped = queue.map(item => {
+			let itemMapped:Queue = {};
+
+			//{{item.category}}{{item.order}}-{{item.publishetAt}}
+			itemMapped.nortic = `${item.normative.category || ''}${item.normative.order || ''}-${item.normative.publishetAt || ''}`;
+			itemMapped.organization = `${item.organization.name || ''}-(${item.organization.acronym || ''})`;
+			itemMapped.status = `${item.status && item.status.description? item.status.description : ''}`;
+			itemMapped.contact = `${item.contact && item.contact.name ? item.contact.name : ''}`;
+			itemMapped.id = item.id || '';
+			itemMapped.type = item.type || '';
+			itemMapped.startDate = moment(item.startDate).format('DD-MM-YYYY') || '';
+			itemMapped.endDate = moment(item.endDate).format('DD-MM-YYYY')  || '';
+
+			if(item.queueActions && item.queueActions.length > 0) {
+				const audit:QueueUserAction = item.queueActions.find(x => x.queueAction.name.toLowerCase().includes('audit'));
+				const consult:QueueUserAction = item.queueActions.find(x => x.queueAction.name.toLowerCase().includes('consult'));
+				itemMapped.auditor = audit && audit.user ? `${audit.user.name} ${audit.user.lastName}` : '';
+				itemMapped.consultant = consult && consult.user ? `${consult.user.name} ${consult.user.lastName}` : '';
+				itemMapped.consultantId = consult && consult.user ? consult.user.id : '';
+				itemMapped.auditorId = audit && audit.user ? audit.user.id: '';
+			}
+			return itemMapped;
+		});
+	}
+
+	public loadDataByUser(userId?:string): void {
 		this.subscriptions.push(
 			this.isLoading$.subscribe(res => this.isLoading = res),
 			this.data$.subscribe((res: QueueModel[]) => {
 				this.data = res;
-				this.dataMapped = res.map(item => {
-					let itemMapped:Queue = {};
-					if(item) {
-						//{{item.category}}{{item.order}}-{{item.publishetAt}}
-						itemMapped.nortic = `${item.normative.category || ''}${item.normative.order || ''}-${item.normative.publishetAt || ''}`;
-						itemMapped.organization = `${item.organization.name || ''}-(${item.organization.acronym || ''})`;
-						itemMapped.status = `${item.status && item.status.description? item.status.description : ''}`;
-						itemMapped.contact = `${item.contact && item.contact.name ? item.contact.name : ''}`;
-						itemMapped.id = item.id || '';
-						itemMapped.type = item.type || '';
-						itemMapped.startDate = moment(item.startDate).format('DD-MM-YYYY') || '';
-						itemMapped.endDate = moment(item.endDate).format('DD-MM-YYYY')  || '';
+				this.mapToTable(res);
+				this.dataMapped = this.dataMapped.filter(x => 
+					(x.auditorId && x.auditorId.includes(userId)) ||
+					(x.consultantId && x.consultantId.includes(userId))
+				);
+			}),
+			this.store.pipe(select(store => store.certifications.certifications)).subscribe(res => this.certifications = res)
+		);
+		this.store.dispatch(actions.loadQueue());
+	}
 
-						if(item.queueActions && item.queueActions.length > 0) {
-							const audit:QueueUserAction = item.queueActions.find(x => x.queueAction.name.toLowerCase().includes('audit'));
-							const consult:QueueUserAction = item.queueActions.find(x => x.queueAction.name.toLowerCase().includes('consult'));
-							itemMapped.auditor = audit && audit.user ? `${audit.user.name} ${audit.user.lastName}` : '';
-							itemMapped.consultant = consult && consult.user ? `${consult.user.name} ${consult.user.lastName}` : '';
-							itemMapped.consultantId = consult && consult.user ? consult.user.id : '';
-							itemMapped.auditorId = audit && audit.user ? audit.user.id: '';
-						}
-
-					}
-					return itemMapped;
-				});
-				userId ? 
-					this.dataMapped = this.dataMapped.filter(x => 
-						(x.auditorId && x.auditorId.includes(userId)) ||
-						(x.consultantId && x.consultantId.includes(userId))
-					) : void 0;
+	public loadDataByType(type?:string): void {
+		let isCertified:boolean = type.includes('inprocess') ? false : true;
+		this.subscriptions.push(
+			this.isLoading$.subscribe(res => this.isLoading = res),
+			this.data$.subscribe((res: QueueModel[]) => {
+				this.data = res;
+				this.mapToTable(res);
+				if(!type.includes('null')) {
+					this.dataMapped = this.dataMapped.filter(x => x.isCertified && x.isCertified == isCertified);
+				} 
 			}),
 			this.store.pipe(select(store => store.certifications.certifications)).subscribe(res => this.certifications = res)
 		);

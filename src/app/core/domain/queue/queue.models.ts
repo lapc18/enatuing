@@ -22,8 +22,9 @@ export interface QueueModel {
     normative?: Normative,
     startDate?: string,
     endDate?: string,
-    type?: string;
-    queueActions?: QueueUserAction[];
+    type?: string,
+    queueActions?: QueueUserAction[],
+    isCertified?: boolean
 }
 
 export interface Queue {
@@ -39,6 +40,7 @@ export interface Queue {
     status?: string,
     startDate?: string,
     endDate?: string,
+    isCertified?: boolean
 }
 
 export const QUEUE_COLS: IColumn[] = [   
