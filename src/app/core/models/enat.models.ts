@@ -261,3 +261,26 @@ export interface NorticStamp {
     consultant?: string,
     auditor?: string,
 }
+
+export const GLOBAL_NORTIC_CATEGORIES: GenericTypeValue[] = [
+    {
+        id: 0,
+        description: 'A'
+    },
+    {
+        id: 1,
+        description: 'B'
+    },
+    {
+        id: 2,
+        description: 'C'
+    },
+    {
+        id: 3,
+        description: 'D'
+    },
+    {
+        id: 4,
+        description: 'E'
+    },
+];
