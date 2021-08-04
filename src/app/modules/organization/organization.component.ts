@@ -11,10 +11,13 @@ import { ExportService } from 'src/app/core/services/export.service';
 import { Certificationstate } from 'src/app/core/stores/certifications/certifications.reducers';
 import * as actions from 'src/app/core/stores/organizations/organizations.actions';
 import * as certActions from 'src/app/core/stores/certifications/certifications.actions';
+import * as queueActions from 'src/app/core/stores/queue/queue.actions';
 import { OrganizationState } from 'src/app/core/stores/organizations/organizations.reducers';
 import { DetailsComponent } from './details/details.component';
 import { DynamicOrganizationDetailComponent } from './dynamic-organization-detail/dynamic-organization-detail.component';
 import { CertificationModel } from 'src/app/core/domain/certifications/certifications.models';
+import { QueueState } from 'src/app/core/stores/queue/queue.reducers';
+import { Queue, QueueModel } from 'src/app/core/domain/queue/queue.models';
 
 @Component({
   selector: 'app-organization',
@@ -29,9 +32,12 @@ export class OrganizationComponent extends CommonAbstractGrid<Organization> impl
 		remove: ['admin', 'manager']
 	};
 
+  public queue:QueueModel[] = [];
+  public certifications:CertificationModel[] = [];
+
   constructor(
     private dialog: MatDialog,
-    private store: Store<{ organization: OrganizationState, certifications:Certificationstate }>,
+    private store: Store<{ organization: OrganizationState, certifications:Certificationstate, queue: QueueState }>,
     public dialogFactory: DialogFactory,
     public exportService: ExportService
   ) {
@@ -51,8 +57,13 @@ export class OrganizationComponent extends CommonAbstractGrid<Organization> impl
   public loadData(): void {
     this.store.dispatch(actions.loadOrganizations());
     this.store.dispatch(certActions.loadCertifications());
-    this.subscriptions.push(this.isLoading$.subscribe(res => this.isLoading = res));
-    this.subscriptions.push(this.data$.subscribe((res: Organization[]) => this.data = res));
+    this.store.dispatch(queueActions.loadQueue());
+    this.subscriptions.push(
+      this.isLoading$.subscribe(res => this.isLoading = res),
+      this.data$.subscribe((res: Organization[]) => this.data = res),
+      this.store.pipe(select(x => x.certifications.certifications)).subscribe(res => this.certifications = res),
+      this.store.pipe(select(x => x.queue.queue)).subscribe(res => this.queue = res),
+    );
   }
 
   public onCreate(): void {
@@ -93,22 +104,18 @@ export class OrganizationComponent extends CommonAbstractGrid<Organization> impl
   }
 
   public onSeeDetails(item: Organization): void {
-    console.log('details:', item)
-    this.store.pipe(select(x => x.certifications.certifications)).subscribe(res => {
-      console.log('into promise')
-      const certifications:CertificationModel[] = res.filter(x => x.organizationId == item.id);
-  
-      this.dialog.open(DetailsComponent, {
-        data: {
-          item: item,
-          certifications: certifications
-        },
-        width: '70vw',
-        height: '90vh',
-        hasBackdrop: true
-      });
+    const certifications:CertificationModel[] = this.certifications.filter(x => x.organizationId == item.id);
+    const queue:QueueModel[] = this.queue.filter(x => x.organization.id == item.id);
+    this.dialog.open(DetailsComponent, {
+      data: {
+        item: item,
+        certifications: certifications,
+        queue: queue
+      },
+      width: '70vw',
+      height: '90vh',
+      hasBackdrop: true
     });
-
   }
 
   public onExport(fileType: FileType): void {

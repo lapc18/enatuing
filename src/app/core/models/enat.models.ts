@@ -258,4 +258,6 @@ export interface NorticStamp {
     nortic: string,
     startDate?: string,
     endDate?: string,
+    consultant?: string,
+    auditor?: string,
 }
