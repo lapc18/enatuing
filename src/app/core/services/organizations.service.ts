@@ -19,6 +19,6 @@ export class OrganizationService extends AbstractEnatService<Organization, Organ
     }
 
     getCities(): Observable<City[]> {
-        return this.http.get<any>('/assets/mocks/dom-cities.json').pipe(map(res => res.Cities));
+        return this.http.get<any>('/assets/mocks/dom-cities.json').pipe(map(res => res.cities));
     }
 }

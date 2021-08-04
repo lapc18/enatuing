@@ -31,6 +31,7 @@ export class DynamicOrganizationDetailComponent extends CommonGridAbstractDetail
       this.loadCities();
       this.loadComponent();
       this.buildOrganizationForm();
+	  this.setAcronymOnValueChange();
     }
 
     private loadCities(): void {
@@ -64,11 +65,19 @@ export class DynamicOrganizationDetailComponent extends CommonGridAbstractDetail
     }
 
 	public setAcronymOnValueChange(): void {
-		const name = this.formGroup.get('name');
-		let arr:string[] = (name.value as string).split(' ');
-		let acronym:string[] = [];
-		arr.forEach(e => acronym.push(e.split('')[0]));
-		this.setPropValue('acronym', acronym.join('').toUpperCase());
+		const name = this.formGroup.controls['name'].valueChanges.subscribe(res => {
+			let arr:string[] = (res as string).split(' ');
+			let acronym:string[] = [];
+			arr.forEach(x => {
+				if(!articlesToAvoid.find(a => a.toLowerCase() == x.toLowerCase())) {
+					acronym.push(x.split('')[0])
+				}
+			});
+			this.setPropValue('acronym', acronym.join('').toUpperCase());
+		});
 	}
 
+
 }
+
+export const articlesToAvoid:string[] = ['de', 'y', 'para', 'la', 'el'];
