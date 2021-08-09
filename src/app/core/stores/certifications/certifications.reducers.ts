@@ -6,10 +6,12 @@ import * as actions from './certifications.actions';
 
 export interface Certificationstate extends CommonState {
     certifications: Array<CertificationModel>,
+    lastCertificationCreated: CertificationModel
 }
 
 const initialCertificationstate: Certificationstate = {
     certifications: [],
+    lastCertificationCreated: {},
     isLoading: false,
     hasError: false,
     errorMessage: '',
@@ -29,6 +31,8 @@ const reducer = createReducer(
         isLoading: true,
         certifications: [...state.certifications,  payload],
     })),
+
+    on(actions.onCertificationCreated, (state, { payload }) => ({ ...state, isLoading: true, lastCertificationCreated: {...payload}})),
     
     on(actions.createCertificationsFailed, (state, { payload }) => ({ ...state, isLoading: false, hasError: true, errorMessage: payload })),
 

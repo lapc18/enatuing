@@ -139,17 +139,24 @@ export class AssignmentComponent implements OnInit, OnDestroy {
 			let auditorAction:QueueUserAction = {
 				queueActionId: (this.auditorAction.id as string),
 				queueId: x.id,
-				user: this.auditor
+				user: this.auditor,
+				userId: this.auditor.id,
 			}
 
 			let consultantAction:QueueUserAction = {
 				queueActionId: (this.consultantAction.id as string),
 				queueId: x.id,
-				user: this.consultant
+				user: this.consultant,
+				userId: this.consultant.id,
 			}
 
-			this.store.dispatch(queueUserActions.createQueueUserAction({payload: auditorAction}));
-			this.store.dispatch(queueUserActions.createQueueUserAction({payload: consultantAction}));
+			if(this.consultant !== undefined && this.consultant !== null && this.consultant) {
+				this.store.dispatch(queueUserActions.createQueueUserAction({payload: consultantAction}));
+			}
+
+			if(this.auditor !== undefined && this.auditor !== null && this.auditor) {
+				this.store.dispatch(queueUserActions.createQueueUserAction({payload: auditorAction}));
+			}
 
 		});
 		this.dialogRef.close();

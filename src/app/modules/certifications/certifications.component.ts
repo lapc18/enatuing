@@ -13,6 +13,7 @@ import { DynamicCertificationsDetailComponent } from './dynamic-certifications-d
 import * as moment from 'moment';
 import { ActivatedRoute } from '@angular/router';
 import { DetailsComponent } from './details/details.component';
+import { NorticCodeViewerComponent } from 'src/app/shared/components/nortic-code-viewer/nortic-code-viewer.component';
 
 @Component({
 selector: 'app-certifications',
@@ -124,13 +125,12 @@ export class CertificationsComponent extends CommonAbstractGrid<CertificationMod
 
 	public onSeeDetails(item: Certification): void {
 		const certification:CertificationModel = this.data.find(x => x.id == item.id);
-		this.dialog.open(DetailsComponent, {
-		data: {
-			item: certification
-		},
-		minWidth: '50%',
-		minHeight: '60vh',
-		hasBackdrop: true
+		this.dialogFactory.create(NorticCodeViewerComponent, {
+			data: {
+				certification: certification
+			},
+			width: '70vw',
+			height: '80vh'
 		});
 	}
 

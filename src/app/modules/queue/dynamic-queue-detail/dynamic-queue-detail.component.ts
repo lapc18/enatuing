@@ -87,6 +87,7 @@ export class DynamicQueueDetailComponent extends CommonGridAbstractDetails<Queue
 			organizationId: queue.organization.id || '',
 			endDate: moment(queue.endDate).format('MM-DD-YYYY') || '',
 			startDate: moment(queue.startDate).format('MM-DD-YYYY') || '',
+			isCertified: false
 		}
 
 		if(this.isEditing) {
@@ -94,7 +95,6 @@ export class DynamicQueueDetailComponent extends CommonGridAbstractDetails<Queue
 		} else if(this.isCreating) {
 			this.store.dispatch(actions.createQueue({ payload: queueModel }));
 		}
-		this.store.dispatch(actions.onSuccess());
 		this.data && this.data.callback ? this.data.callback() : void 0;
 		this.dialogRef.close();
 	}

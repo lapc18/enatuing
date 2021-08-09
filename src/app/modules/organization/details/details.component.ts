@@ -1,4 +1,4 @@
-import { Component, Inject, OnInit } from '@angular/core';
+import { Component, ElementRef, Inject, OnInit, ViewChild } from '@angular/core';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import * as moment from 'moment';
 import { CertificationModel } from 'src/app/core/domain/certifications/certifications.models';
@@ -6,6 +6,7 @@ import { Organization } from 'src/app/core/domain/organizations/organizations.mo
 import { QueueUserAction } from 'src/app/core/domain/queue-user/queue-user.model';
 import { Queue, QueueModel } from 'src/app/core/domain/queue/queue.models';
 import { NorticStamp } from 'src/app/core/models/enat.models';
+import { NorticStampComponent } from 'src/app/shared/components/nortic-stamp/nortic-stamp.component';
 
 @Component({
   selector: 'app-details',
@@ -14,6 +15,7 @@ import { NorticStamp } from 'src/app/core/models/enat.models';
 })
 export class DetailsComponent implements OnInit {
   	
+	@ViewChild('nortic') stamp: NorticStampComponent;
 	public norticsDone:NorticStamp[] = [];
 	public norticsInProgress:NorticStamp[] = [];
 	public organization:Organization = null;
@@ -27,6 +29,7 @@ export class DetailsComponent implements OnInit {
 	ngOnInit(): void {
 		this.loadComponent();
 	}
+	
 	public loadComponent(): void {
 		console.log(this.data)
 		this.organization = this.data && this.data.item ? this.data.item : null;

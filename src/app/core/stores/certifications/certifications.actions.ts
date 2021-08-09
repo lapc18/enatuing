@@ -12,3 +12,5 @@ export const editCertificationsFailed = createAction('[Certification Module] Edi
 export const removeCertifications = createAction('[Certification Module] Removing Certifications', props<{ payload: string }>());
 export const removeCertificationsFailed = createAction('[Certification Module] Removing Certifications Failed', props<{ payload: string }>());
 export const onSuccess = createAction('[Action Status] Action excuted Successfully');
+
+export const onCertificationCreated = createAction('[Certification Module] Certification created Successfully', props<{ payload: CertificationModel }>());

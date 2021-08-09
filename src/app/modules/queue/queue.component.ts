@@ -20,6 +20,7 @@ import { NormativesState } from 'src/app/core/stores/normatives/normatives.reduc
 import { Normative } from 'src/app/core/domain/normatives/normatives.models';
 import { generateNIU } from 'src/app/core/utils/enat.utils';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NorticCodeViewerComponent } from 'src/app/shared/components/nortic-code-viewer/nortic-code-viewer.component';
 
 @Component({
   selector: 'app-queue',
@@ -38,6 +39,8 @@ export class QueueComponent extends CommonAbstractGrid<QueueModel, Queue> implem
 	public dataMapped: Queue[] = [];
 	public certifications: CertificationModel[] = [];
 	public normatives: Normative[] = [];
+	public certificationCreated: CertificationModel;
+
 
 	constructor(
 		private route: ActivatedRoute,
@@ -56,8 +59,8 @@ export class QueueComponent extends CommonAbstractGrid<QueueModel, Queue> implem
 	}
 
 	ngOnInit(): void {
-		console.log(this.route);
 		this.route.url.subscribe(segments => {
+			this.store.dispatch(actions.loadQueue());
 			segments.forEach(x => {
 				if(x.path.includes('current')) {
 					const routeParams = this.route.snapshot.paramMap;
@@ -70,6 +73,7 @@ export class QueueComponent extends CommonAbstractGrid<QueueModel, Queue> implem
 				}
 			});
 		});
+		this.subscriptions.push(this.store.pipe(select(x => x.certifications.lastCertificationCreated)).subscribe((res) => res && res.id ? this.onCertificationCreated(res):void 0));
 	}
 
 	private mapToTable(queue: QueueModel[]): void {
@@ -111,7 +115,6 @@ export class QueueComponent extends CommonAbstractGrid<QueueModel, Queue> implem
 			}),
 			this.store.pipe(select(store => store.certifications.certifications)).subscribe(res => this.certifications = res)
 		);
-		this.store.dispatch(actions.loadQueue());
 	}
 
 	public loadDataByType(type?:string): void {
@@ -127,7 +130,6 @@ export class QueueComponent extends CommonAbstractGrid<QueueModel, Queue> implem
 			}),
 			this.store.pipe(select(store => store.certifications.certifications)).subscribe(res => this.certifications = res)
 		);
-		this.store.dispatch(actions.loadQueue());
 	}
 
 	public onCreate(): void {
@@ -135,7 +137,7 @@ export class QueueComponent extends CommonAbstractGrid<QueueModel, Queue> implem
 			data: { 
 				isCreating: true, 
 				callback:() => {
-					this.store.dispatch(actions.loadQueue());
+					setTimeout(() => this.store.dispatch(actions.loadQueue()));
 				} 
 			},
 			minWidth: '50%',
@@ -246,6 +248,7 @@ export class QueueComponent extends CommonAbstractGrid<QueueModel, Queue> implem
 			message: '¿Está seguro que desea certificar esta solicitud de certificación?',
 			callback:() => {
 				this.saveCertification({...queueItem});
+				this.updateRequestStatus({...queueItem});
 				this.store.dispatch(certActions.loadCertifications());
 				this.store.dispatch(actions.loadQueue());
 			}
@@ -278,6 +281,22 @@ export class QueueComponent extends CommonAbstractGrid<QueueModel, Queue> implem
 		};
 
 		this.store.dispatch(certActions.createCertifications({payload: payload}));
+	}
+
+	private updateRequestStatus(item: QueueModel): void {
+		item.isCertified = true;
+		this.store.dispatch(actions.editQueue({ payload: item, id: item.id}))
+	}
+
+	private onCertificationCreated(item: CertificationModel): void {
+		console.log('from here')
+		this.dialogFactory.create(NorticCodeViewerComponent, {
+			data: {
+				certification: item
+			},
+			width: '70vw',
+			height: '80vh'
+		});
 	}
   
 }

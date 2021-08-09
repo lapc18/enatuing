@@ -19,3 +19,28 @@ export const generateNIU = (item: QueueModel, certifications: CertificationModel
     niu = `${year.substring(2)}${norticPrefix++}-${certificationsCount > 9 ? certificationsCount : '0'+ certificationsCount.toString() }-${nortic}${certificationType}${normativesCount}`;
     return niu;
 }
+
+
+export const convertBlobToBase64 = (blob:Blob) => new Promise<string | ArrayBuffer>((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onerror = reject;
+    reader.onload = () => {
+        console.log(reader.result)
+        resolve(reader.result);
+    };
+    reader.readAsDataURL(blob);
+});
+
+export const downloadAsTxt = (fileName:string, content:string):void => {
+    let file = new Blob([content], {type: '.txt'});
+    let a = document.createElement("a"),
+            url = URL.createObjectURL(file);
+    a.href = url;
+    a.download = fileName;
+    document.body.appendChild(a);
+    a.click();
+    setTimeout(function() {
+        document.body.removeChild(a);
+        window.URL.revokeObjectURL(url);  
+    }, 0); 
+}

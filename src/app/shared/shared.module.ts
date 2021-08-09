@@ -22,6 +22,7 @@ import { MultipleCardSliderComponent } from './components/multiple-card-slider/m
 import { NorticStampComponent } from './components/nortic-stamp/nortic-stamp.component';
 import { ColorPickerComponent } from './components/color-picker/color-picker.component';
 import { RoleHandlerDirective } from './directives/role-handler.directive';
+import { NorticCodeViewerComponent } from './components/nortic-code-viewer/nortic-code-viewer.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { RoleHandlerDirective } from './directives/role-handler.directive';
     NorticStampComponent,
     ColorPickerComponent,
     RoleHandlerDirective,
+    NorticCodeViewerComponent,
   ],
   imports: [
     CommonModule,
@@ -73,6 +75,7 @@ import { RoleHandlerDirective } from './directives/role-handler.directive';
     NorticStampComponent,
     ColorPickerComponent,
     RoleHandlerDirective,
+    NorticCodeViewerComponent,
   ]
 })
 export class SharedModule { }

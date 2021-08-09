@@ -1,0 +1,50 @@
+<div class="container">
+
+    <div class="header text-center">
+        <h1>Detalles de la Organización</h1>
+        <br>
+        <p class="lead">{{ organization.name }}</p>
+        <p class="lead">({{ organization.acronym }})</p>
+    </div>
+
+    <ng-container>
+        <div class="text-center">
+            <h2>Certificación Completada</h2>
+        </div>
+        
+        <div class="text-center p-4" [ngStyle]="{ display: isLoading ? 'none' : 'block' }">
+            <div class="row justify-content-around">
+                <div style="width: 400px; padding: 5px;">
+                    <nortic-stamp (onConvertToBlob)="generateCode($event)"
+                        [stampCode]="nortic.niu"
+                        [color]="nortic.color"
+                        [backgroundColor]="'#FFF'"
+                        [year]="nortic.year"
+                        [nortic]="nortic.nortic"
+                    ></nortic-stamp>
+                    <br>
+                    <br>
+                    <p class="lead"><b>Fecha de solicitud:</b> {{nortic.startDate}}</p>
+                    <p class="lead"><b>Fecha de finalidad:</b> {{nortic.endDate}}</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="row justify-content-center p-4" *ngIf="isLoading">
+            <mat-spinner></mat-spinner>
+        </div>
+
+        <div class="code">
+            <figure>
+                <figcaption>Código para la integración web</figcaption>
+                <button mat-button (click)="saveAsFile()">Guardar en un archivo</button>
+                <pre>
+                  <code [innerText]="code"></code>
+                </pre>
+              </figure>
+        </div>
+    </ng-container>
+
+    
+</div>
+

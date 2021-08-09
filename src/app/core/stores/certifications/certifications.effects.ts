@@ -27,7 +27,7 @@ export class CertificationsEffects {
     save$ = createEffect(() => this.actions$.pipe(
         ofType(actions.createCertifications),
         mergeMap((payload) => this.apiService.save(payload.payload).pipe(
-                map(() => (actions.onSuccess())),
+                map((res) => (actions.onCertificationCreated({payload: res}))),
                 catchError((err) => of(actions.createCertificationsFailed({ payload: `${err}` })))
             )
         )
@@ -42,7 +42,7 @@ export class CertificationsEffects {
         )
     ));
 
-    removeUsers$ = createEffect(() => this.actions$.pipe(
+    remove$ = createEffect(() => this.actions$.pipe(
         ofType(actions.removeCertifications),
         switchMap((action) => this.apiService.softDelete(action.payload)),
         switchMap(() => [actions.onSuccess(), actions.loadCertifications()]),

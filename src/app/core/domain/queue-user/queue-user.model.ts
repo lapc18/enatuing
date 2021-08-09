@@ -10,5 +10,6 @@ export interface QueueUserAction {
     queueId?: string,
     queueActionId?: string,
     user?: any,
+    userId?: string,
     queueAction?: QueueAction,
 }
